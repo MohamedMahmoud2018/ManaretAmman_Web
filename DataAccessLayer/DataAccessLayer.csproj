@@ -10,7 +10,6 @@
     <Folder Include="DTO\" />
     <Folder Include="Models\" />
     <Folder Include="Identity\" />
-    <Folder Include="Context\" />
   </ItemGroup>
 
   <ItemGroup>
