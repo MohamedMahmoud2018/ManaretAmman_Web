@@ -1,5 +1,15 @@
+using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var TypesToRegister = Assembly.Load("BusinessLogicLayer").GetTypes()
+                .Where(x => !string.IsNullOrEmpty(x.Namespace))
+                .Where(x => x.IsClass).ToList();
+var ITypesToRegister = Assembly.Load("BusinessLogicLayer").GetTypes()
+                .Where(x => !string.IsNullOrEmpty(x.Namespace))
+                .Where(x => x.IsInterface).ToList();
 #region Cors Origin
 string defaultpolicy = "default";
 builder.Services.AddCors(
@@ -13,16 +23,11 @@ builder.Services.AddCors(
 );
 #endregion
 
-var TypesToRegister = Assembly.Load("BusinessLogicLayer").GetTypes()
-                .Where(x => !string.IsNullOrEmpty(x.Namespace))
-                .Where(x => x.IsClass).ToList();
-var ITypesToRegister = Assembly.Load("BusinessLogicLayer").GetTypes()
-                .Where(x => !string.IsNullOrEmpty(x.Namespace))
-                .Where(x => x.IsInterface).ToList();
+
 
 #region DbContext
 
-builder.Services.AddDbContext<BapetcoContext>(options =>
+builder.Services.AddDbContext<PayrolLogOnlyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 #endregion

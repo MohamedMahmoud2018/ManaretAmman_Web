@@ -1,0 +1,182 @@
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\appsettings.Development.json
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\appsettings.json
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.exe
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.deps.json
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.runtimeconfig.json
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.pdb
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\AutoMapper.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Azure.Core.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Azure.Identity.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Humanizer.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.OpenApi.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Mono.TextTemplating.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.CodeDom.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Drawing.Common.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Memory.Data.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Runtime.Caching.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Security.Permissions.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Text.Json.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Windows.Extensions.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\DataAccessLayer.dll
+F:\Free Work\ManaretAmman\ManaretAmman\bin\Debug\net6.0\DataAccessLayer.pdb
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.AssemblyReference.cache
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.GeneratedMSBuildEditorConfig.editorconfig
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.AssemblyInfoInputs.cache
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.AssemblyInfo.cs
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.CoreCompileInputs.cache
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.MvcApplicationPartsAssemblyInfo.cs
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.MvcApplicationPartsAssemblyInfo.cache
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.ManaretAmman.Microsoft.AspNetCore.StaticWebAssets.props
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.build.ManaretAmman.props
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ManaretAmman.props
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ManaretAmman.props
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets.pack.json
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets.build.json
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets.development.json
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\scopedcss\bundle\ManaretAmman.styles.css
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.CopyComplete
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.dll
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\refint\ManaretAmman.dll
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.pdb
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.genruntimeconfig.cache
+F:\Free Work\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ref\ManaretAmman.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\appsettings.Development.json
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\appsettings.json
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.exe
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.deps.json
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.runtimeconfig.json
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\ManaretAmman.pdb
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\AutoMapper.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Azure.Core.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Azure.Identity.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Humanizer.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.OpenApi.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Mono.TextTemplating.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.CodeDom.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Drawing.Common.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Memory.Data.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Runtime.Caching.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Security.Permissions.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Text.Json.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\System.Windows.Extensions.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\BusinessLogicLayer.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\DataAccessLayer.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\BusinessLogicLayer.pdb
+F:\FreeWork\ManaretAmman\ManaretAmman\bin\Debug\net6.0\DataAccessLayer.pdb
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.AssemblyReference.cache
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.GeneratedMSBuildEditorConfig.editorconfig
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.AssemblyInfoInputs.cache
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.AssemblyInfo.cs
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.CoreCompileInputs.cache
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.MvcApplicationPartsAssemblyInfo.cs
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.MvcApplicationPartsAssemblyInfo.cache
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.ManaretAmman.Microsoft.AspNetCore.StaticWebAssets.props
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.build.ManaretAmman.props
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ManaretAmman.props
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ManaretAmman.props
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets.pack.json
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets.build.json
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\staticwebassets.development.json
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\scopedcss\bundle\ManaretAmman.styles.css
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.CopyComplete
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\refint\ManaretAmman.dll
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.pdb
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ManaretAmman.genruntimeconfig.cache
+F:\FreeWork\ManaretAmman\ManaretAmman\obj\Debug\net6.0\ref\ManaretAmman.dll

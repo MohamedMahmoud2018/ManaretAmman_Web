@@ -1,0 +1,12 @@
+F:\FreeWork\ManaretAmman\BLL\bin\Debug\net6.0\BusinessLogicLayer.deps.json
+F:\FreeWork\ManaretAmman\BLL\bin\Debug\net6.0\BusinessLogicLayer.dll
+F:\FreeWork\ManaretAmman\BLL\bin\Debug\net6.0\BusinessLogicLayer.pdb
+F:\FreeWork\ManaretAmman\BLL\obj\Debug\net6.0\BusinessLogicLayer.csproj.AssemblyReference.cache
+F:\FreeWork\ManaretAmman\BLL\obj\Debug\net6.0\BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+F:\FreeWork\ManaretAmman\BLL\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfoInputs.cache
+F:\FreeWork\ManaretAmman\BLL\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfo.cs
+F:\FreeWork\ManaretAmman\BLL\obj\Debug\net6.0\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+F:\FreeWork\ManaretAmman\BLL\obj\Debug\net6.0\BusinessLogicLayer.dll
+F:\FreeWork\ManaretAmman\BLL\obj\Debug\net6.0\refint\BusinessLogicLayer.dll
+F:\FreeWork\ManaretAmman\BLL\obj\Debug\net6.0\BusinessLogicLayer.pdb
+F:\FreeWork\ManaretAmman\BLL\obj\Debug\net6.0\ref\BusinessLogicLayer.dll

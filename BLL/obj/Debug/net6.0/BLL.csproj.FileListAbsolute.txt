@@ -1,0 +1,12 @@
+F:\Free Work\ManaretAmman\BLL\bin\Debug\net6.0\BLL.deps.json
+F:\Free Work\ManaretAmman\BLL\bin\Debug\net6.0\BLL.dll
+F:\Free Work\ManaretAmman\BLL\bin\Debug\net6.0\BLL.pdb
+F:\Free Work\ManaretAmman\BLL\obj\Debug\net6.0\BLL.csproj.AssemblyReference.cache
+F:\Free Work\ManaretAmman\BLL\obj\Debug\net6.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+F:\Free Work\ManaretAmman\BLL\obj\Debug\net6.0\BLL.AssemblyInfoInputs.cache
+F:\Free Work\ManaretAmman\BLL\obj\Debug\net6.0\BLL.AssemblyInfo.cs
+F:\Free Work\ManaretAmman\BLL\obj\Debug\net6.0\BLL.csproj.CoreCompileInputs.cache
+F:\Free Work\ManaretAmman\BLL\obj\Debug\net6.0\BLL.dll
+F:\Free Work\ManaretAmman\BLL\obj\Debug\net6.0\refint\BLL.dll
+F:\Free Work\ManaretAmman\BLL\obj\Debug\net6.0\BLL.pdb
+F:\Free Work\ManaretAmman\BLL\obj\Debug\net6.0\ref\BLL.dll

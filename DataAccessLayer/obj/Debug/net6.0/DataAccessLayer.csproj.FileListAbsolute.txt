@@ -1,0 +1,28 @@
+F:\Free Work\ManaretAmman\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+F:\Free Work\ManaretAmman\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+F:\Free Work\ManaretAmman\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+F:\Free Work\ManaretAmman\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+F:\Free Work\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
+F:\FreeWork\ManaretAmman\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+F:\FreeWork\ManaretAmman\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+F:\FreeWork\ManaretAmman\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+F:\FreeWork\ManaretAmman\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+F:\FreeWork\ManaretAmman\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
