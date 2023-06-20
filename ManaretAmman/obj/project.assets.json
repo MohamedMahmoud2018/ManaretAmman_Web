@@ -1263,6 +1263,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "DataAccessLayer": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.5"
         },
         "compile": {

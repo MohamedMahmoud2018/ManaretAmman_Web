@@ -1,4 +1,5 @@
 using DataAccessLayer.Models;
+using ManaretAmman.MiddleWare;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -10,6 +11,7 @@ var TypesToRegister = Assembly.Load("BusinessLogicLayer").GetTypes()
 var ITypesToRegister = Assembly.Load("BusinessLogicLayer").GetTypes()
                 .Where(x => !string.IsNullOrEmpty(x.Namespace))
                 .Where(x => x.IsInterface).ToList();
+
 #region Cors Origin
 string defaultpolicy = "default";
 builder.Services.AddCors(
@@ -60,11 +62,13 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware(typeof(GlobalExceptionHandler));
 #region Cors
 app.UseCors(builder =>
 {

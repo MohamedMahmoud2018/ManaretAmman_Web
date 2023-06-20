@@ -1,3 +1,4 @@
+using ManaretAmman.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManaretAmman.Controllers
@@ -19,15 +20,18 @@ namespace ManaretAmman.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public IApiResponse Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+
+            throw new NotImplementedException("ttttttttttttttt");
+            var result = Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            }).ToArray();
+
+            return ApiResponse<IEnumerable<WeatherForecast>>.Success(result);
         }
     }
 }
