@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Models;
+﻿using BusinessLogicLayer.Repositories;
+using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,17 @@ namespace BusinessLogicLayer.UnitOfWork
     {
         private readonly PayrolLogOnlyContext context;
 
-        //public UnitOfWork(ApplicationDBContext _context)
-        //{
-        //    context = _context;
-        //}
+        public UnitOfWork(PayrolLogOnlyContext _context)
+        {
+            context = _context;
+        }
 
 
-        //private IRepository<Gender> genderRepo;
-        //public IRepository<Gender> GenderRepo
-        //{
-        //    get { return genderRepo ?? (genderRepo = new Repository<Gender>(context)); }
-        //}
+        private IRepository<EmployeeLeaf> employeeLeafRepo;
+        public IRepository<EmployeeLeaf> EmployeeLeafRepo
+        {
+            get { return employeeLeafRepo ?? (employeeLeafRepo = new Repository<EmployeeLeaf>(context)); }
+        }
 
 
 

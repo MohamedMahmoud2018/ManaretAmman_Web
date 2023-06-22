@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BusinessLogicLayer.Repositories;
+using DataAccessLayer.DTO;
+using DataAccessLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +11,7 @@ namespace BusinessLogicLayer.UnitOfWork
 {
     interface IUnitOfWork
     {
-        //IRepository<Gender> GenderRepo { get; }
+        IRepository<EmployeeLeaf> EmployeeLeafRepo { get; }
 
         void Save();
     }

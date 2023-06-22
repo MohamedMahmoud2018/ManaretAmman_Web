@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DataAccessLayer.DTO;
+using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,8 @@ namespace BusinessLogicLayer.Mapper
     {
         public Mapping()
         {
-            //CreateMap<Gender, GenderInput>().ReverseMap();
-            //CreateMap<Gender, GenderOutput>();
+            CreateMap<EmployeeLeaf, EmployeeLeavesInput>().ReverseMap();
+            CreateMap<EmployeeLeaf, EmployeeLeavesOutput>();
         }
     }
 }
