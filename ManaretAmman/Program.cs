@@ -2,6 +2,8 @@ using DataAccessLayer.Models;
 using ManaretAmman.MiddleWare;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using AutoMapper;
+using BusinessLogicLayer.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +27,15 @@ builder.Services.AddCors(
 );
 #endregion
 
+#region Atuo Mapping
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new Mapping());
+});
 
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+#endregion
 
 #region DbContext
 
