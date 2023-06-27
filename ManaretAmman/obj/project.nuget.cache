@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7LtlkM52ZuT9mzH+75MBvMxIrnENgqGNVZlDPy5UIrk3oPwxYPqypsEiPJXb2HBsoNIGcjlp3cQqXut3BVD4Tw==",
+  "dgSpecHash": "fzXyhXl2FY/R57/3Uo5iB7uE5dKQJ779j4jqzlS77eqXgXgLgpSXmXoBglt4/qB4TOeHVNqU25qw0lNCZgX3sA==",
   "success": true,
-  "projectFilePath": "D:\\Special Work\\Manara\\ManaretAmman\\ManaretAmman.csproj",
+  "projectFilePath": "D:\\Special Work\\Manara\\ManaretAmman_web\\ManaretAmman\\ManaretAmman.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mkamel\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\mkamel\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",

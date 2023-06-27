@@ -41,19 +41,30 @@ namespace BusinessLogicLayer.Services.Implementation
                 return HttpStatusCode.NoContent;
         }
 
-        public EmployeeLeavesOutput Get(int id)
+        public EmployeeLeavesOutput Get(int id, int projectId)
         {
-            throw new NotImplementedException();
+           var employee= _unityOfWork.EmployeeLeafRepo.Get(emp=>emp.EmployeeID==id && emp.ProjectID==projectId).FirstOrDefault();
+            if (employee != null)
+            return _mapper.Map<EmployeeLeavesOutput>(employee);
+            return new EmployeeLeavesOutput();
         }
 
-        public ICollection<EmployeeLeavesOutput> GetAll()
+        public ICollection<EmployeeLeavesOutput> GetAll(int projectId)
         {
-            throw new NotImplementedException();
+            var employees = _unityOfWork.EmployeeLeafRepo.Get(emp=>emp.ProjectID == projectId);
+            return _mapper.Map<ICollection<EmployeeLeavesOutput>>(employees);
         }
 
         public HttpStatusCode Update(EmployeeLeavesInput employee)
         {
-            throw new NotImplementedException();
+            EmployeeLeaf employeeToUpdate = _unityOfWork.EmployeeLeafRepo.Get().Where(emp => emp.EmployeeID == employee.EmployeeID && emp.ProjectID == employee.ProjectID).FirstOrDefault();
+            if (employeeToUpdate != null)
+            {
+                _unityOfWork.EmployeeLeafRepo.Update(employeeToUpdate);
+                return HttpStatusCode.OK;
+            }
+            else
+                return HttpStatusCode.NoContent;
         }
     }
 }

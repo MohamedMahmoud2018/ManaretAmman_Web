@@ -13,7 +13,7 @@ namespace BusinessLogicLayer.Services
         HttpStatusCode Create(EmployeeLeavesInput employee);
         HttpStatusCode Update(EmployeeLeavesInput employee);
         HttpStatusCode delete(EmployeeLeafDelete employee);
-        EmployeeLeavesOutput Get(int id);
-        ICollection<EmployeeLeavesOutput> GetAll();
+        EmployeeLeavesOutput Get(int id,int projectId);
+        ICollection<EmployeeLeavesOutput> GetAll(int projectId);
     }
 }

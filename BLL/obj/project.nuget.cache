@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6Ysc2q0qkhNZBnRe0K0D0sDlt97ltnikmsqr8uLaSVOD/gy6JaC7eH5FS9ZGOB33LkCvTHbc/xpAdK7WxKvh/g==",
+  "dgSpecHash": "1JGSGSdmGnJlxWv6ONgLtdfOW8GUKBvtmbz92jto1t3COQm38TSMFZB9AOLzY9bj2XetRI0UJEm17Jb+vkt0nw==",
   "success": true,
-  "projectFilePath": "D:\\Special Work\\Manara\\BLL\\BusinessLogicLayer.csproj",
+  "projectFilePath": "D:\\Special Work\\Manara\\ManaretAmman_web\\BLL\\BusinessLogicLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mkamel\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\mkamel\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",

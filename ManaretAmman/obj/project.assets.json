@@ -4008,11 +4008,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Special Work\\Manara\\ManaretAmman\\ManaretAmman.csproj",
+      "projectUniqueName": "D:\\Special Work\\Manara\\ManaretAmman_web\\ManaretAmman\\ManaretAmman.csproj",
       "projectName": "ManaretAmman",
-      "projectPath": "D:\\Special Work\\Manara\\ManaretAmman\\ManaretAmman.csproj",
+      "projectPath": "D:\\Special Work\\Manara\\ManaretAmman_web\\ManaretAmman\\ManaretAmman.csproj",
       "packagesPath": "C:\\Users\\mkamel\\.nuget\\packages\\",
-      "outputPath": "D:\\Special Work\\Manara\\ManaretAmman\\obj\\",
+      "outputPath": "D:\\Special Work\\Manara\\ManaretAmman_web\\ManaretAmman\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4035,11 +4035,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Special Work\\Manara\\BLL\\BusinessLogicLayer.csproj": {
-              "projectPath": "D:\\Special Work\\Manara\\BLL\\BusinessLogicLayer.csproj"
+            "D:\\Special Work\\Manara\\ManaretAmman_web\\BLL\\BusinessLogicLayer.csproj": {
+              "projectPath": "D:\\Special Work\\Manara\\ManaretAmman_web\\BLL\\BusinessLogicLayer.csproj"
             },
-            "D:\\Special Work\\Manara\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "D:\\Special Work\\Manara\\DataAccessLayer\\DataAccessLayer.csproj"
+            "D:\\Special Work\\Manara\\ManaretAmman_web\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "D:\\Special Work\\Manara\\ManaretAmman_web\\DataAccessLayer\\DataAccessLayer.csproj"
             }
           }
         }

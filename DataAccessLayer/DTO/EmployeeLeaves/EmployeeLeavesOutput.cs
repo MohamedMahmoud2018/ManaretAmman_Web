@@ -8,6 +8,7 @@ namespace DataAccessLayer.DTO
 {
     public class EmployeeLeavesOutput
     {
+        public EmployeeLeavesOutput() { }
         public int EmployeeLeaveID { get; set; }
         public int EmployeeID { get; set; }
         public int? LeaveTypeID { get; set; }

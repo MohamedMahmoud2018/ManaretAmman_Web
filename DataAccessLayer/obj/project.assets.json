@@ -3541,11 +3541,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Special Work\\Manara\\DataAccessLayer\\DataAccessLayer.csproj",
+      "projectUniqueName": "D:\\Special Work\\Manara\\ManaretAmman_web\\DataAccessLayer\\DataAccessLayer.csproj",
       "projectName": "DataAccessLayer",
-      "projectPath": "D:\\Special Work\\Manara\\DataAccessLayer\\DataAccessLayer.csproj",
+      "projectPath": "D:\\Special Work\\Manara\\ManaretAmman_web\\DataAccessLayer\\DataAccessLayer.csproj",
       "packagesPath": "C:\\Users\\mkamel\\.nuget\\packages\\",
-      "outputPath": "D:\\Special Work\\Manara\\DataAccessLayer\\obj\\",
+      "outputPath": "D:\\Special Work\\Manara\\ManaretAmman_web\\DataAccessLayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

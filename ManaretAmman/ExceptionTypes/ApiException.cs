@@ -36,4 +36,8 @@ namespace ManaretAmman.ExceptionTypes
     {
         public UnauthorizedAccessException(string message) : base(message,HttpStatusCode.Unauthorized) { }
     }
+    public class internalServerException : ApiException
+    {
+        public internalServerException(string message) : base(message, HttpStatusCode.InternalServerError) { }
+    }
 }
