@@ -50,15 +50,15 @@ namespace BusinessLogicLayer.Services.Implementation
 
                 selectedEmployeeLeave.EmployeeLeaveName = _unityOfWork.LookupTableRepo
                     .Get(look=>look.ProjectID==projectId
-                    &&Int32.Parse( look.ColumnValue)==selectedEmployeeLeave.LeaveTypeID
+                    &&look.ColumnValue==selectedEmployeeLeave.LeaveTypeID.ToString()
                     &&look.TableName== "EmployeeLeaves" 
-                    && look.ColumnName== "LeaveTypeID").FirstOrDefault().ColumnDescription.ToString();
+                    && look.ColumnName== "LeaveTypeID").FirstOrDefault().ColumnDescription;
 
                 selectedEmployeeLeave.EmployeeLeaveNameAr = _unityOfWork.LookupTableRepo
                     .Get(look => look.ProjectID == projectId
-                    && Int32.Parse(look.ColumnValue) == selectedEmployeeLeave.LeaveTypeID
+                    && look.ColumnValue == selectedEmployeeLeave.LeaveTypeID.ToString()
                     && look.TableName == "EmployeeLeaves"
-                    && look.ColumnName == "LeaveTypeID").FirstOrDefault().ColumnDescriptionAr.ToString();
+                    && look.ColumnName == "LeaveTypeID").FirstOrDefault().ColumnDescriptionAr;
                 return selectedEmployeeLeave;
 
             }

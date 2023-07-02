@@ -27,7 +27,7 @@ namespace ManaretAmman.Controllers
         }
 
         [Route("Update")]
-        [HttpPost]
+        [HttpPut]
         public IApiResponse Update(EmployeeLeavesInput employee)
         {
             if (_employeeLeafService.Update(employee) == HttpStatusCode.OK)
@@ -37,7 +37,7 @@ namespace ManaretAmman.Controllers
         }
 
         [Route("Delete")]
-        [HttpPost]
+        [HttpDelete]
         public IApiResponse Delete(EmployeeLeafDelete employee)
         {
             if (_employeeLeafService.delete(employee) == HttpStatusCode.OK)
@@ -47,10 +47,11 @@ namespace ManaretAmman.Controllers
         }
 
         [Route("Get")]
-        [HttpPost]
+        [HttpGet]
         public IApiResponse Get(int id, int projectId)
         {
-            if (_employeeLeafService.Get(id,projectId) != null)
+            var result = _employeeLeafService.Get(id, projectId);
+            if ( result!= null ||result.EmployeeID!=0 )
             {
                return ApiResponse<EmployeeLeavesOutput>.Success("", _employeeLeafService.Get(id, projectId));
             }
@@ -59,7 +60,7 @@ namespace ManaretAmman.Controllers
         }
 
         [Route("GetAll")]
-        [HttpPost]
+        [HttpGet]
         public IApiResponse GetAll(int projectId)
         {
             if (_employeeLeafService.GetAll(projectId) != null)
