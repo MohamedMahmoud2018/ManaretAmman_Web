@@ -45,7 +45,23 @@ namespace BusinessLogicLayer.Services.Implementation
         {
            var employee= _unityOfWork.EmployeeLeafRepo.Get(emp=>emp.EmployeeID==id && emp.ProjectID==projectId).FirstOrDefault();
             if (employee != null)
-            return _mapper.Map<EmployeeLeavesOutput>(employee);
+            {
+                var selectedEmployeeLeave= _mapper.Map<EmployeeLeavesOutput>(employee);
+
+                selectedEmployeeLeave.EmployeeLeaveName = _unityOfWork.LookupTableRepo
+                    .Get(look=>look.ProjectID==projectId
+                    &&Int32.Parse( look.ColumnValue)==selectedEmployeeLeave.LeaveTypeID
+                    &&look.TableName== "EmployeeLeaves" 
+                    && look.ColumnName== "LeaveTypeID").FirstOrDefault().ColumnDescription.ToString();
+
+                selectedEmployeeLeave.EmployeeLeaveNameAr = _unityOfWork.LookupTableRepo
+                    .Get(look => look.ProjectID == projectId
+                    && Int32.Parse(look.ColumnValue) == selectedEmployeeLeave.LeaveTypeID
+                    && look.TableName == "EmployeeLeaves"
+                    && look.ColumnName == "LeaveTypeID").FirstOrDefault().ColumnDescriptionAr.ToString();
+                return selectedEmployeeLeave;
+
+            }
             return new EmployeeLeavesOutput();
         }
 
