@@ -12,6 +12,7 @@ namespace BusinessLogicLayer.UnitOfWork
     interface IUnitOfWork
     {
         IRepository<EmployeeLeaf> EmployeeLeafRepo { get; }
+        IRepository<LookupTable> LookupTableRepo { get; }
 
         void Save();
     }

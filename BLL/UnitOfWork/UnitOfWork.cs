@@ -24,7 +24,11 @@ namespace BusinessLogicLayer.UnitOfWork
             get { return employeeLeafRepo ?? (employeeLeafRepo = new Repository<EmployeeLeaf>(context)); }
         }
 
-
+        private IRepository<LookupTable> lookupTableRepo;
+        public IRepository<LookupTable> LookupTableRepo
+        {
+            get { return lookupTableRepo ?? (lookupTableRepo = new Repository<LookupTable>(context)); }
+        }
 
         public void Save()
         {
