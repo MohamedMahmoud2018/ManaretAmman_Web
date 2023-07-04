@@ -2,6 +2,10 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Net.Http;
+using DataAccessLayer.Contracts;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -13,10 +17,13 @@ namespace DataAccessLayer.Models
         {
         }
 
-        public PayrolLogOnlyContext(DbContextOptions<PayrolLogOnlyContext> options)
+        public PayrolLogOnlyContext(DbContextOptions<PayrolLogOnlyContext> options, IHttpContextAccessor httpContextAccessor)
             : base(options)
         {
+            HttpContextAccessor = httpContextAccessor;
         }
+
+        protected IHttpContextAccessor HttpContextAccessor { get; }
 
         public virtual DbSet<Allowance_deduction> Allowance_deductions { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
@@ -915,10 +922,62 @@ namespace DataAccessLayer.Models
                     .HasConstraintName("FK_Users_Projects");
             });
 
+            #region Filter results by projectId
+            // Implement multi-tenancy logic here
+            if ((HttpContextAccessor.HttpContext.Items["ProjectId"] is string projectIdString && int.TryParse(projectIdString, out int projectId)))
+            {
+                // Modify the modelBuilder to apply the filtering logic to all relevant entity types.
+                foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+                {
+                    if (typeof(IMustHaveProject).IsAssignableFrom(entityType.ClrType))
+                    {
+                        var parameter = Expression.Parameter(entityType.ClrType, "e");
+                        var body = Expression.Equal(
+                            Expression.PropertyOrField(parameter, "ProjectId"),
+                            Expression.Constant(projectId)
+                        );
+                        var predicate = Expression.Lambda(body, parameter);
+
+                        modelBuilder.Entity(entityType.ClrType).HasQueryFilter(predicate);
+                    }
+                }
+            }
+            else
+            {
+                throw new DirectoryNotFoundException("Booooooo");
+            }
+
+            #endregion
+
             OnModelCreatingGeneratedProcedures(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public override int SaveChanges()
+        {
+            ApplyProjectIdToEntities();
+            return base.SaveChanges();
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            ApplyProjectIdToEntities();
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void ApplyProjectIdToEntities()
+        {
+            var projectId = (int)HttpContextAccessor.HttpContext.Items["ProjectId"];
+
+            var tenantEntities = ChangeTracker.Entries<IMustHaveProject>()
+                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
+
+            foreach (var entityEntry in tenantEntities)
+            {
+                entityEntry.Entity.ProjectID = projectId;
+            }
+        }
     }
 }
