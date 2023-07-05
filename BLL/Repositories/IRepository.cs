@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace BusinessLogicLayer.Repositories
 {
@@ -67,7 +62,13 @@ namespace BusinessLogicLayer.Repositories
         /// Insert entity to db
         /// </summary>
         /// <param name="entity"></param>
-        void Insert(TEntity entity);
+        void Insert(TEntity entity);  
+        
+        /// <summary>
+        /// Insert entity to db async
+        /// </summary>
+        /// <param name="entity"></param>
+        Task InsertAsync(TEntity entity);
         /// <summary>
         /// Insert entities to db
         /// </summary>
@@ -78,7 +79,13 @@ namespace BusinessLogicLayer.Repositories
         /// Update entity in db
         /// </summary>
         /// <param name="entity"></param>
-        void Update(TEntity entity);
+        void Update(TEntity entity);    
+        
+        /// <summary>
+        /// Update entity in db
+        /// </summary>
+        /// <param name="entity"></param>
+        Task UpdateAsync(TEntity entity);
 
         /// <summary>
         /// Update entities in db

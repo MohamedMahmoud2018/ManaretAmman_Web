@@ -1,19 +1,14 @@
 ﻿using BusinessLogicLayer.Repositories;
-using DataAccessLayer.DTO;
 using DataAccessLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.UnitOfWork
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
-        IRepository<EmployeeLeaf> EmployeeLeafRepo { get; }
-        IRepository<LookupTable> LookupTableRepo { get; }
+        IRepository<EmployeeLeaf> EmployeeLeaveRepository { get; }
+        IRepository<LookupTable> LookupsRepository { get; }
 
         void Save();
+        Task SaveAsync();
     }
 }

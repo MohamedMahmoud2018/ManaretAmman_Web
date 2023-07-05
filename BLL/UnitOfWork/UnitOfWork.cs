@@ -1,42 +1,50 @@
-﻿using BusinessLogicLayer.Repositories;
+﻿using BusinessLogicLayer.Exceptions;
+using BusinessLogicLayer.Repositories;
 using DataAccessLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private readonly PayrolLogOnlyContext context;
+        private readonly PayrolLogOnlyContext _context;
 
-        public UnitOfWork(PayrolLogOnlyContext _context)
+        public UnitOfWork(PayrolLogOnlyContext context)
         {
-            context = _context;
+            this._context = context;
         }
 
 
-        private IRepository<EmployeeLeaf> employeeLeafRepo;
-        public IRepository<EmployeeLeaf> EmployeeLeafRepo
+        private IRepository<EmployeeLeaf> _employeeLeaveRepository;
+        public IRepository<EmployeeLeaf> EmployeeLeaveRepository
         {
-            get { return employeeLeafRepo ?? (employeeLeafRepo = new Repository<EmployeeLeaf>(context)); }
+            get { return _employeeLeaveRepository ?? (_employeeLeaveRepository = new Repository<EmployeeLeaf>(_context)); }
         }
 
-        private IRepository<LookupTable> lookupTableRepo;
-        public IRepository<LookupTable> LookupTableRepo
+        private IRepository<LookupTable> _lookupsRepository;
+        public IRepository<LookupTable> LookupsRepository
         {
-            get { return lookupTableRepo ?? (lookupTableRepo = new Repository<LookupTable>(context)); }
+            get { return _lookupsRepository ?? (_lookupsRepository = new Repository<LookupTable>(_context)); }
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
+        }
+
+        public async Task SaveAsync()
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new InternalServerException("an error occured while trying save changes");
+            }
         }
         public void Dispose()
         {
-            context.Dispose();
+            _context.Dispose();
             System.GC.SuppressFinalize(this);
         }
     }

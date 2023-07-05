@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace ManaretAmman.ExceptionTypes
+namespace BusinessLogicLayer.Exceptions
 {
     public abstract class ApiException:Exception
     {
@@ -35,8 +35,8 @@ namespace ManaretAmman.ExceptionTypes
     {
         public UnauthorizedAccessException(string message) : base(message,HttpStatusCode.Unauthorized) { }
     }
-    public class internalServerException : ApiException
+    public class InternalServerException : ApiException
     {
-        public internalServerException(string message) : base(message, HttpStatusCode.InternalServerError) { }
+        public InternalServerException(string message) : base(message, HttpStatusCode.InternalServerError) { }
     }
 }

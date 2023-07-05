@@ -1,11 +1,6 @@
-﻿using DataAccessLayer.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Repositories
 {
@@ -103,6 +98,11 @@ namespace BusinessLogicLayer.Repositories
             dbSet.Update(entity);
             //_context.Entry(entity).State = EntityState.Modified;
         }
+        
+        public virtual async Task UpdateAsync(TEntity entity)
+        {
+            dbSet.Update(entity);
+        }
         public virtual void Update(ICollection<TEntity> entities)
         {
             dbSet.UpdateRange(entities);
@@ -139,6 +139,11 @@ namespace BusinessLogicLayer.Repositories
         {
             //_context.RemoveRange(entity);
             dbSet.RemoveRange(entity);
+        }
+
+        public virtual async Task InsertAsync(TEntity entity)
+        {
+            await dbSet.AddAsync(entity);
         }
     }
 

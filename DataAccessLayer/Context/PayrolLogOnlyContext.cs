@@ -942,10 +942,6 @@ namespace DataAccessLayer.Models
                     }
                 }
             }
-            else
-            {
-                throw new DirectoryNotFoundException("Booooooo");
-            }
 
             #endregion
 
