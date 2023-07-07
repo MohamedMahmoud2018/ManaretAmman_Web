@@ -911,6 +911,17 @@ namespace DataAccessLayer.Models
                     .HasConstraintName("FK_TransactionTypes_Projects");
             });
 
+            #region set CreationDate -  ModificationDate
+            modelBuilder.Entity<IBaseEntity>()
+                .Property(e => e.CreationDate)
+                .ValueGeneratedOnAdd(); 
+            
+            modelBuilder.Entity<IBaseEntity>()
+                .Property(e => e.ModificationDate)
+                .ValueGeneratedOnUpdate();
+
+            #endregion
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => new { e.UserID, e.ProjectID });

@@ -4,10 +4,10 @@
     {
         public EmployeeLeavesOutput() { }
         public int EmployeeLeaveID { get; set; }
-        public string EmployeeLeaveName { get; set; }
+        public string EmployeeLeaveName { get; set; } 
         public string EmployeeLeaveNameAr { get; set; }
         public int EmployeeID { get; set; }
-        public string EmployeeName { get; set; }
+        public string EmployeeName { get; set; }  
         public int? LeaveTypeID { get; set; }
         public int? LeaveDate { get; set; }
         public int? FromTime { get; set; }

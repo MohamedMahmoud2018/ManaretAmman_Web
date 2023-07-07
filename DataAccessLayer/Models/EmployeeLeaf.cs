@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DataAccessLayer.Models
 {
     [Index("EmployeeID", Name = "ix_EmployeeLeaves_2")]
-    public partial class EmployeeLeaf  : IMustHaveProject
+    public partial class EmployeeLeaf  : IMustHaveProject, IBaseEntity
     {
         [Key]
         public int EmployeeLeaveID { get; set; }
@@ -19,11 +19,15 @@ namespace DataAccessLayer.Models
         public int? FromTime { get; set; }
         public int? ToTime { get; set; }
         public int? CreatedBy { get; set; }
+
         [Column(TypeName = "datetime")]
         public DateTime? CreationDate { get; set; }
+
         public int? ModifiedBy { get; set; }
+
         [Column(TypeName = "datetime")]
         public DateTime? ModificationDate { get; set; }
+
         public int? BySystem { get; set; }
         [Key]
         public int ProjectID { get; set; }
