@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using DataAccessLayer.DTO;
 using DataAccessLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Mapper
 {
@@ -14,7 +9,10 @@ namespace BusinessLogicLayer.Mapper
         public Mapping()
         {
             CreateMap<EmployeeLeaf, EmployeeLeavesInput>().ReverseMap();
-            CreateMap<EmployeeLeaf, EmployeeLeavesOutput>();
+            CreateMap<EmployeeLeaf, EmployeeLeavesOutput>().ForMember(destination => destination.EmployeeName,
+                options => options.MapFrom(source => source.Employee.EmployeeName));
+
+            CreateMap<LookupTable, LookupDto>();
         }
     }
 }

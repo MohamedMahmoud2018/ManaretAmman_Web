@@ -9,6 +9,6 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
         Task Update(EmployeeLeavesInput employee);
         Task Delete(int employeeId, int employeeLeaveId);
         Task<EmployeeLeavesOutput> Get(int id);
-        List<EmployeeLeavesOutput> GetAll();
+        Task<List<EmployeeLeavesOutput>> GetAll();
     }
 }

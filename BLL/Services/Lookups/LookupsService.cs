@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.UnitOfWork;
-using DataAccessLayer.Models;
+using DataAccessLayer.DTO;
 
 namespace BusinessLogicLayer.Services.Lookups
 {
@@ -35,11 +35,13 @@ namespace BusinessLogicLayer.Services.Lookups
             return lookup.ColumnDescriptionAr;
         }
 
-        public async Task<IList<LookupTable>> GetLookups(string tableName, string columnName)
+        public async Task<IList<LookupDto>> GetLookups(string tableName, string columnName)
         {
-            return _unit.LookupsRepository
+            var lookups =  _unit.LookupsRepository
                     .Get(e => e.TableName == tableName && e.ColumnName == columnName)
                     .ToList();
+
+            return _mapper.Map<IList<LookupDto>>(lookups);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessLogicLayer.Common;
 using BusinessLogicLayer.Exceptions;
 using BusinessLogicLayer.Services.Lookups;
 using BusinessLogicLayer.UnitOfWork;
@@ -30,11 +31,20 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
             return _mapper.Map<EmployeeLeaf, EmployeeLeavesOutput>(leave);
         }
 
-        public List<EmployeeLeavesOutput> GetAll()
+        public async Task<List<EmployeeLeavesOutput>> GetAll()
         {
-            var leaves = _unitOfWork.EmployeeLeaveRepository.Get().ToList();
+            var leaves = _unitOfWork.EmployeeLeaveRepository.Get(includes: e => e.Employee).ToList();
 
-            return _mapper.Map<List<EmployeeLeaf>, List<EmployeeLeavesOutput>>(leaves);
+            var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
+
+            var result = _mapper.Map<List<EmployeeLeaf>, List<EmployeeLeavesOutput>>(leaves);
+
+            foreach (var item in result)
+            {
+                item.LeaveType = lookups.FirstOrDefault(e => e.ColumnValue == item.LeaveTypeID.ToString()).ColumnDescription;
+            }
+
+            return result;
         }
 
         public async Task Create(EmployeeLeavesInput model)

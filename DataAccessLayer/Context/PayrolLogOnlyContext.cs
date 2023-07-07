@@ -911,16 +911,6 @@ namespace DataAccessLayer.Models
                     .HasConstraintName("FK_TransactionTypes_Projects");
             });
 
-            #region set CreationDate -  ModificationDate
-            modelBuilder.Entity<IBaseEntity>()
-                .Property(e => e.CreationDate)
-                .ValueGeneratedOnAdd(); 
-            
-            modelBuilder.Entity<IBaseEntity>()
-                .Property(e => e.ModificationDate)
-                .ValueGeneratedOnUpdate();
-
-            #endregion
 
             modelBuilder.Entity<User>(entity =>
             {
@@ -932,6 +922,17 @@ namespace DataAccessLayer.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Users_Projects");
             });
+
+            #region Set CreationDate -  ModificationDate
+            //modelBuilder.Entity<BaseEntity>()
+            //    .Property(e => e.CreationDate)
+            //    .ValueGeneratedOnAdd(); 
+            
+            //modelBuilder.Entity<BaseEntity>()
+            //    .Property(e => e.ModificationDate)
+            //    .ValueGeneratedOnUpdate();
+
+            #endregion
 
             #region Filter results by projectId
             // Implement multi-tenancy logic here

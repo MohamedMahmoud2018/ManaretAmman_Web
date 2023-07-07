@@ -16,9 +16,9 @@ namespace ManaretAmman.Controllers.Employees
         => _employeeService = employeeService;
 
         [HttpGet("GetAll")]
-        public IApiResponse Get()
+        public async Task<IApiResponse> Get()
         {
-            var result = _employeeService.GetAll();
+            var result = await  _employeeService.GetAll();
 
             return ApiResponse<List<EmployeeLeavesOutput>>.Success("data has been retrieved succussfully", result);
         }
