@@ -39,7 +39,7 @@ namespace BusinessLogicLayer.UnitOfWork
             }
             catch (Exception ex)
             {
-                throw new InternalServerException("an error occured while trying save changes");
+                throw new InternalServerException($"an error occured while trying save changes, details is: {ex.InnerException.Message}");
             }
         }
         public void Dispose()

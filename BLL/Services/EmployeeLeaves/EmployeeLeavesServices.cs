@@ -28,7 +28,13 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
             if (leave is null)
                 throw new NotFoundException("data not found");
 
-            return _mapper.Map<EmployeeLeaf, EmployeeLeavesOutput>(leave);
+            var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
+
+            var result = _mapper.Map<EmployeeLeaf, EmployeeLeavesOutput>(leave);
+
+            result.LeaveType = lookups.FirstOrDefault(e => e.ColumnValue == result.LeaveTypeID.ToString()).ColumnDescription;
+
+            return result;
         }
 
         public async Task<List<EmployeeLeavesOutput>> GetAll()
@@ -61,7 +67,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
         public async Task Update(EmployeeLeavesInput employeeLeave)
         {
-            var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeID == employeeLeave.EmployeeID)
+            var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeLeaveID == employeeLeave.EmployeeLeaveID)
                 .FirstOrDefault();
 
             if (leave is null)
@@ -75,10 +81,10 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
         }
 
-        public async Task Delete(int employeeId, int employeeLeaveId)
+        public async Task Delete( int employeeLeaveId)
         {
             var leave = _unitOfWork.EmployeeLeaveRepository
-                        .Get(e => e.EmployeeID == employeeId && e.EmployeeLeaveID == employeeLeaveId)
+                        .Get(e => e.EmployeeLeaveID == employeeLeaveId)
                         .FirstOrDefault();
 
             if (leave is null)

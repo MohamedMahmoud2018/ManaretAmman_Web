@@ -977,7 +977,8 @@ namespace DataAccessLayer.Models
 
         private void ApplyProjectIdToEntities()
         {
-            var projectId = (int)HttpContextAccessor.HttpContext.Items["ProjectId"];
+            var projectIdFromHeader = HttpContextAccessor.HttpContext.Items["ProjectId"].ToString();
+            var projectId = int.Parse(projectIdFromHeader);
 
             var tenantEntities = ChangeTracker.Entries<IMustHaveProject>()
                 .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);

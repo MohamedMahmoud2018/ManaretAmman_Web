@@ -2,7 +2,6 @@
 using DataAccessLayer.DTO;
 using ManaretAmman.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace ManaretAmman.Controllers.Employees
 {
@@ -16,7 +15,7 @@ namespace ManaretAmman.Controllers.Employees
         => _employeeService = employeeService;
 
         [HttpGet("GetAll")]
-        public async Task<IApiResponse> Get()
+        public async Task<IApiResponse> GetAll()
         {
             var result = await  _employeeService.GetAll();
 
@@ -49,9 +48,9 @@ namespace ManaretAmman.Controllers.Employees
 
 
         [HttpDelete]
-        public async Task<IApiResponse> Delete(int employeeId, int employeeLeaveId)
+        public async Task<IApiResponse> Delete(int employeeLeaveId)
         {
-            await _employeeService.Delete(employeeId, employeeLeaveId);
+            await _employeeService.Delete(employeeLeaveId);
             return ApiResponse.Success();
         }
     }
