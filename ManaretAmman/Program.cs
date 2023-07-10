@@ -79,8 +79,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseMiddleware(typeof(GlobalExceptionHandler));
-app.UseMiddleware(typeof(ProjectMiddleware));
+
 #region Cors
 app.UseCors(builder =>
 {
@@ -90,6 +91,9 @@ app.UseCors(builder =>
     .AllowAnyHeader();
 });
 #endregion
+
+app.UseExceptionHandler("/error"); 
+
 app.UseHttpsRedirection();
 
 app.UseRouting();
@@ -97,6 +101,9 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+
+app.UseMiddleware(typeof(ProjectMiddleware));
 
 app.MapControllers();
 

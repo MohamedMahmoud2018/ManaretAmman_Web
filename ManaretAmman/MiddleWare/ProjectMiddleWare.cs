@@ -11,7 +11,7 @@
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (context.Request.Headers.TryGetValue("ProjectId", out var ProjectIdValue))
+            if (context.Request.Headers.TryGetValue("projectid", out var ProjectIdValue))
             {
                 context.Items["ProjectId"] = ProjectIdValue.ToString();
             }
