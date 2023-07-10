@@ -62,8 +62,8 @@ namespace BusinessLogicLayer.Repositories
         /// Insert entity to db
         /// </summary>
         /// <param name="entity"></param>
-        void Insert(TEntity entity);  
-        
+        void Insert(TEntity entity);
+
         /// <summary>
         /// Insert entity to db async
         /// </summary>
@@ -79,8 +79,8 @@ namespace BusinessLogicLayer.Repositories
         /// Update entity in db
         /// </summary>
         /// <param name="entity"></param>
-        void Update(TEntity entity);    
-        
+        void Update(TEntity entity);
+
         /// <summary>
         /// Update entity in db
         /// </summary>
@@ -115,6 +115,15 @@ namespace BusinessLogicLayer.Repositories
         /// </summary>
         /// <param name="entity"></param>
         void DeleteRange(List<TEntity> entity);
+
+        #region According ProjectID
+        IQueryable<TEntity> PQuery(
+            Expression<Func<TEntity, bool>> filter = null, 
+            Func<IQueryable<TEntity>, 
+            IOrderedQueryable<TEntity>> orderBy = null,
+            params Expression<Func<TEntity,object>>[] include);
+        Task PInsertAsync(TEntity entity);
+        #endregion
     }
 
 }

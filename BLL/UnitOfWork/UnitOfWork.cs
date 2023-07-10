@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.Exceptions;
 using BusinessLogicLayer.Repositories;
+using BusinessLogicLayer.Services.ProjectProvider;
 using DataAccessLayer.Models;
 
 namespace BusinessLogicLayer.UnitOfWork
@@ -7,23 +8,25 @@ namespace BusinessLogicLayer.UnitOfWork
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly PayrolLogOnlyContext _context;
+        private readonly IProjectProvider _projectProvider;
 
-        public UnitOfWork(PayrolLogOnlyContext context)
+        public UnitOfWork(PayrolLogOnlyContext context, IProjectProvider projectProvider)
         {
-            this._context = context;
+            this._context    = context;
+            _projectProvider = projectProvider;
         }
 
 
         private IRepository<EmployeeLeaf> _employeeLeaveRepository;
         public IRepository<EmployeeLeaf> EmployeeLeaveRepository
         {
-            get { return _employeeLeaveRepository ?? (_employeeLeaveRepository = new Repository<EmployeeLeaf>(_context)); }
+            get { return _employeeLeaveRepository ?? (_employeeLeaveRepository = new Repository<EmployeeLeaf>(_context, _projectProvider)); }
         }
 
         private IRepository<LookupTable> _lookupsRepository;
         public IRepository<LookupTable> LookupsRepository
         {
-            get { return _lookupsRepository ?? (_lookupsRepository = new Repository<LookupTable>(_context)); }
+            get { return _lookupsRepository ?? (_lookupsRepository = new Repository<LookupTable>(_context, _projectProvider)); }
         }
 
         public void Save()

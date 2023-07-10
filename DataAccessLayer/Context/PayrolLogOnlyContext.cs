@@ -934,59 +934,11 @@ namespace DataAccessLayer.Models
 
             #endregion
 
-            #region Filter results by projectId
-            // Implement multi-tenancy logic here
-            if ((HttpContextAccessor.HttpContext.Items["ProjectId"] is string projectIdString && int.TryParse(projectIdString, out int projectId)))
-            {
-                // Modify the modelBuilder to apply the filtering logic to all relevant entity types.
-                foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-                {
-                    if (typeof(IMustHaveProject).IsAssignableFrom(entityType.ClrType))
-                    {
-                        var parameter = Expression.Parameter(entityType.ClrType, "e");
-                        var body = Expression.Equal(
-                            Expression.PropertyOrField(parameter, "ProjectId"),
-                            Expression.Constant(projectId)
-                        );
-                        var predicate = Expression.Lambda(body, parameter);
-
-                        modelBuilder.Entity(entityType.ClrType).HasQueryFilter(predicate);
-                    }
-                }
-            }
-
-            #endregion
-
             OnModelCreatingGeneratedProcedures(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-        public override int SaveChanges()
-        {
-            ApplyProjectIdToEntities();
-            return base.SaveChanges();
-        }
-
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            ApplyProjectIdToEntities();
-            return await base.SaveChangesAsync(cancellationToken);
-        }
-
-        private void ApplyProjectIdToEntities()
-        {
-            var projectIdFromHeader = HttpContextAccessor.HttpContext.Items["ProjectId"].ToString();
-            var projectId = int.Parse(projectIdFromHeader);
-
-            var tenantEntities = ChangeTracker.Entries<IMustHaveProject>()
-                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
-
-            foreach (var entityEntry in tenantEntities)
-            {
-                entityEntry.Entity.ProjectID = projectId;
-            }
-        }
     }
 }

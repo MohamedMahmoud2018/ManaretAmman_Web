@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using AutoMapper;
 using BusinessLogicLayer.Mapper;
+using BusinessLogicLayer.Services.ProjectProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,8 +44,11 @@ builder.Services.AddDbContext<PayrolLogOnlyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 #endregion
+
 // Add services to the container.
 #region Injection
+builder.Services.AddSingleton<IProjectProvider, ProjectProvider>();
+
 builder.Services.AddScoped<DbContext, PayrolLogOnlyContext>();
 
 for (int i = 0; i < TypesToRegister.Count; i++)

@@ -22,7 +22,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
         public async Task<EmployeeLeavesOutput> Get(int id)
         {
             var leave = _unitOfWork.EmployeeLeaveRepository
-                       .Get(e => e.EmployeeLeaveID == id)
+                       .PQuery(e => e.EmployeeLeaveID == id)
                        .FirstOrDefault();
 
             if (leave is null)
@@ -39,7 +39,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
         public async Task<List<EmployeeLeavesOutput>> GetAll()
         {
-            var leaves = _unitOfWork.EmployeeLeaveRepository.Get(includes: e => e.Employee).ToList();
+            var leaves = _unitOfWork.EmployeeLeaveRepository.PQuery(include: e => e.Employee).ToList();
 
             var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
 
@@ -60,7 +60,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
             var employeeLeave = _mapper.Map<EmployeeLeaf>(model);
 
-            await _unitOfWork.EmployeeLeaveRepository.InsertAsync(employeeLeave);
+            await _unitOfWork.EmployeeLeaveRepository.PInsertAsync(employeeLeave);
 
              await _unitOfWork.SaveAsync();
         }
