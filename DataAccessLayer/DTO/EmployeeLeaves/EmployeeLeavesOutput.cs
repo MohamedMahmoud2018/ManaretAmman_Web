@@ -4,6 +4,7 @@
     {
         public EmployeeLeavesOutput() { }
         public int EmployeeLeaveID { get; set; }
+        public int EmployeeID { get; set; }
         public string EmployeeName { get; set; }
         public int? LeaveTypeID { get; set; }
         public string LeaveType { get; set; }

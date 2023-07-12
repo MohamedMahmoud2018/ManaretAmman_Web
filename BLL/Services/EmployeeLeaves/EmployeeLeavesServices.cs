@@ -22,7 +22,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
         public async Task<EmployeeLeavesOutput> Get(int id)
         {
             var leave = _unitOfWork.EmployeeLeaveRepository
-                       .PQuery(e => e.EmployeeLeaveID == id)
+                       .PQuery(e => e.EmployeeLeaveID == id, include: e => e.Employee)
                        .FirstOrDefault();
 
             if (leave is null)
