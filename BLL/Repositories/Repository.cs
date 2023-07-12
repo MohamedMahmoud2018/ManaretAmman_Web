@@ -162,17 +162,16 @@ namespace BusinessLogicLayer.Repositories
             var projectId = _projectProvider.GetProjectId();
             Expression<Func<TEntity, bool>> projectFilter = e => ((IMustHaveProject)e).ProjectID == projectId;
 
-            IQueryable<TEntity> query = default;
+            IQueryable<TEntity> query = _context.Set<TEntity>().Where(projectFilter);
 
             if (filter != null)
             {
-                var combinedFilter = Expression.Lambda<Func<TEntity, bool>>(Expression.AndAlso(projectFilter.Body,
-                                         new ExpressionParameterReplacer(projectFilter.Parameters, filter.Parameters).Visit(filter.Body)), filter.Parameters);
-                query = Query(combinedFilter, orderBy);
+                query = query.Where(filter);
             }
-            else
+
+            if (orderBy != null)
             {
-                query = Query(projectFilter, orderBy);
+                query = orderBy(query);
             }
 
             if (includes is not null)
