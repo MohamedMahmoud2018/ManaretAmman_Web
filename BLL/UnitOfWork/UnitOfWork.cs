@@ -17,13 +17,24 @@ namespace BusinessLogicLayer.UnitOfWork
         }
 
 
+        private IRepository<Employee> _employeeRepository;
+
         private IRepository<EmployeeLeaf> _employeeLeaveRepository;
+
+        private IRepository<LookupTable> _lookupsRepository;
+
+
+
+        public IRepository<Employee> EmployeeRepository
+        {
+            get { return _employeeRepository ?? (_employeeRepository = new Repository<Employee>(_context, _projectProvider)); }
+        } 
+
         public IRepository<EmployeeLeaf> EmployeeLeaveRepository
         {
             get { return _employeeLeaveRepository ?? (_employeeLeaveRepository = new Repository<EmployeeLeaf>(_context, _projectProvider)); }
         }
 
-        private IRepository<LookupTable> _lookupsRepository;
         public IRepository<LookupTable> LookupsRepository
         {
             get { return _lookupsRepository ?? (_lookupsRepository = new Repository<LookupTable>(_context, _projectProvider)); }
@@ -36,14 +47,7 @@ namespace BusinessLogicLayer.UnitOfWork
 
         public async Task SaveAsync()
         {
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new InternalServerException($"an error occured while trying save changes, details is: {ex.InnerException.Message}");
-            }
+            await _context.SaveChangesAsync();
         }
         public void Dispose()
         {

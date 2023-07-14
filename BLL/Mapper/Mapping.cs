@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataAccessLayer.DTO;
+using DataAccessLayer.DTO.Employees;
 using DataAccessLayer.Models;
 
 namespace BusinessLogicLayer.Mapper
@@ -13,6 +14,8 @@ namespace BusinessLogicLayer.Mapper
                 options => options.MapFrom(source => source.Employee.EmployeeName));
 
             CreateMap<LookupTable, LookupDto>();
+
+            CreateMap<Employee, EmployeeLookup>();
         }
     }
 }
