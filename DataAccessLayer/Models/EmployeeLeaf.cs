@@ -11,6 +11,7 @@ namespace DataAccessLayer.Models
     public partial class EmployeeLeaf  : IMustHaveProject, IBaseEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmployeeLeaveID { get; set; }
         [Key]
         public int EmployeeID { get; set; }
