@@ -96,7 +96,7 @@ app.UseCors(builder =>
 });
 #endregion
 
-app.UseExceptionHandler("/error"); 
+//app.UseExceptionHandler(); 
 
 app.UseHttpsRedirection();
 
