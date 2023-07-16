@@ -3,7 +3,7 @@
     public class EmployeeLeavesOutput
     {
         public EmployeeLeavesOutput() { }
-        public int EmployeeLeaveID { get; set; }
+        public int ID { get; set; }
         public int EmployeeID { get; set; }
         public string EmployeeName { get; set; }
         public int? LeaveTypeID { get; set; }

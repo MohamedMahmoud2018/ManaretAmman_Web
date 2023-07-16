@@ -9,17 +9,46 @@ namespace BusinessLogicLayer.Mapper
     {
         public Mapping()
         {
-            CreateMap<EmployeeLeaf, EmployeeLeavesInput>().ReverseMap();
-            CreateMap<EmployeeLeaf, EmployeeLeavesOutput>().ForMember(destination => destination.EmployeeName,
-                options => options.MapFrom(source => source.Employee.EmployeeName));
-            
-            CreateMap<EmployeeVacation, EmployeeVacationInput>().ReverseMap();
-            CreateMap<EmployeeVacation, EmployeeVacationOutput>().ForMember(destination => destination.EmployeeName,
-                options => options.MapFrom(source => source.Employee.EmployeeName));
+            #region EmployeeLeaves
 
-            CreateMap<LookupTable, LookupDto>();
+                CreateMap<EmployeeLeaf, EmployeeLeavesInput>().ForMember(destination => destination.ID,
+                    options => options.MapFrom(source => source.EmployeeLeaveID));
 
-            CreateMap<Employee, EmployeeLookup>();
+                CreateMap<EmployeeLeavesInput, EmployeeLeaf>().ForMember(destination => destination.EmployeeLeaveID,
+                    options => options.MapFrom(source => source.ID));
+
+                CreateMap<EmployeeLeaf, EmployeeLeavesOutput>().ForMember(destination => destination.EmployeeName,
+                    options => options.MapFrom(source => source.Employee.EmployeeName))
+                    .ForMember(destination => destination.ID,
+                    options => options.MapFrom(source => source.EmployeeLeaveID));
+
+            #endregion
+
+
+            #region EmployeeVacations
+
+                CreateMap<EmployeeVacation, EmployeeVacationInput>().ReverseMap();
+                CreateMap<EmployeeVacation, EmployeeVacationOutput>().ForMember(destination => destination.EmployeeName,
+                    options => options.MapFrom(source => source.Employee.EmployeeName));
+
+            #endregion
+
+
+            #region Employee
+
+                CreateMap<Employee, EmployeeLookup>();
+
+            #endregion
+
+
+            #region Lookups
+
+                CreateMap<LookupTable, LookupDto>();
+
+            #endregion
+
+
+
         }
     }
 }
