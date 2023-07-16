@@ -86,7 +86,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
             employeeLeave.FromTime  = timing.FromTime;
             employeeLeave.ToTime    = timing.ToTime;
 
-            employeeLeave.LeaveTypeID = null;
+            //employeeLeave.LeaveTypeID = null;
 
             await _unitOfWork.EmployeeLeaveRepository.PInsertAsync(employeeLeave);
 

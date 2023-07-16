@@ -7,11 +7,11 @@ namespace ManaretAmman.Controllers.Employees
 {
     [Route("api/Employees/[controller]")]
     [ApiController]
-    public class VacationController : ControllerBase
+    public class VacationsController : ControllerBase
     {
         private readonly IEmployeeVacationService _employeeService;
 
-        public VacationController(IEmployeeVacationService employeeService)
+        public VacationsController(IEmployeeVacationService employeeService)
         => _employeeService = employeeService;
 
         [HttpGet("GetAll")]
