@@ -2,7 +2,7 @@
 {
     public class EmployeeLeavesInput
     {
-        public int EmployeeLeaveID { get; set; }
+        public int ID { get; set; }
         public int EmployeeID { get; set; }
         public int? LeaveTypeID { get; set; }
         public DateTime? LeaveDate { get; set; }

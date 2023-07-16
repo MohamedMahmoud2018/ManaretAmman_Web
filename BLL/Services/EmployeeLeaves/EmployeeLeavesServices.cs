@@ -33,7 +33,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
             var result = new EmployeeLeavesOutput
             {
-                EmployeeLeaveID = leave.EmployeeLeaveID,
+                ID = leave.EmployeeLeaveID,
                 EmployeeID      = leave.EmployeeID,
                 EmployeeName    = leave.Employee.EmployeeName,
                 LeaveTypeID     = leave.LeaveTypeID,
@@ -55,7 +55,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
             var result = leaves.Select(item => new EmployeeLeavesOutput 
             {
-                EmployeeLeaveID = item.EmployeeLeaveID,
+                ID = item.EmployeeLeaveID,
                 EmployeeID      = item.EmployeeID,
                 EmployeeName    = item.Employee.EmployeeName,
                 LeaveTypeID     = item.LeaveTypeID,
@@ -95,7 +95,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
         public async Task Update(EmployeeLeavesInput employeeLeave)
         {
-            var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeLeaveID == employeeLeave.EmployeeLeaveID)
+            var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeLeaveID == employeeLeave.ID)
                 .FirstOrDefault();
 
             if (leave is null)
