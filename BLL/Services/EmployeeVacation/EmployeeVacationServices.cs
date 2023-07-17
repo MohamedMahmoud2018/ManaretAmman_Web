@@ -33,7 +33,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             var result = new EmployeeVacationOutput
             {
-                EmployeeVacationID = Vacation.EmployeeVacationID,
+                ID = Vacation.EmployeeVacationID,
                 EmployeeID = Vacation.EmployeeID,
                 EmployeeName = Vacation.Employee.EmployeeName,
                 VacationTypeID = Vacation.VacationTypeID,
@@ -53,7 +53,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             var result = Vacation.Select(item => new EmployeeVacationOutput 
             {
-                EmployeeVacationID = item.EmployeeVacationID,
+                ID = item.EmployeeVacationID,
                 EmployeeID      = item.EmployeeID,
                 EmployeeName    = item.Employee.EmployeeName,
                 VacationTypeID     = item.VacationTypeID,
@@ -91,7 +91,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
         public async Task Update(EmployeeVacationInput employeeVacation)
         {
-            var Vacation = _unitOfWork.EmployeeVacationRepository.Get(emp => emp.EmployeeVacationID == employeeVacation.EmployeeVacationID)
+            var Vacation = _unitOfWork.EmployeeVacationRepository.Get(emp => emp.EmployeeVacationID == employeeVacation.ID)
                 .FirstOrDefault();
 
             if (Vacation is null)
