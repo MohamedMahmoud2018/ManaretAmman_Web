@@ -61,8 +61,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                                  && e.ColumnValue == item.VacationTypeID.ToString())?.ColumnDescription,
                 FromDate        = item.FromDate.ConvertFromUnixTimestampToDateTime(),
                 ToDate          = item.ToDate.ConvertFromUnixTimestampToDateTime() ,
-                DayCount= item.DayCount,
-                Notes= item.Notes,
+                DayCount        = item.DayCount,
+                Notes           = item.Notes,
             });
 
             return result.ToList();
@@ -80,8 +80,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             var employeeVacation = _mapper.Map<EmployeeVacationInput, EmployeeVacation>(model);
 
-            employeeVacation.FromDate = Constants.ConvertFromDateFormat(1,model.FromDate);
-            employeeVacation.ToDate = Constants.ConvertFromDateFormat(1,model.ToDate);
+            employeeVacation.FromDate = timing.FromDate;
+            employeeVacation.ToDate   = timing.ToDate;
 
             await _unitOfWork.EmployeeVacationRepository.PInsertAsync(employeeVacation);
 
@@ -104,7 +104,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             var updatedVacation = _mapper.Map<EmployeeVacationInput, EmployeeVacation>(employeeVacation);
 
             updatedVacation.FromDate = timing.FromDate;
-            updatedVacation.ToDate = timing.ToDate;
+            updatedVacation.ToDate   = timing.ToDate;
 
             await _unitOfWork.EmployeeVacationRepository.UpdateAsync(updatedVacation);
 
