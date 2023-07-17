@@ -49,18 +49,20 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
         {
             var Vacation = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee).ToList();
 
-            var lookups = await _lookupsService.GetLookups(Constants.VacationType, Constants.VacationTypeId);
+            var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
 
             var result = Vacation.Select(item => new EmployeeVacationOutput 
             {
-                ID = item.EmployeeVacationID,
+                ID              = item.EmployeeVacationID,
                 EmployeeID      = item.EmployeeID,
                 EmployeeName    = item.Employee.EmployeeName,
-                VacationTypeID     = item.VacationTypeID,
-                VacationType       = lookups.FirstOrDefault(e => item.VacationTypeID is not null
+                VacationTypeID  = item.VacationTypeID,
+                VacationType    = lookups.FirstOrDefault(e => item.VacationTypeID is not null
                                  && e.ColumnValue == item.VacationTypeID.ToString())?.ColumnDescription,
-                FromDate = item.FromDate.ConvertFromUnixTimestampToDateTime(),
-                ToDate = item.ToDate.ConvertFromUnixTimestampToDateTime()
+                FromDate        = item.FromDate.ConvertFromUnixTimestampToDateTime(),
+                ToDate          = item.ToDate.ConvertFromUnixTimestampToDateTime() ,
+                DayCount= item.DayCount,
+                Notes= item.Notes,
             });
 
             return result.ToList();
@@ -71,18 +73,15 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
 
-            //var timing = GetVacationTimingInputs(model);
+            var timing = GetVacationTimingInputs(model);
 
-            //model.VacationDate = null;
-            //model.FromTime  = null;
-            //model.ToTime    = null;
+            model.FromDate = null;
+            model.ToDate = null;
 
-            var employeeVacation = _mapper.Map<EmployeeVacation>(model);
+            var employeeVacation = _mapper.Map<EmployeeVacationInput, EmployeeVacation>(model);
 
             employeeVacation.FromDate = Constants.ConvertFromDateFormat(1,model.FromDate);
             employeeVacation.ToDate = Constants.ConvertFromDateFormat(1,model.ToDate);
-
-            employeeVacation.VacationTypeID = null;
 
             await _unitOfWork.EmployeeVacationRepository.PInsertAsync(employeeVacation);
 
@@ -91,22 +90,21 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
         public async Task Update(EmployeeVacationInput employeeVacation)
         {
-            var Vacation = _unitOfWork.EmployeeVacationRepository.Get(emp => emp.EmployeeVacationID == employeeVacation.ID)
+            var vacation = _unitOfWork.EmployeeVacationRepository.Get(emp => emp.EmployeeVacationID == employeeVacation.ID)
                 .FirstOrDefault();
 
-            if (Vacation is null)
+            if (vacation is null)
                 throw new NotFoundException("Data Not Found");
 
-            //var timing = GetVacationTimingInputs(employeeVacation);
+            var timing = GetVacationTimingInputs(employeeVacation);
 
-            //employeeVacation.VacationDate = null;
-            //employeeVacation.FromTime  = null;
-            //employeeVacation.ToTime    = null;
+            employeeVacation.FromDate = null;
+            employeeVacation.ToDate = null;
 
             var updatedVacation = _mapper.Map<EmployeeVacationInput, EmployeeVacation>(employeeVacation);
 
-            updatedVacation.FromDate = Constants.ConvertFromDateFormat(1, employeeVacation.FromDate);
-            updatedVacation.ToDate = Constants.ConvertFromDateFormat(1, employeeVacation.ToDate);
+            updatedVacation.FromDate = timing.FromDate;
+            updatedVacation.ToDate = timing.ToDate;
 
             await _unitOfWork.EmployeeVacationRepository.UpdateAsync(updatedVacation);
 
@@ -129,14 +127,13 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
         }
 
-        //private (int? FromTime, int? ToTime, int? VacationDate) GetVacationTimingInputs(EmployeeVacationInput model)
-        //{
-        //    return (
-        //           FromTime: model.FromTime.ConvertFromTimeStringToMinutes() ,
-        //           ToTime: model.ToTime.ConvertFromTimeStringToMinutes(),
-        //           VacationDate: model.VacationDate.ConvertFromDateTimeToUnixTimestamp()
-        //        ) ;
-        //}
+        private (int? FromDate, int? ToDate) GetVacationTimingInputs(EmployeeVacationInput model)
+        {
+            return (
+                   FromDate: model.FromDate.ConvertFromDateTimeToUnixTimestamp(),
+                   ToDate: model.FromDate.ConvertFromDateTimeToUnixTimestamp()
+                   );
+        }
 
     }
 }
