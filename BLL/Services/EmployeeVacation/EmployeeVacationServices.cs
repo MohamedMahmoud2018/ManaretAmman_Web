@@ -71,6 +71,11 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
 
+            DateTime startDate = (DateTime)model.FromDate;
+            DateTime endDate = (DateTime)model.ToDate;
+            TimeSpan dayCount = endDate.Subtract(startDate);
+            int daysDifference = dayCount.Days;
+            model.DayCount= daysDifference;
             //var timing = GetVacationTimingInputs(model);
 
             //model.VacationDate = null;
@@ -84,6 +89,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             employeeVacation.VacationTypeID = null;
 
+
             await _unitOfWork.EmployeeVacationRepository.PInsertAsync(employeeVacation);
 
              await _unitOfWork.SaveAsync();
@@ -96,6 +102,12 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             if (Vacation is null)
                 throw new NotFoundException("Data Not Found");
+
+            DateTime startDate = (DateTime)employeeVacation.FromDate;
+            DateTime endDate = (DateTime)employeeVacation.ToDate;
+            TimeSpan dayCount = endDate.Subtract(startDate);
+            int daysDifference = dayCount.Days;
+            employeeVacation.DayCount = daysDifference;
 
             //var timing = GetVacationTimingInputs(employeeVacation);
 
