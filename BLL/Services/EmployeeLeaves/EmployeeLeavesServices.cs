@@ -82,11 +82,10 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
             var employeeLeave = _mapper.Map<EmployeeLeaf>(model);
 
-            employeeLeave.LeaveDate = timing.LeaveDate;
-            employeeLeave.FromTime  = timing.FromTime;
-            employeeLeave.ToTime    = timing.ToTime;
-            employeeLeave.CreationDate=DateTime.Now;
-            //employeeLeave.LeaveTypeID = null;
+            employeeLeave.LeaveDate    = timing.LeaveDate;
+            employeeLeave.FromTime     = timing.FromTime;
+            employeeLeave.ToTime       = timing.ToTime;
+            employeeLeave.CreationDate = DateTime.Now;
 
             await _unitOfWork.EmployeeLeaveRepository.PInsertAsync(employeeLeave);
 
@@ -112,7 +111,8 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
             updatedLeave.LeaveDate = timing.LeaveDate;
             updatedLeave.FromTime  = timing.FromTime;
             updatedLeave.ToTime    = timing.ToTime;
-            employeeLeave.CreationDate = DateTime.Now;
+            employeeLeave.ModificationDate = DateTime.Now;
+
             await _unitOfWork.EmployeeLeaveRepository.UpdateAsync(updatedLeave);
 
             await _unitOfWork.SaveAsync();

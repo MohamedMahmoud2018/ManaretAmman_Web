@@ -73,15 +73,22 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
 
+            DateTime startDate = (DateTime)model.FromDate;
+            DateTime endDate   = (DateTime)model.ToDate;
+            TimeSpan dayCount  = endDate.Subtract(startDate);
+            int daysDifference = dayCount.Days;
+            model.DayCount     = daysDifference;
+
             var timing = GetVacationTimingInputs(model);
 
             model.FromDate = null;
-            model.ToDate = null;
+            model.ToDate   = null;
 
             var employeeVacation = _mapper.Map<EmployeeVacationInput, EmployeeVacation>(model);
 
-            employeeVacation.FromDate = timing.FromDate;
-            employeeVacation.ToDate   = timing.ToDate;
+            employeeVacation.FromDate     = timing.FromDate;
+            employeeVacation.ToDate       = timing.ToDate;
+            employeeVacation.CreationDate = DateTime.Now;
 
             await _unitOfWork.EmployeeVacationRepository.PInsertAsync(employeeVacation);
 
@@ -96,15 +103,22 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             if (vacation is null)
                 throw new NotFoundException("Data Not Found");
 
+            DateTime startDate        = (DateTime)employeeVacation.FromDate;
+            DateTime endDate          = (DateTime)employeeVacation.ToDate;
+            TimeSpan dayCount         = endDate.Subtract(startDate);
+            int daysDifference        = dayCount.Days;
+            employeeVacation.DayCount = daysDifference;
+
             var timing = GetVacationTimingInputs(employeeVacation);
 
             employeeVacation.FromDate = null;
-            employeeVacation.ToDate = null;
+            employeeVacation.ToDate   = null;
 
             var updatedVacation = _mapper.Map<EmployeeVacationInput, EmployeeVacation>(employeeVacation);
 
-            updatedVacation.FromDate = timing.FromDate;
-            updatedVacation.ToDate   = timing.ToDate;
+            updatedVacation.FromDate         = timing.FromDate;
+            updatedVacation.ToDate           = timing.ToDate;
+            updatedVacation.ModificationDate = DateTime.Now;
 
             await _unitOfWork.EmployeeVacationRepository.UpdateAsync(updatedVacation);
 
