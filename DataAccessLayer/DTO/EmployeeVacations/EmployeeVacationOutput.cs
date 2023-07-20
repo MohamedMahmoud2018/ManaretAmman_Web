@@ -22,6 +22,8 @@ public class EmployeeVacationOutput
     public int? StatusID { get; set; }
     public string EmployeeName { get; set; }
     public string VacationType { get; set; }
+    public string VacationTypeAr { get; set; }
+    public string VacationTypeEn { get; set; }
     public string ModifiedName { get; set; }
     public string CreatedName { get; set; }
     //public int? statusid { get; set; }

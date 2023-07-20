@@ -20,5 +20,23 @@ namespace BusinessLogicLayer.Common
             return indecator == 1 ? dateValue.ConvertFromDateTimeToUnixTimestamp() : timeValue.ConvertFromTimeStringToMinutes();
         }
         #endregion
+
+        #region Dictionaries
+        public static readonly Dictionary<int, DictionarData> EmployeeLoanDictionary = new Dictionary<int, DictionarData> 
+        {
+            { 0,new DictionarData{ NameEn="NonSchedule",NameAr="غير مجدولة"} },
+            { 1,new DictionarData{ NameEn="Schedule",NameAr="مجدولة"} }
+        };
+        #endregion
+
+
+        #region Enums
+       
+        #endregion
+    }
+    public class DictionarData
+    {
+        public string NameEn { get; set; }
+        public string NameAr { get; set; }
     }
 }
