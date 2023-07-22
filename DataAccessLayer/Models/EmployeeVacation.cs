@@ -16,7 +16,6 @@ namespace DataAccessLayer.Models
     public partial class EmployeeVacation
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmployeeVacationID { get; set; }
         [Key]
         public int EmployeeID { get; set; }

@@ -34,6 +34,11 @@ namespace DataAccessLayer.Models
 
         protected void OnModelCreatingGeneratedProcedures(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ArrangeEMployeeWeeklyHolidayResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<AutomaticLeaveResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<CalculateEmployeeSalaryResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<ChangeEmployeeRequestStatusResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<DeleteEmployeesResult>().HasNoKey().ToView(null);
             modelBuilder.Entity<GetAllowance_deductionResult>().HasNoKey().ToView(null);
             modelBuilder.Entity<GetAttendanceResult>().HasNoKey().ToView(null);
             modelBuilder.Entity<GetAttendanceAutomaticActionTypeResult>().HasNoKey().ToView(null);
@@ -99,9 +104,33 @@ namespace DataAccessLayer.Models
             modelBuilder.Entity<GetShiftDetailsResult>().HasNoKey().ToView(null);
             modelBuilder.Entity<GetShiftsResult>().HasNoKey().ToView(null);
             modelBuilder.Entity<GetUsersResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<InsertAttendanceResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<InsertAutomaticAttendanceActionsResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<InsertEmployeeHolidayResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<InsertEMployeeWeeklyHolidayResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<InsertLookupTableResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<InsertSettingDetailsResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<InsertSettingsResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<InsertShiftAllowanceResult>().HasNoKey().ToView(null);
             modelBuilder.Entity<Online_GetprojectsResult>().HasNoKey().ToView(null);
             modelBuilder.Entity<Online_SaveprojectsResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<RefreshEmployeeAttendanceResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<RefreshEmployeeAttendanceTest20221107Result>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveAllowance_DeductionResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveEmployeeAllowancesResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveEmployeeFromDeviceResult>().HasNoKey().ToView(null);
             modelBuilder.Entity<SaveEmployeeGeneralInfoResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveEmployeeLeavesResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveEmployeeLoanResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveEmployeeShiftsResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveEmployeeTransactionResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveEmployeeTransactionAutoResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveEmployeeVacationResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveEmployeeVacationScheduleResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<SaveIDsResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<TarheelEmployeeBalanceResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<UpdateEmployeeAttendanceResult>().HasNoKey().ToView(null);
+            modelBuilder.Entity<UpdateEmployeeAttendance2Result>().HasNoKey().ToView(null);
         }
     }
 
@@ -114,7 +143,7 @@ namespace DataAccessLayer.Models
             _context = context;
         }
 
-        public virtual async Task<int> ArrangeEMployeeWeeklyHolidayAsync(int? pFromDate, int? pToDate, int? pCreatedBy, int? pProjectID, int? pMonthID, int? pYearID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<ArrangeEMployeeWeeklyHolidayResult>> ArrangeEMployeeWeeklyHolidayAsync(int? pFromDate, int? pToDate, int? pCreatedBy, int? pProjectID, int? pMonthID, int? pYearID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -171,7 +200,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[ArrangeEMployeeWeeklyHoliday] @pFromDate, @pToDate, @pCreatedBy, @pProjectID, @pMonthID, @pYearID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<ArrangeEMployeeWeeklyHolidayResult>("EXEC @returnValue = [dbo].[ArrangeEMployeeWeeklyHoliday] @pFromDate, @pToDate, @pCreatedBy, @pProjectID, @pMonthID, @pYearID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -220,7 +249,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> AutomaticLeaveAsync(int? pEmployeeID, int? pProjectID, int? pDate, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<AutomaticLeaveResult>> AutomaticLeaveAsync(int? pEmployeeID, int? pProjectID, int? pDate, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -259,7 +288,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[AutomaticLeave] @pEmployeeID, @pProjectID, @pDate, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<AutomaticLeaveResult>("EXEC @returnValue = [dbo].[AutomaticLeave] @pEmployeeID, @pProjectID, @pDate, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -267,7 +296,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> CalculateEmployeeSalaryAsync(int? pProjectID, int? pEmployeeID, int? pCurrentMonthID, int? pCurrentYearID, int? pFromDate, int? pToDate, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<CalculateEmployeeSalaryResult>> CalculateEmployeeSalaryAsync(int? pProjectID, int? pEmployeeID, int? pCurrentMonthID, int? pCurrentYearID, int? pFromDate, int? pToDate, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -330,7 +359,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[CalculateEmployeeSalary] @pProjectID, @pEmployeeID, @pCurrentMonthID, @pCurrentYearID, @pFromDate, @pToDate, @pCreatedBy, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<CalculateEmployeeSalaryResult>("EXEC @returnValue = [dbo].[CalculateEmployeeSalary] @pProjectID, @pEmployeeID, @pCurrentMonthID, @pCurrentYearID, @pFromDate, @pToDate, @pCreatedBy, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -338,7 +367,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> ChangeEmployeeRequestStatusAsync(int? pEmployeeID, int? pCreatedBy, int? pApprovalStatusID, int? pApprovalPageID, int? pProjectID, int? pID, int? pPrevilageType, int? pSendToLog, int? pPK, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<ChangeEmployeeRequestStatusResult>> ChangeEmployeeRequestStatusAsync(int? pEmployeeID, int? pCreatedBy, int? pApprovalStatusID, int? pApprovalPageID, int? pProjectID, int? pID, int? pPrevilageType, int? pSendToLog, int? pPK, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -413,7 +442,7 @@ namespace DataAccessLayer.Models
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[ChangeEmployeeRequestStatus] @pEmployeeID, @pCreatedBy, @pApprovalStatusID, @pApprovalPageID, @pProjectID, @pID, @pPrevilageType, @pError OUTPUT, @pSendToLog, @pPK", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<ChangeEmployeeRequestStatusResult>("EXEC @returnValue = [dbo].[ChangeEmployeeRequestStatus] @pEmployeeID, @pCreatedBy, @pApprovalStatusID, @pApprovalPageID, @pProjectID, @pID, @pPrevilageType, @pError OUTPUT, @pSendToLog, @pPK", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -954,7 +983,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> DeleteEmployeesAsync(int? pEmployeeID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<DeleteEmployeesResult>> DeleteEmployeesAsync(int? pEmployeeID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -981,7 +1010,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[DeleteEmployees] @pEmployeeID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<DeleteEmployeesResult>("EXEC @returnValue = [dbo].[DeleteEmployees] @pEmployeeID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -5581,7 +5610,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> InsertAttendanceAsync(int? pAttDate, string pType, int? pEmployeeID, int? pStatusID, int? pattdateint, int? pProjectID, DateTime? pDatetime, OutputParameter<int?> pID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<InsertAttendanceResult>> InsertAttendanceAsync(int? pAttDate, string pType, int? pEmployeeID, int? pStatusID, int? pattdateint, int? pProjectID, DateTime? pDatetime, OutputParameter<int?> pID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpID = new SqlParameter
             {
@@ -5653,7 +5682,7 @@ namespace DataAccessLayer.Models
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[InsertAttendance] @pID OUTPUT, @pAttDate, @pType, @pEmployeeID, @pStatusID, @pattdateint, @pProjectID, @pError OUTPUT, @pDatetime", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<InsertAttendanceResult>("EXEC @returnValue = [dbo].[InsertAttendance] @pID OUTPUT, @pAttDate, @pType, @pEmployeeID, @pStatusID, @pattdateint, @pProjectID, @pError OUTPUT, @pDatetime", sqlParameters, cancellationToken);
 
             pID.SetValue(parameterpID.Value);
             pError.SetValue(parameterpError.Value);
@@ -5839,7 +5868,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> InsertAutomaticAttendanceActionsAsync(int? pEmployeeID, int? pVacationTypeID, int? pActionTypeID, int? pAttendanceDate, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<InsertAutomaticAttendanceActionsResult>> InsertAutomaticAttendanceActionsAsync(int? pEmployeeID, int? pVacationTypeID, int? pActionTypeID, int? pAttendanceDate, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -5890,7 +5919,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[InsertAutomaticAttendanceActions] @pEmployeeID, @pVacationTypeID, @pActionTypeID, @pAttendanceDate, @pCreatedBy, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<InsertAutomaticAttendanceActionsResult>("EXEC @returnValue = [dbo].[InsertAutomaticAttendanceActions] @pEmployeeID, @pVacationTypeID, @pActionTypeID, @pAttendanceDate, @pCreatedBy, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -6222,7 +6251,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> InsertEmployeeHolidayAsync(string pEmployeeID, string pDayID, int? pMonthID, int? pYearID, int? pCreatedBy, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<InsertEmployeeHolidayResult>> InsertEmployeeHolidayAsync(string pEmployeeID, string pDayID, int? pMonthID, int? pYearID, int? pCreatedBy, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -6281,7 +6310,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[InsertEmployeeHoliday] @pEmployeeID, @pDayID, @pMonthID, @pYearID, @pCreatedBy, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<InsertEmployeeHolidayResult>("EXEC @returnValue = [dbo].[InsertEmployeeHoliday] @pEmployeeID, @pDayID, @pMonthID, @pYearID, @pCreatedBy, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -6788,7 +6817,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> InsertEMployeeWeeklyHolidayAsync(int? pEmployeeID, int? pMonthID, int? pYearID, string pDayID, string pStatusID, int? pCreatedBy, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<InsertEMployeeWeeklyHolidayResult>> InsertEMployeeWeeklyHolidayAsync(int? pEmployeeID, int? pMonthID, int? pYearID, string pDayID, string pStatusID, int? pCreatedBy, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -6853,7 +6882,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[InsertEMployeeWeeklyHoliday] @pEmployeeID, @pMonthID, @pYearID, @pDayID, @pStatusID, @pCreatedBy, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<InsertEMployeeWeeklyHolidayResult>("EXEC @returnValue = [dbo].[InsertEMployeeWeeklyHoliday] @pEmployeeID, @pMonthID, @pYearID, @pDayID, @pStatusID, @pCreatedBy, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -6861,7 +6890,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> InsertLookupTableAsync(string pTableName, string pColumnName, string pColumnValue, string pColumnDescription, int? pOrderBy, int? pBalance, int? pDefaultValue, int? pParentID, int? pProjectID, int? pEmployeeID, int? pCalWithHoliday, int? pIsHealthVacation, int? pIsInjuryVacation, int? pApprovalProcessID, int? pFirstPeriod, int? pSecondPeriod, int? pThirdPeriod, int? pFourthPeriod, int? pFifthPeriod, int? pPenaltyCategoryID2, int? pPenaltyCategoryID3, int? pPenaltyCategoryID4, int? pPenaltyCategoryID5, int? pIsWithoutSalaryVacation, int? pIsPersonalVacation, decimal? pWithoutSalaryVacationValue, OutputParameter<int?> pID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<InsertLookupTableResult>> InsertLookupTableAsync(string pTableName, string pColumnName, string pColumnValue, string pColumnDescription, int? pOrderBy, int? pBalance, int? pDefaultValue, int? pParentID, int? pProjectID, int? pEmployeeID, int? pCalWithHoliday, int? pIsHealthVacation, int? pIsInjuryVacation, int? pApprovalProcessID, int? pFirstPeriod, int? pSecondPeriod, int? pThirdPeriod, int? pFourthPeriod, int? pFifthPeriod, int? pPenaltyCategoryID2, int? pPenaltyCategoryID3, int? pPenaltyCategoryID4, int? pPenaltyCategoryID5, int? pIsWithoutSalaryVacation, int? pIsPersonalVacation, decimal? pWithoutSalaryVacationValue, OutputParameter<int?> pID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpID = new SqlParameter
             {
@@ -7052,7 +7081,7 @@ namespace DataAccessLayer.Models
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[InsertLookupTable] @pID OUTPUT, @pTableName, @pColumnName, @pColumnValue, @pColumnDescription, @pOrderBy, @pBalance, @pDefaultValue, @pParentID, @pProjectID, @pEmployeeID, @pCalWithHoliday, @pIsHealthVacation, @pIsInjuryVacation, @pError OUTPUT, @pApprovalProcessID, @pFirstPeriod, @pSecondPeriod, @pThirdPeriod, @pFourthPeriod, @pFifthPeriod, @pPenaltyCategoryID2, @pPenaltyCategoryID3, @pPenaltyCategoryID4, @pPenaltyCategoryID5, @pIsWithoutSalaryVacation, @pIsPersonalVacation, @pWithoutSalaryVacationValue", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<InsertLookupTableResult>("EXEC @returnValue = [dbo].[InsertLookupTable] @pID OUTPUT, @pTableName, @pColumnName, @pColumnValue, @pColumnDescription, @pOrderBy, @pBalance, @pDefaultValue, @pParentID, @pProjectID, @pEmployeeID, @pCalWithHoliday, @pIsHealthVacation, @pIsInjuryVacation, @pError OUTPUT, @pApprovalProcessID, @pFirstPeriod, @pSecondPeriod, @pThirdPeriod, @pFourthPeriod, @pFifthPeriod, @pPenaltyCategoryID2, @pPenaltyCategoryID3, @pPenaltyCategoryID4, @pPenaltyCategoryID5, @pIsWithoutSalaryVacation, @pIsPersonalVacation, @pWithoutSalaryVacationValue", sqlParameters, cancellationToken);
 
             pID.SetValue(parameterpID.Value);
             pError.SetValue(parameterpError.Value);
@@ -7382,7 +7411,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> InsertSettingDetailsAsync(int? pDayID, int? pStartTime, int? pEndTime, int? pIsWorkingDay, int? pCreatedBy, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<InsertSettingDetailsResult>> InsertSettingDetailsAsync(int? pDayID, int? pStartTime, int? pEndTime, int? pIsWorkingDay, int? pCreatedBy, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -7439,7 +7468,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[InsertSettingDetails] @pDayID, @pStartTime, @pEndTime, @pIsWorkingDay, @pCreatedBy, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<InsertSettingDetailsResult>("EXEC @returnValue = [dbo].[InsertSettingDetails] @pDayID, @pStartTime, @pEndTime, @pIsWorkingDay, @pCreatedBy, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -7447,7 +7476,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> InsertSettingsAsync(int? pSettingID, decimal? pAdditionalInWork, decimal? pAdditionalInHoliday, int? pCalculateAdditionalIfExceed, decimal? pSocialSecurityAllowanceID, int? pCalLeavesFromSalary, int? pCalLateAsAdditional, int? pDailyWorkInMinutes, int? pStartTimeINMinutes, int? pEndTimeInMinutes, int? pAllowedLate, int? pNoOfDaysBerMonth, int? pWithMorningExtra, int? pCheckoutAfterMidNight, int? pAllowedLateInLeave, int? pActiveYear, int? pDependOnCheckType, int? pCreatedBy, DateTime? pCreationDate, int? pModifiedBy, DateTime? pModificationDate, int? pAdditionalAllowanceID, int? pPersonalVacationID, string pMonthID, int? pLastCalculationDate, int? pGlobalLocal, int? pTest, int? pWithBreak, int? pbreaktime, int? pProjectID, int? pLateDeductType, decimal? pLateDeductPercentage, decimal? pCompanySharePercent, int? pBreakFrom, int? pBreakTo, int? pEarlyLeaveDeductPercentage, int? pISDynamicShift, decimal? pSocialSecurityAmount2, decimal? pCompanySharePercent2, int? pMissingCheckoutValue, int? pExtraDaysWillBeAddedToSalry, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<InsertSettingsResult>> InsertSettingsAsync(int? pSettingID, decimal? pAdditionalInWork, decimal? pAdditionalInHoliday, int? pCalculateAdditionalIfExceed, decimal? pSocialSecurityAllowanceID, int? pCalLeavesFromSalary, int? pCalLateAsAdditional, int? pDailyWorkInMinutes, int? pStartTimeINMinutes, int? pEndTimeInMinutes, int? pAllowedLate, int? pNoOfDaysBerMonth, int? pWithMorningExtra, int? pCheckoutAfterMidNight, int? pAllowedLateInLeave, int? pActiveYear, int? pDependOnCheckType, int? pCreatedBy, DateTime? pCreationDate, int? pModifiedBy, DateTime? pModificationDate, int? pAdditionalAllowanceID, int? pPersonalVacationID, string pMonthID, int? pLastCalculationDate, int? pGlobalLocal, int? pTest, int? pWithBreak, int? pbreaktime, int? pProjectID, int? pLateDeductType, decimal? pLateDeductPercentage, decimal? pCompanySharePercent, int? pBreakFrom, int? pBreakTo, int? pEarlyLeaveDeductPercentage, int? pISDynamicShift, decimal? pSocialSecurityAmount2, decimal? pCompanySharePercent2, int? pMissingCheckoutValue, int? pExtraDaysWillBeAddedToSalry, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -7729,7 +7758,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[InsertSettings] @pSettingID, @pAdditionalInWork, @pAdditionalInHoliday, @pCalculateAdditionalIfExceed, @pSocialSecurityAllowanceID, @pCalLeavesFromSalary, @pCalLateAsAdditional, @pDailyWorkInMinutes, @pStartTimeINMinutes, @pEndTimeInMinutes, @pAllowedLate, @pNoOfDaysBerMonth, @pWithMorningExtra, @pCheckoutAfterMidNight, @pAllowedLateInLeave, @pActiveYear, @pDependOnCheckType, @pCreatedBy, @pCreationDate, @pModifiedBy, @pModificationDate, @pAdditionalAllowanceID, @pPersonalVacationID, @pMonthID, @pLastCalculationDate, @pGlobalLocal, @pTest, @pWithBreak, @pbreaktime, @pProjectID, @pLateDeductType, @pLateDeductPercentage, @pCompanySharePercent, @pBreakFrom, @pBreakTo, @pEarlyLeaveDeductPercentage, @pISDynamicShift, @pSocialSecurityAmount2, @pCompanySharePercent2, @pMissingCheckoutValue, @pExtraDaysWillBeAddedToSalry, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<InsertSettingsResult>("EXEC @returnValue = [dbo].[InsertSettings] @pSettingID, @pAdditionalInWork, @pAdditionalInHoliday, @pCalculateAdditionalIfExceed, @pSocialSecurityAllowanceID, @pCalLeavesFromSalary, @pCalLateAsAdditional, @pDailyWorkInMinutes, @pStartTimeINMinutes, @pEndTimeInMinutes, @pAllowedLate, @pNoOfDaysBerMonth, @pWithMorningExtra, @pCheckoutAfterMidNight, @pAllowedLateInLeave, @pActiveYear, @pDependOnCheckType, @pCreatedBy, @pCreationDate, @pModifiedBy, @pModificationDate, @pAdditionalAllowanceID, @pPersonalVacationID, @pMonthID, @pLastCalculationDate, @pGlobalLocal, @pTest, @pWithBreak, @pbreaktime, @pProjectID, @pLateDeductType, @pLateDeductPercentage, @pCompanySharePercent, @pBreakFrom, @pBreakTo, @pEarlyLeaveDeductPercentage, @pISDynamicShift, @pSocialSecurityAmount2, @pCompanySharePercent2, @pMissingCheckoutValue, @pExtraDaysWillBeAddedToSalry, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -7737,7 +7766,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> InsertShiftAllowanceAsync(int? pProjectID, int? pShiftID, int? pAllowanceID, int? pStartDate, int? pEndDate, int? pStatusID, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int?> pAllowanceShiftID, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<InsertShiftAllowanceResult>> InsertShiftAllowanceAsync(int? pProjectID, int? pShiftID, int? pAllowanceID, int? pStartDate, int? pEndDate, int? pStatusID, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int?> pAllowanceShiftID, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -7808,7 +7837,7 @@ namespace DataAccessLayer.Models
                 parameterpAllowanceShiftID,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[InsertShiftAllowance] @pProjectID, @pShiftID, @pAllowanceID, @pStartDate, @pEndDate, @pStatusID, @pCreatedBy, @pError OUTPUT, @pAllowanceShiftID OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<InsertShiftAllowanceResult>("EXEC @returnValue = [dbo].[InsertShiftAllowance] @pProjectID, @pShiftID, @pAllowanceID, @pStartDate, @pEndDate, @pStatusID, @pCreatedBy, @pError OUTPUT, @pAllowanceShiftID OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             pAllowanceShiftID.SetValue(parameterpAllowanceShiftID.Value);
@@ -8420,7 +8449,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> RefreshEmployeeAttendanceAsync(int? pAgain, int? pEmployeeID, int? pProjectID, int? pCheckIn, int? pCheckOut, int? pAttendanceDate, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<RefreshEmployeeAttendanceResult>> RefreshEmployeeAttendanceAsync(int? pAgain, int? pEmployeeID, int? pProjectID, int? pCheckIn, int? pCheckOut, int? pAttendanceDate, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -8477,7 +8506,7 @@ namespace DataAccessLayer.Models
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[RefreshEmployeeAttendance] @pAgain, @pEmployeeID, @pProjectID, @pError OUTPUT, @pCheckIn, @pCheckOut, @pAttendanceDate", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<RefreshEmployeeAttendanceResult>("EXEC @returnValue = [dbo].[RefreshEmployeeAttendance] @pAgain, @pEmployeeID, @pProjectID, @pError OUTPUT, @pCheckIn, @pCheckOut, @pAttendanceDate", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -8485,7 +8514,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> RefreshEmployeeAttendanceTest20221107Async(int? pAgain, int? pEmployeeID, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<RefreshEmployeeAttendanceTest20221107Result>> RefreshEmployeeAttendanceTest20221107Async(int? pAgain, int? pEmployeeID, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -8524,7 +8553,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[RefreshEmployeeAttendanceTest20221107] @pAgain, @pEmployeeID, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<RefreshEmployeeAttendanceTest20221107Result>("EXEC @returnValue = [dbo].[RefreshEmployeeAttendanceTest20221107] @pAgain, @pEmployeeID, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -8532,7 +8561,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveAllowance_DeductionAsync(string pDefaultDesc, int? pTypeID, decimal? pAmount, int? pCalculateTypeID, int? pNatureID, int? pIsDefault, int? pCreatedBy, int? pProjectID, int? pCalculateWithOvertime, int? pCalculateWithAttendanceDeduction, OutputParameter<int?> pAllowanceID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveAllowance_DeductionResult>> SaveAllowance_DeductionAsync(string pDefaultDesc, int? pTypeID, decimal? pAmount, int? pCalculateTypeID, int? pNatureID, int? pIsDefault, int? pCreatedBy, int? pProjectID, int? pCalculateWithOvertime, int? pCalculateWithAttendanceDeduction, OutputParameter<int?> pAllowanceID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpAllowanceID = new SqlParameter
             {
@@ -8624,7 +8653,7 @@ namespace DataAccessLayer.Models
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveAllowance_Deduction] @pAllowanceID OUTPUT, @pDefaultDesc, @pTypeID, @pAmount, @pCalculateTypeID, @pNatureID, @pIsDefault, @pCreatedBy, @pProjectID, @pError OUTPUT, @pCalculateWithOvertime, @pCalculateWithAttendanceDeduction", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveAllowance_DeductionResult>("EXEC @returnValue = [dbo].[SaveAllowance_Deduction] @pAllowanceID OUTPUT, @pDefaultDesc, @pTypeID, @pAmount, @pCalculateTypeID, @pNatureID, @pIsDefault, @pCreatedBy, @pProjectID, @pError OUTPUT, @pCalculateWithOvertime, @pCalculateWithAttendanceDeduction", sqlParameters, cancellationToken);
 
             pAllowanceID.SetValue(parameterpAllowanceID.Value);
             pError.SetValue(parameterpError.Value);
@@ -9025,7 +9054,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveEmployeeAllowancesAsync(int? pEmployeeID, int? pStartDate, int? pEndDate, int? pAllowanceID, int? pCreatedBy, int? pProjectID, decimal? pAmount, int? pCalculatedWithOverTime, OutputParameter<int?> pEmployeeAllowanceID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveEmployeeAllowancesResult>> SaveEmployeeAllowancesAsync(int? pEmployeeID, int? pStartDate, int? pEndDate, int? pAllowanceID, int? pCreatedBy, int? pProjectID, decimal? pAmount, int? pCalculatedWithOverTime, OutputParameter<int?> pEmployeeAllowanceID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpEmployeeAllowanceID = new SqlParameter
             {
@@ -9104,7 +9133,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveEmployeeAllowances] @pEmployeeAllowanceID OUTPUT, @pEmployeeID, @pStartDate, @pEndDate, @pAllowanceID, @pCreatedBy, @pProjectID, @pAmount, @pCalculatedWithOverTime, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveEmployeeAllowancesResult>("EXEC @returnValue = [dbo].[SaveEmployeeAllowances] @pEmployeeAllowanceID OUTPUT, @pEmployeeID, @pStartDate, @pEndDate, @pAllowanceID, @pCreatedBy, @pProjectID, @pAmount, @pCalculatedWithOverTime, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pEmployeeAllowanceID.SetValue(parameterpEmployeeAllowanceID.Value);
             pError.SetValue(parameterpError.Value);
@@ -9286,7 +9315,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveEmployeeFromDeviceAsync(string pstuName, string pszUserID, int? pProjectID, OutputParameter<string> pRecno, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveEmployeeFromDeviceResult>> SaveEmployeeFromDeviceAsync(string pstuName, string pszUserID, int? pProjectID, OutputParameter<string> pRecno, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpRecno = new SqlParameter
             {
@@ -9336,7 +9365,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveEmployeeFromDevice] @pRecno OUTPUT, @pstuName, @pszUserID, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveEmployeeFromDeviceResult>("EXEC @returnValue = [dbo].[SaveEmployeeFromDevice] @pRecno OUTPUT, @pstuName, @pszUserID, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pRecno.SetValue(parameterpRecno.Value);
             pError.SetValue(parameterpError.Value);
@@ -9850,7 +9879,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveEmployeeLeavesAsync(int? pEmployeeID, int? pLeaveTypeID, int? pLeaveDate, int? pFromTime, int? pToTime, int? pCreatedBy, int? pBySystem, int? pProjectID, int? pPrevilageType, OutputParameter<int?> pEmployeeLeaveID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveEmployeeLeavesResult>> SaveEmployeeLeavesAsync(int? pEmployeeID, int? pLeaveTypeID, int? pLeaveDate, int? pFromTime, int? pToTime, int? pCreatedBy, int? pBySystem, int? pProjectID, int? pPrevilageType, OutputParameter<int?> pEmployeeLeaveID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpEmployeeLeaveID = new SqlParameter
             {
@@ -9933,7 +9962,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveEmployeeLeaves] @pEmployeeLeaveID OUTPUT, @pEmployeeID, @pLeaveTypeID, @pLeaveDate, @pFromTime, @pToTime, @pCreatedBy, @pBySystem, @pProjectID, @pPrevilageType, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveEmployeeLeavesResult>("EXEC @returnValue = [dbo].[SaveEmployeeLeaves] @pEmployeeLeaveID OUTPUT, @pEmployeeID, @pLeaveTypeID, @pLeaveDate, @pFromTime, @pToTime, @pCreatedBy, @pBySystem, @pProjectID, @pPrevilageType, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pEmployeeLeaveID.SetValue(parameterpEmployeeLeaveID.Value);
             pError.SetValue(parameterpError.Value);
@@ -9942,7 +9971,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveEmployeeLoanAsync(int? pEmployeeID, int? pLoanDate, decimal? pLoanAmount, string pNotes, int? pCreatedBy, int? pProjectID, int? ploantypeid, int? pPrevilageType, OutputParameter<int?> pEmployeeLoanID, OutputParameter<int?> pError, OutputParameter<int?> pLoanSerial, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveEmployeeLoanResult>> SaveEmployeeLoanAsync(int? pEmployeeID, int? pLoanDate, decimal? pLoanAmount, string pNotes, int? pCreatedBy, int? pProjectID, int? ploantypeid, int? pPrevilageType, OutputParameter<int?> pEmployeeLoanID, OutputParameter<int?> pError, OutputParameter<int?> pLoanSerial, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpEmployeeLoanID = new SqlParameter
             {
@@ -10030,7 +10059,7 @@ namespace DataAccessLayer.Models
                 parameterpLoanSerial,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveEmployeeLoan] @pEmployeeLoanID OUTPUT, @pEmployeeID, @pLoanDate, @pLoanAmount, @pNotes, @pCreatedBy, @pProjectID, @pError OUTPUT, @ploantypeid, @pPrevilageType, @pLoanSerial OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveEmployeeLoanResult>("EXEC @returnValue = [dbo].[SaveEmployeeLoan] @pEmployeeLoanID OUTPUT, @pEmployeeID, @pLoanDate, @pLoanAmount, @pNotes, @pCreatedBy, @pProjectID, @pError OUTPUT, @ploantypeid, @pPrevilageType, @pLoanSerial OUTPUT", sqlParameters, cancellationToken);
 
             pEmployeeLoanID.SetValue(parameterpEmployeeLoanID.Value);
             pError.SetValue(parameterpError.Value);
@@ -10190,7 +10219,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveEmployeeShiftsAsync(int? pEmployeeID, int? pShiftID, int? pFromDate, int? pToDate, int? pCreatedBy, int? pProjectID, int? pIsCalledFromOtherSP, OutputParameter<int?> pEmployeeShiftID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveEmployeeShiftsResult>> SaveEmployeeShiftsAsync(int? pEmployeeID, int? pShiftID, int? pFromDate, int? pToDate, int? pCreatedBy, int? pProjectID, int? pIsCalledFromOtherSP, OutputParameter<int?> pEmployeeShiftID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpEmployeeShiftID = new SqlParameter
             {
@@ -10261,7 +10290,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveEmployeeShifts] @pEmployeeShiftID OUTPUT, @pEmployeeID, @pShiftID, @pFromDate, @pToDate, @pCreatedBy, @pProjectID, @pIsCalledFromOtherSP, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveEmployeeShiftsResult>("EXEC @returnValue = [dbo].[SaveEmployeeShifts] @pEmployeeShiftID OUTPUT, @pEmployeeID, @pShiftID, @pFromDate, @pToDate, @pCreatedBy, @pProjectID, @pIsCalledFromOtherSP, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pEmployeeShiftID.SetValue(parameterpEmployeeShiftID.Value);
             pError.SetValue(parameterpError.Value);
@@ -10270,7 +10299,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveEmployeeTransactionAsync(int? pEmployeeID, int? pTransactionDate, int? pTransactionTypeID, int? pTransactionInMinutes, string pNotes, int? pCreatedBy, int? pBySystem, int? pRelatedToDate, int? pProjectID, OutputParameter<int?> pEmployeeTransactionID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveEmployeeTransactionResult>> SaveEmployeeTransactionAsync(int? pEmployeeID, int? pTransactionDate, int? pTransactionTypeID, int? pTransactionInMinutes, string pNotes, int? pCreatedBy, int? pBySystem, int? pRelatedToDate, int? pProjectID, OutputParameter<int?> pEmployeeTransactionID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpEmployeeTransactionID = new SqlParameter
             {
@@ -10354,7 +10383,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveEmployeeTransaction] @pEmployeeTransactionID OUTPUT, @pEmployeeID, @pTransactionDate, @pTransactionTypeID, @pTransactionInMinutes, @pNotes, @pCreatedBy, @pBySystem, @pRelatedToDate, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveEmployeeTransactionResult>("EXEC @returnValue = [dbo].[SaveEmployeeTransaction] @pEmployeeTransactionID OUTPUT, @pEmployeeID, @pTransactionDate, @pTransactionTypeID, @pTransactionInMinutes, @pNotes, @pCreatedBy, @pBySystem, @pRelatedToDate, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pEmployeeTransactionID.SetValue(parameterpEmployeeTransactionID.Value);
             pError.SetValue(parameterpError.Value);
@@ -10363,7 +10392,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveEmployeeTransactionAutoAsync(int? pEmployeeID, int? pTransactionDate, int? pTransactionTypeID, int? pTransactionInMinutes, string pNotes, int? pCreatedBy, int? pBySystem, int? pRelatedToDate, int? pProjectID, OutputParameter<int?> pEmployeeTransactionID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveEmployeeTransactionAutoResult>> SaveEmployeeTransactionAutoAsync(int? pEmployeeID, int? pTransactionDate, int? pTransactionTypeID, int? pTransactionInMinutes, string pNotes, int? pCreatedBy, int? pBySystem, int? pRelatedToDate, int? pProjectID, OutputParameter<int?> pEmployeeTransactionID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpEmployeeTransactionID = new SqlParameter
             {
@@ -10447,7 +10476,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveEmployeeTransactionAuto] @pEmployeeTransactionID OUTPUT, @pEmployeeID, @pTransactionDate, @pTransactionTypeID, @pTransactionInMinutes, @pNotes, @pCreatedBy, @pBySystem, @pRelatedToDate, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveEmployeeTransactionAutoResult>("EXEC @returnValue = [dbo].[SaveEmployeeTransactionAuto] @pEmployeeTransactionID OUTPUT, @pEmployeeID, @pTransactionDate, @pTransactionTypeID, @pTransactionInMinutes, @pNotes, @pCreatedBy, @pBySystem, @pRelatedToDate, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pEmployeeTransactionID.SetValue(parameterpEmployeeTransactionID.Value);
             pError.SetValue(parameterpError.Value);
@@ -10456,7 +10485,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveEmployeeVacationAsync(int? pEmployeeID, int? pVacationTypeID, int? pFromDate, int? pToDate, string pNotes, int? pDayCount, int? pCreatedBy, int? pProjectID, int? pIsCalledFromOtherSP, int? pPrevilageType, OutputParameter<int?> pEmployeeVacationID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveEmployeeVacationResult>> SaveEmployeeVacationAsync(int? pEmployeeID, int? pVacationTypeID, int? pFromDate, int? pToDate, string pNotes, int? pDayCount, int? pCreatedBy, int? pProjectID, int? pIsCalledFromOtherSP, int? pPrevilageType, OutputParameter<int?> pEmployeeVacationID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpEmployeeVacationID = new SqlParameter
             {
@@ -10546,7 +10575,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveEmployeeVacation] @pEmployeeVacationID OUTPUT, @pEmployeeID, @pVacationTypeID, @pFromDate, @pToDate, @pNotes, @pDayCount, @pCreatedBy, @pProjectID, @pIsCalledFromOtherSP, @pPrevilageType, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveEmployeeVacationResult>("EXEC @returnValue = [dbo].[SaveEmployeeVacation] @pEmployeeVacationID OUTPUT, @pEmployeeID, @pVacationTypeID, @pFromDate, @pToDate, @pNotes, @pDayCount, @pCreatedBy, @pProjectID, @pIsCalledFromOtherSP, @pPrevilageType, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pEmployeeVacationID.SetValue(parameterpEmployeeVacationID.Value);
             pError.SetValue(parameterpError.Value);
@@ -10555,7 +10584,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveEmployeeVacationScheduleAsync(int? pEmployeeID, int? pVacationTypeID, int? pFromDate, int? pToDate, string pNotes, int? pDayCount, int? pCreatedBy, int? pProjectID, int? pIsCalledFromOtherSP, int? pPrevilageType, OutputParameter<int?> pEmployeeVacationID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveEmployeeVacationScheduleResult>> SaveEmployeeVacationScheduleAsync(int? pEmployeeID, int? pVacationTypeID, int? pFromDate, int? pToDate, string pNotes, int? pDayCount, int? pCreatedBy, int? pProjectID, int? pIsCalledFromOtherSP, int? pPrevilageType, OutputParameter<int?> pEmployeeVacationID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpEmployeeVacationID = new SqlParameter
             {
@@ -10645,7 +10674,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveEmployeeVacationSchedule] @pEmployeeVacationID OUTPUT, @pEmployeeID, @pVacationTypeID, @pFromDate, @pToDate, @pNotes, @pDayCount, @pCreatedBy, @pProjectID, @pIsCalledFromOtherSP, @pPrevilageType, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveEmployeeVacationScheduleResult>("EXEC @returnValue = [dbo].[SaveEmployeeVacationSchedule] @pEmployeeVacationID OUTPUT, @pEmployeeID, @pVacationTypeID, @pFromDate, @pToDate, @pNotes, @pDayCount, @pCreatedBy, @pProjectID, @pIsCalledFromOtherSP, @pPrevilageType, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pEmployeeVacationID.SetValue(parameterpEmployeeVacationID.Value);
             pError.SetValue(parameterpError.Value);
@@ -10786,7 +10815,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> SaveIDsAsync(int? pProjectID, string pValidatePeriod, string pValidateID, string pValidateType, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SaveIDsResult>> SaveIDsAsync(int? pProjectID, string pValidatePeriod, string pValidateID, string pValidateType, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -10834,7 +10863,7 @@ namespace DataAccessLayer.Models
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[SaveIDs] @pProjectID, @pError OUTPUT, @pValidatePeriod, @pValidateID, @pValidateType", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SaveIDsResult>("EXEC @returnValue = [dbo].[SaveIDs] @pProjectID, @pError OUTPUT, @pValidatePeriod, @pValidateID, @pValidateType", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -11245,7 +11274,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> TarheelEmployeeBalanceAsync(int? pYearID, int? pProjectID, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TarheelEmployeeBalanceResult>> TarheelEmployeeBalanceAsync(int? pYearID, int? pProjectID, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -11284,7 +11313,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[TarheelEmployeeBalance] @pYearID, @pProjectID, @pCreatedBy, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<TarheelEmployeeBalanceResult>("EXEC @returnValue = [dbo].[TarheelEmployeeBalance] @pYearID, @pProjectID, @pCreatedBy, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -11450,7 +11479,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> UpdateEmployeeAttendanceAsync(int? pEmployeeID, int? pAttendanceDate, int? pCheckIn, int? pCheckOut, int? pWeekDayID, int? pCreatedBy, int? pBreakIn, int? pBreakOut, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<UpdateEmployeeAttendanceResult>> UpdateEmployeeAttendanceAsync(int? pEmployeeID, int? pAttendanceDate, int? pCheckIn, int? pCheckOut, int? pWeekDayID, int? pCreatedBy, int? pBreakIn, int? pBreakOut, int? pProjectID, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -11525,7 +11554,7 @@ namespace DataAccessLayer.Models
                 parameterpError,
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[UpdateEmployeeAttendance] @pEmployeeID, @pAttendanceDate, @pCheckIn, @pCheckOut, @pWeekDayID, @pCreatedBy, @pBreakIn, @pBreakOut, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<UpdateEmployeeAttendanceResult>("EXEC @returnValue = [dbo].[UpdateEmployeeAttendance] @pEmployeeID, @pAttendanceDate, @pCheckIn, @pCheckOut, @pWeekDayID, @pCreatedBy, @pBreakIn, @pBreakOut, @pProjectID, @pError OUTPUT", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
@@ -11533,7 +11562,7 @@ namespace DataAccessLayer.Models
             return _;
         }
 
-        public virtual async Task<int> UpdateEmployeeAttendance2Async(int? pID, int? pAttendanceDate, int? pEmployeeID, int? pProjectID, int? pTypeID, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<UpdateEmployeeAttendance2Result>> UpdateEmployeeAttendance2Async(int? pID, int? pAttendanceDate, int? pEmployeeID, int? pProjectID, int? pTypeID, int? pCreatedBy, OutputParameter<int?> pError, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterpError = new SqlParameter
             {
@@ -11590,7 +11619,7 @@ namespace DataAccessLayer.Models
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[UpdateEmployeeAttendance2] @pID, @pAttendanceDate, @pEmployeeID, @pProjectID, @pError OUTPUT, @pTypeID, @pCreatedBy", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<UpdateEmployeeAttendance2Result>("EXEC @returnValue = [dbo].[UpdateEmployeeAttendance2] @pID, @pAttendanceDate, @pEmployeeID, @pProjectID, @pError OUTPUT, @pTypeID, @pCreatedBy", sqlParameters, cancellationToken);
 
             pError.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
