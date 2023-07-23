@@ -36,7 +36,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
                 ID = Loan.EmployeeLoanID,
                 EmployeeID = Loan.EmployeeID,
                 EmployeeName = Loan.Employee.EmployeeName,
-                loantypeid = Loan.loantypeid,
+                LoantypeId = Loan.loantypeid,
                 loantypeEn = Constants.EmployeeLoanDictionary[Loan.EmployeeLoanID].NameEn,
                 loantypeAr = Constants.EmployeeLoanDictionary[Loan.EmployeeLoanID].NameAr,
                 LoanDate = Loan.LoanDate.ConvertFromUnixTimestampToDateTime(),
@@ -48,20 +48,20 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
 
         public async Task<List<EmployeeLoansOutput>> GetAll()
         {
-            var Loans = _unitOfWork.EmployeeLoanRepository.PQuery(include: e => e.Employee).ToList();
+            var Loans = _unitOfWork.EmployeeLoanRepository.PQuery(include: e => e.Employee);
 
             //var lookups = await _lookupsService.GetLookups(Constants.EmployeeLoans, Constants.LoanTypeID);
 
             var result = Loans.Select(item => new EmployeeLoansOutput 
             {
-                ID = item.EmployeeLoanID,
-                EmployeeID      = item.EmployeeID,
-                EmployeeName    = item.Employee.EmployeeName,
-                loantypeid     = item.loantypeid,
-                loantypeEn = Constants.EmployeeLoanDictionary[item.EmployeeLoanID].NameEn,
-                loantypeAr = Constants.EmployeeLoanDictionary[item.EmployeeLoanID].NameAr,
-                LoanDate = item.LoanDate.ConvertFromUnixTimestampToDateTime(),
-                LoanAmount = item.LoanAmount
+                ID           = item.EmployeeLoanID,
+                EmployeeID   = item.EmployeeID,
+                EmployeeName = item.Employee.EmployeeName,
+                LoantypeId   = item.loantypeid,
+                //loantypeEn   = Constants.EmployeeLoanDictionary[item.EmployeeLoanID].NameEn,
+                //loantypeAr   = Constants.EmployeeLoanDictionary[item.EmployeeLoanID].NameAr,
+                LoanDate     = item.LoanDate.ConvertFromUnixTimestampToDateTime(),
+                LoanAmount   = item.LoanAmount
             });
 
             return result.ToList();
