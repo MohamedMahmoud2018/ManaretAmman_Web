@@ -106,6 +106,10 @@ namespace BusinessLogicLayer.Repositories
         
         public virtual async Task UpdateAsync(TEntity entity)
         {
+            if (entity is IBaseEntity entityBaseEntity)
+            {
+                entityBaseEntity.ModificationDate = DateTime.Now;
+            }
             dbSet.Update(entity);
         }
         public virtual void Update(ICollection<TEntity> entities)
@@ -189,13 +193,32 @@ namespace BusinessLogicLayer.Repositories
             {
                 throw new InvalidOperationException("TEntity must implement IMustHaveProject.");
             }
-
+            if(entity is IBaseEntity entityBaseEntity)
+            {
+                entityBaseEntity.CreationDate =  DateTime.Now;
+            }
             var projectId = _projectProvider.GetProjectId();
 
             projectEntity.ProjectID = projectId;
 
             await InsertAsync(entity);
         }
+        //public virtual async Task PUpdateAsync(TEntity entity)
+        //{
+        //    if (!(entity is IMustHaveProject projectEntity))
+        //    {
+        //        throw new InvalidOperationException("TEntity must implement IMustHaveProject.");
+        //    }
+        //    if(entity is IBaseEntity entityBaseEntity)
+        //    {
+        //        entityBaseEntity.ModificationDate =  DateTime.Now;
+        //    }
+        //    var projectId = _projectProvider.GetProjectId();
+
+        //    projectEntity.ProjectID = projectId;
+
+        //    await UpdateAsync(entity);
+        //}
         #endregion
     }
 
