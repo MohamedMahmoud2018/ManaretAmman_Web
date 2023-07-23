@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Services.EmployeeLeaves;
+﻿using BusinessLogicLayer.Services.EmployeeLoans;
 using DataAccessLayer.DTO;
 using ManaretAmman.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +9,9 @@ namespace ManaretAmman.Controllers.Employees
     [ApiController]
     public class LoansController : ControllerBase
     {
-        private readonly IEmployeeLeavesService _employeeService;
+        private readonly IEmployeeLoansService _employeeService;
 
-        public LoansController(IEmployeeLeavesService employeeService)
+        public LoansController(IEmployeeLoansService employeeService)
         => _employeeService = employeeService;
 
         [HttpGet("GetAll")]
@@ -19,7 +19,7 @@ namespace ManaretAmman.Controllers.Employees
         {
             var result = await  _employeeService.GetAll();
 
-            return ApiResponse<List<EmployeeLeavesOutput>>.Success("data has been retrieved succussfully", result);
+            return ApiResponse<List<EmployeeLoansOutput>>.Success("data has been retrieved succussfully", result);
         }
 
         [HttpGet]
@@ -27,11 +27,11 @@ namespace ManaretAmman.Controllers.Employees
         {
             var result = await _employeeService.Get(id);
 
-            return ApiResponse<EmployeeLeavesOutput>.Success("data has been retrieved succussfully", result);
+            return ApiResponse<EmployeeLoansOutput>.Success("data has been retrieved succussfully", result);
         }
 
         [HttpPost]
-        public async Task<IApiResponse> Create(EmployeeLeavesInput employee)
+        public async Task<IApiResponse> Create(EmployeeLoansInput employee)
         {
             await _employeeService.Create(employee);
 
@@ -39,7 +39,7 @@ namespace ManaretAmman.Controllers.Employees
         }
 
         [HttpPut]
-        public async Task<IApiResponse> Update(EmployeeLeavesInput employee)
+        public async Task<IApiResponse> Update(EmployeeLoansInput employee)
         {
             await _employeeService.Update(employee);
 
@@ -48,9 +48,9 @@ namespace ManaretAmman.Controllers.Employees
 
 
         [HttpDelete]
-        public async Task<IApiResponse> Delete(int employeeLeaveId)
+        public async Task<IApiResponse> Delete(int employeeLoanId)
         {
-            await _employeeService.Delete(employeeLeaveId);
+            await _employeeService.Delete(employeeLoanId);
             return ApiResponse.Success();
         }
     }

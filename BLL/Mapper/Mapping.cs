@@ -54,6 +54,21 @@ namespace BusinessLogicLayer.Mapper
             #endregion
 
 
+            #region EmployeeLoans
+            //          source    , distination
+            CreateMap<EmployeeLoan, EmployeeLoansInput>().ForMember(destination => destination.ID,
+                options => options.MapFrom(source => source.EmployeeLoanID));
+
+            CreateMap<EmployeeLoansInput, EmployeeLoan>().ForMember(destination => destination.EmployeeLoanID,
+                options => options.MapFrom(source => source.ID));
+
+            CreateMap<EmployeeLoan, EmployeeLoansOutput>().ForMember(destination => destination.EmployeeName,
+                options => options.MapFrom(source => source.Employee.EmployeeName))
+                .ForMember(destination => destination.ID,
+                options => options.MapFrom(source => source.EmployeeLoanID));
+
+            #endregion
+
         }
     }
 }

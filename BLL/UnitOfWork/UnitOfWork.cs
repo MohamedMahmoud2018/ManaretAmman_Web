@@ -50,6 +50,12 @@ namespace BusinessLogicLayer.UnitOfWork
             get { return _employeeVacationRepository ?? (_employeeVacationRepository = new Repository<EmployeeVacation>(_context, _projectProvider)); }
         }
 
+        private IRepository<EmployeeLoan> _employeeLoanRepository;
+
+        public IRepository<EmployeeLoan> EmployeeLoanRepository
+        {
+            get { return _employeeLoanRepository ?? (_employeeLoanRepository = new Repository<EmployeeLoan>(_context, _projectProvider)); }
+        }
 
 
 
