@@ -1,12 +1,11 @@
 ﻿using DataAccessLayer.DTO;
 using DataAccessLayer.Models;
 
-namespace BusinessLogicLayer.Services.Lookups
+namespace BusinessLogicLayer.Services.Balance
 {
-    public interface ILookupsService
+    public interface IBalanceService
     {
-        Task<IList<LookupDto>> GetLookups(string tableName, string columnName);
-        Task<string> GetDescription(string tableName, string columnName, int columnValue);
-        Task<string> GetDescriptionAr(string tableName, string columnName, int columnValue);
+        Task<List<GetEmployeeBalanceReportResult>> Get(EmployeeBalancesInput balanceData);
+       
     }
 }
