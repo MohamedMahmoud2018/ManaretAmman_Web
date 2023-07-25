@@ -7,7 +7,10 @@ namespace DataAccessLayer.Models
 {
     public partial class GetEmployeeBalanceReportResult
     {
+        [NotMapped]
+
         public string PrintDate { get; set; }
+        [NotMapped]
         public string PrintTime { get; set; }
         public int EmployeeID { get; set; }
         public string EmployeeName { get; set; }
@@ -16,14 +19,18 @@ namespace DataAccessLayer.Models
         public int PreviousBalance { get; set; }
         public int EnableDelete { get; set; }
         public int EnableUpdate { get; set; }
-        public int? ActualBalance { get; set; }
+        public double? ActualBalance { get; set; }
         public int? StartDate { get; set; }
         public int? EndDate { get; set; }
         public int YearID { get; set; }
         public int? Balance { get; set; }
         public int? SettingBalance { get; set; }
-        public string AttendanceDate { get; set; }
+        [NotMapped]
+
+        public DateTime? AttendanceDate { get; set; }
+        [NotMapped]
         public string Amount { get; set; }
+        [NotMapped]
         public int? Amountasint { get; set; }
         public string CurrentBalanceTemp { get; set; }
         public string PreviousBalanceTemp { get; set; }
@@ -52,6 +59,7 @@ namespace DataAccessLayer.Models
         public string EarlyandMorningLeaves { get; set; }
         public string BalanceTemp2 { get; set; }
         public int? CuurentBalanceUpToDate { get; set; }
+        [NotMapped]
         public int? TypeID { get; set; }
     }
 }
