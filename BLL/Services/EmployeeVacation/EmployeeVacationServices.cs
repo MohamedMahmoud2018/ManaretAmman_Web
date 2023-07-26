@@ -67,7 +67,11 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             return result.ToList();
         }
+<<<<<<< HEAD
         g
+=======
+        
+>>>>>>> 3a4455f32d1ec643a8343db1c4423203a3e24a8c
         public async Task Create(EmployeeVacationInput model)
         {
             if (model == null)
@@ -88,7 +92,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             employeeVacation.FromDate     = timing.FromDate;
             employeeVacation.ToDate       = timing.ToDate;
-            employeeVacation.CreationDate = DateTime.Now;
+            //employeeVacation.CreationDate = DateTime.Now;
 
             await _unitOfWork.EmployeeVacationRepository.PInsertAsync(employeeVacation);
 
@@ -118,7 +122,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             updatedVacation.FromDate         = timing.FromDate;
             updatedVacation.ToDate           = timing.ToDate;
-            updatedVacation.ModificationDate = DateTime.Now;
+            //updatedVacation.ModificationDate = DateTime.Now;
 
             await _unitOfWork.EmployeeVacationRepository.UpdateAsync(updatedVacation);
 

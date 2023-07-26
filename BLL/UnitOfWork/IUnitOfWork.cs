@@ -10,6 +10,7 @@ namespace BusinessLogicLayer.UnitOfWork
 
         IRepository<EmployeeLeaf> EmployeeLeaveRepository { get; }
         IRepository<EmployeeVacation> EmployeeVacationRepository { get; }
+        IRepository<EmployeeLoan> EmployeeLoanRepository { get; }
 
         void Save();
         Task SaveAsync();
