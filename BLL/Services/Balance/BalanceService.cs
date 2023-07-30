@@ -22,7 +22,7 @@ namespace BusinessLogicLayer.Services.Balance
             //var testres = _unit.EmployeeBalanceRepository.ExecStoreProcedure("GetEmployeeBalanceReport", 2, 2019, 0, 1, 0, 0, 0, 0).ToList();
             
             var result=await _payrolLogOnlyContext.GetProcedures().GetEmployeeBalanceReportAsync(balanceData.EmployeeID, balanceData.YearID, balanceData.ProjectID, balanceData.Flag, balanceData.Languageid,null,null,null);
-            var x = result;
+            
             return result;
         }
     }

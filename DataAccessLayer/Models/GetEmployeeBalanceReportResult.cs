@@ -8,7 +8,6 @@ namespace DataAccessLayer.Models
     public partial class GetEmployeeBalanceReportResult
     {
         [NotMapped]
-
         public string PrintDate { get; set; }
         [NotMapped]
         public string PrintTime { get; set; }
@@ -19,7 +18,7 @@ namespace DataAccessLayer.Models
         public int PreviousBalance { get; set; }
         public int EnableDelete { get; set; }
         public int EnableUpdate { get; set; }
-        public double? ActualBalance { get; set; }
+        public int? ActualBalance { get; set; }
         public int? StartDate { get; set; }
         public int? EndDate { get; set; }
         public int YearID { get; set; }
