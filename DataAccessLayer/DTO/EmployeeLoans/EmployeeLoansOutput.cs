@@ -19,11 +19,12 @@ namespace DataAccessLayer.DTO
         public DateTime? ModificationDate { get; set; }
         public int ProjectID { get; set; }
         public DateTime? LoanDate { get; set; }
+
         [Column(TypeName = "decimal(18, 5)")]
         public decimal? LoanAmount { get; set; }
         [StringLength(200)]
         public string Notes { get; set; }
-        public int? loantypeid { get; set; }
+        public int? LoantypeId { get; set; }
         public string? loantypeEn { get; set; }
         public string? loantypeAr { get; set; }
         //public int? StatusID { get; set; }

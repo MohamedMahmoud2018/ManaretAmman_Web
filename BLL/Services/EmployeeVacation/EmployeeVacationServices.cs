@@ -67,7 +67,11 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             return result.ToList();
         }
+<<<<<<< HEAD
+        g
+=======
         
+>>>>>>> 3a4455f32d1ec643a8343db1c4423203a3e24a8c
         public async Task Create(EmployeeVacationInput model)
         {
             if (model == null)
