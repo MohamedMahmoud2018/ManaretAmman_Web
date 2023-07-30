@@ -1,4 +1,6 @@
 ﻿using BusinessLogicLayer.Extensions;
+using System.Runtime.CompilerServices;
+
 namespace BusinessLogicLayer.Common
 {
     public static class Constants
@@ -22,16 +24,18 @@ namespace BusinessLogicLayer.Common
         #endregion
 
         #region Dictionaries
-        public static readonly Dictionary<int, DictionarData> EmployeeLoanDictionary = new Dictionary<int, DictionarData> 
+         static readonly Dictionary<int, DictionarData> EmployeeLoanDictionary = new Dictionary<int, DictionarData> 
         {
             { 0,new DictionarData{ NameEn="NonSchedule",NameAr="غير مجدولة"} },
             { 1,new DictionarData{ NameEn="Schedule",NameAr="مجدولة"} }
         };
+
+        public static Dictionary<int, DictionarData> GetEmployeeLoanDictionary => EmployeeLoanDictionary;
         #endregion
 
 
         #region Enums
-       
+
         #endregion
     }
     public class DictionarData

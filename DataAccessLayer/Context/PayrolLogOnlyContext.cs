@@ -2,10 +2,6 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Net.Http;
-using DataAccessLayer.Contracts;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -17,13 +13,10 @@ namespace DataAccessLayer.Models
         {
         }
 
-        public PayrolLogOnlyContext(DbContextOptions<PayrolLogOnlyContext> options, IHttpContextAccessor httpContextAccessor)
+        public PayrolLogOnlyContext(DbContextOptions<PayrolLogOnlyContext> options)
             : base(options)
         {
-            HttpContextAccessor = httpContextAccessor;
         }
-
-        protected IHttpContextAccessor HttpContextAccessor { get; }
 
         public virtual DbSet<Allowance_deduction> Allowance_deductions { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
@@ -113,10 +106,7 @@ namespace DataAccessLayer.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-
-            }
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -487,6 +477,8 @@ namespace DataAccessLayer.Models
             {
                 entity.HasKey(e => new { e.EmployeeLeaveID, e.EmployeeID, e.ProjectID });
 
+                entity.Property(e => e.EmployeeLeaveID).ValueGeneratedOnAdd();
+
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.EmployeeLeaves)
                     .HasForeignKey(d => d.EmployeeID)
@@ -646,6 +638,8 @@ namespace DataAccessLayer.Models
             modelBuilder.Entity<EmployeeVacation>(entity =>
             {
                 entity.HasKey(e => new { e.EmployeeVacationID, e.EmployeeID, e.ProjectID });
+
+                entity.Property(e => e.EmployeeVacationID).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.EmployeeVacations)
@@ -911,7 +905,6 @@ namespace DataAccessLayer.Models
                     .HasConstraintName("FK_TransactionTypes_Projects");
             });
 
-
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => new { e.UserID, e.ProjectID });
@@ -923,22 +916,11 @@ namespace DataAccessLayer.Models
                     .HasConstraintName("FK_Users_Projects");
             });
 
-            #region Set CreationDate -  ModificationDate
-            //modelBuilder.Entity<BaseEntity>()
-            //    .Property(e => e.CreationDate)
-            //    .ValueGeneratedOnAdd(); 
-            
-            //modelBuilder.Entity<BaseEntity>()
-            //    .Property(e => e.ModificationDate)
-            //    .ValueGeneratedOnUpdate();
-
-            #endregion
-
             OnModelCreatingGeneratedProcedures(modelBuilder);
+            OnModelCreatingGeneratedFunctions(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
     }
 }

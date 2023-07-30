@@ -7,23 +7,20 @@
    "IncludeConnectionString": true,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "Identity",
+   "OutputPath": "ModelsTest",
    "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "DataAccessLayer",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
    "Tables": [
       {
          "Name": "[dbo].[Allowance_deduction]",
          "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[Attendance]",
-         "ObjectType": 0
       }
    ],
-   "UiHint": "mkamel_dev\\mssqlserver01.PayrolLogOnly.dbo",
+   "UiHint": "mohamedkamel.PayrolLogOnly.dbo",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
@@ -40,6 +37,7 @@
    "UseNodaTime": false,
    "UseNullableReferences": false,
    "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
    "UseSpatial": false,
    "UseT4": false
 }
