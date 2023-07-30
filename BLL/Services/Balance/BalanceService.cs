@@ -19,9 +19,7 @@ namespace BusinessLogicLayer.Services.Balance
 
         public async Task<List<GetEmployeeBalanceReportResult>> Get(EmployeeBalancesInput balanceData)
         {
-            //var testres = _unit.EmployeeBalanceRepository.ExecStoreProcedure("GetEmployeeBalanceReport", 2, 2019, 0, 1, 0, 0, 0, 0).ToList();
-            
-            var result=await _payrolLogOnlyContext.GetProcedures().GetEmployeeBalanceReportAsync(balanceData.EmployeeID, balanceData.YearID, balanceData.ProjectID, balanceData.Flag, balanceData.Languageid,null,null,null);
+            var result=await _payrolLogOnlyContext.GetProcedures().GetEmployeeBalanceReportAsync(balanceData.EmployeeID, balanceData.YearID, balanceData.ProjectID, 1, 0,null,null,null);
             
             return result;
         }
