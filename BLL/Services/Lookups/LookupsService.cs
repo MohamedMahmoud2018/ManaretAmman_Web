@@ -37,8 +37,11 @@ namespace BusinessLogicLayer.Services.Lookups
 
         public async Task<IList<LookupDto>> GetLookups(string tableName, string columnName)
         {
+            if (columnName == null)
+                columnName = string.Empty;
+
             var lookups =  _unit.LookupsRepository
-                    .Get(e => e.TableName == tableName && e.ColumnName == columnName)
+                    .PQuery(e => e.TableName == tableName && e.ColumnName == columnName)
                     .ToList();
 
             return _mapper.Map<IList<LookupDto>>(lookups);

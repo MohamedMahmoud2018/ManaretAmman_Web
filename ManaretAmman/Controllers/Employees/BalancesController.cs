@@ -10,16 +10,17 @@ namespace ManaretAmman.Controllers.Employees
 {
     [Route("api/Employees/[controller]")]
     [ApiController]
-    public class BalanceController : ControllerBase
+    public class BalancesController : ControllerBase
     {
         private IBalanceService balanceService;
 
-        public BalanceController(IBalanceService balanceService)
+        public BalancesController(IBalanceService balanceService)
         {
             this.balanceService = balanceService;
         }
-        [HttpPost("Get")]
-        public async Task<IApiResponse> Get(EmployeeBalancesInput balanceData)
+
+        [HttpPost("GetBalance")]
+        public async Task<IApiResponse> GetBalance(EmployeeBalancesInput balanceData)
         {
             var result =await balanceService.Get(balanceData);
             if (result == null || result.Count == 0) {

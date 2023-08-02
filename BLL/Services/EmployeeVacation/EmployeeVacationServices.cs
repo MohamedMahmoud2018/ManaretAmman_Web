@@ -50,6 +50,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             var Vacation = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee).ToList();
 
             var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
+           
+            var approvals = await _lookupsService.GetLookups(Constants.Approvals, string.Empty);
 
             var result = Vacation.Select(item => new EmployeeVacationOutput 
             {
@@ -63,15 +65,11 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 ToDate          = item.ToDate.ConvertFromUnixTimestampToDateTime() ,
                 DayCount        = item.DayCount,
                 Notes           = item.Notes,
+                ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString()).ColumnDescription
             });
 
             return result.ToList();
         }
-<<<<<<< HEAD
-        g
-=======
-        
->>>>>>> 3a4455f32d1ec643a8343db1c4423203a3e24a8c
         public async Task Create(EmployeeVacationInput model)
         {
             if (model == null)

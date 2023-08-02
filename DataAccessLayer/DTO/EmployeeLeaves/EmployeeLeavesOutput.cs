@@ -18,6 +18,7 @@
         public string ModifiedName { get; set; }
         public DateTime? ModificationDate { get; set; }
         public int ProjectID { get; set; }
+        public string ApprovalStatus { get; set; }
         //public int? statusid { get; set; }
         //public int? approvalstatusid { get; set; }
     }

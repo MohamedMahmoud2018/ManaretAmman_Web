@@ -5,6 +5,10 @@ namespace BusinessLogicLayer.Common
 {
     public static class Constants
     {
+        #region Approvals
+        public const string Approvals = "Approval";
+        #endregion
+
         #region EmployeeLeaves
         public const string EmployeeLeaves = "EmployeeLeaves";
         public const string LeaveTypeID    = "LeaveTypeID";

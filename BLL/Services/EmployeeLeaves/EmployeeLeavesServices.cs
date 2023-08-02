@@ -53,9 +53,11 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
             var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
 
+            var approvals = await _lookupsService.GetLookups(Constants.Approvals, string.Empty);
+
             var result = leaves.Select(item => new EmployeeLeavesOutput 
             {
-                ID = item.EmployeeLeaveID,
+                ID              = item.EmployeeLeaveID,
                 EmployeeID      = item.EmployeeID,
                 EmployeeName    = item.Employee.EmployeeName,
                 LeaveTypeID     = item.LeaveTypeID,
@@ -63,7 +65,8 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
                                  && e.ColumnValue == item.LeaveTypeID.ToString())?.ColumnDescription,
                 LeaveDate       = item.LeaveDate.ConvertFromUnixTimestampToDateTime() ,
                 FromTime        = item.FromTime.ConvertFromMinutesToTimeString(),
-                ToTime          = item.ToTime.ConvertFromMinutesToTimeString()
+                ToTime          = item.ToTime.ConvertFromMinutesToTimeString()   ,
+                ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.approvalstatusid.ToString()).ColumnDescription
             });
 
             return result.ToList();

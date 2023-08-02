@@ -26,6 +26,8 @@ public class EmployeeVacationOutput
     public string VacationTypeEn { get; set; }
     public string ModifiedName { get; set; }
     public string CreatedName { get; set; }
+    public string ApprovalStatus { get; set; }
+
     //public int? statusid { get; set; }
     //public int? approvalstatusid { get; set; }
 }

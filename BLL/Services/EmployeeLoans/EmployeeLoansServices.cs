@@ -36,9 +36,9 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
                 ID = Loan.EmployeeLoanID,
                 EmployeeID = Loan.EmployeeID,
                 EmployeeName = Loan.Employee.EmployeeName,
-                loantypeid = Loan.loantypeid,
-                loantypeEn = Constants.GetEmployeeLoanDictionary[Loan.loantypeid.Value].NameEn,
-                loantypeAr = Constants.GetEmployeeLoanDictionary[Loan.loantypeid.Value].NameAr,
+                //loantypeid = Loan.loantypeid,
+                //loantypeEn = Constants.GetEmployeeLoanDictionary[Loan.loantypeid.Value].NameEn,
+                //loantypeAr = Constants.GetEmployeeLoanDictionary[Loan.loantypeid.Value].NameAr,
                 LoanDate = Loan.LoanDate.ConvertFromUnixTimestampToDateTime(),
                 LoanAmount = Loan.LoanAmount
             };
@@ -51,17 +51,19 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
             var Loans = _unitOfWork.EmployeeLoanRepository.PQuery(include: e => e.Employee).ToList();
 
             //var lookups = await _lookupsService.GetLookups(Constants.EmployeeLoans, Constants.LoanTypeID);
+            var approvals = await _lookupsService.GetLookups(Constants.Approvals, string.Empty);
 
             var result = Loans.Select(item => new EmployeeLoansOutput 
             {
-                ID = item.EmployeeLoanID,
-                EmployeeID      = item.EmployeeID,
-                EmployeeName    = item.Employee.EmployeeName,
-                loantypeid     = item.loantypeid,
-                loantypeEn = Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameEn,
-                loantypeAr = Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameAr,
-                LoanDate = item.LoanDate.ConvertFromUnixTimestampToDateTime(),
-                LoanAmount = item.LoanAmount
+                ID             = item.EmployeeLoanID,
+                EmployeeID     = item.EmployeeID,
+                EmployeeName   = item.Employee.EmployeeName,
+                //loantypeid     = item.loantypeid,
+                //loantypeEn = Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameEn,
+                //loantypeAr = Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameAr,
+                LoanDate       = item.LoanDate.ConvertFromUnixTimestampToDateTime(),
+                LoanAmount     = item.LoanAmount  ,
+                ApprovalStatus = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString())?.ColumnDescription
             });
 
             return result.ToList();
