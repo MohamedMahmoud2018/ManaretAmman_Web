@@ -38,7 +38,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 EmployeeName = Vacation.Employee.EmployeeName,
                 VacationTypeID = Vacation.VacationTypeID,
                 VacationType = lookups.FirstOrDefault(e => Vacation.VacationTypeID is not null
-                                 && e.ColumnValue == Vacation.VacationTypeID.ToString())?.ColumnDescription,
+                                 && e.ID == Vacation.VacationTypeID)?.ColumnDescription,
                 FromDate = Vacation.FromDate.ConvertFromUnixTimestampToDateTime(),
                 ToDate = Vacation.ToDate.ConvertFromUnixTimestampToDateTime()
             };
@@ -60,7 +60,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 EmployeeName    = item.Employee.EmployeeName,
                 VacationTypeID  = item.VacationTypeID,
                 VacationType    = lookups.FirstOrDefault(e => item.VacationTypeID is not null
-                                 && e.ColumnValue == item.VacationTypeID.ToString())?.ColumnDescription,
+                                 && e.ID == item.VacationTypeID)?.ColumnDescription,
                 FromDate        = item.FromDate.ConvertFromUnixTimestampToDateTime(),
                 ToDate          = item.ToDate.ConvertFromUnixTimestampToDateTime() ,
                 DayCount        = item.DayCount,

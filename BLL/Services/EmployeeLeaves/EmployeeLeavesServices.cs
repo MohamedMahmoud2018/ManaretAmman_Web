@@ -38,7 +38,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
                 EmployeeName    = leave.Employee.EmployeeName,
                 LeaveTypeID     = leave.LeaveTypeID,
                 LeaveType       = lookups.FirstOrDefault(e => leave.LeaveTypeID is not null
-                                 && e.ColumnValue == leave.LeaveTypeID.ToString())?.ColumnDescription,
+                                 && e.ID == leave.LeaveTypeID)?.ColumnDescription,
                 LeaveDate       = leave.LeaveDate.ConvertFromUnixTimestampToDateTime(),
                 FromTime        = leave.FromTime.ConvertFromMinutesToTimeString(),
                 ToTime          = leave.ToTime.ConvertFromMinutesToTimeString()
@@ -62,7 +62,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
                 EmployeeName    = item.Employee.EmployeeName,
                 LeaveTypeID     = item.LeaveTypeID,
                 LeaveType       = lookups.FirstOrDefault(e => item.LeaveTypeID is not null
-                                 && e.ColumnValue == item.LeaveTypeID.ToString())?.ColumnDescription,
+                                 && e.ID == item.LeaveTypeID)?.ColumnDescription,
                 LeaveDate       = item.LeaveDate.ConvertFromUnixTimestampToDateTime() ,
                 FromTime        = item.FromTime.ConvertFromMinutesToTimeString(),
                 ToTime          = item.ToTime.ConvertFromMinutesToTimeString()   ,
