@@ -12,9 +12,6 @@
         public DateTime? CreationDate { get; set; }
         public int? ModifiedBy { get; set; }
         public DateTime? ModificationDate { get; set; }
-        public int? BySystem { get; set; }
         public int ProjectID { get; set; }
-        //public int? statusid { get; set; }
-        //public int? approvalstatusid { get; set; }
     }
 }

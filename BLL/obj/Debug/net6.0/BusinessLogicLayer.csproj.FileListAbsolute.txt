@@ -66,23 +66,6 @@ D:\Special Work\Manara\ManaretAmman_web\BLL\obj\Debug\net6.0\refint\BusinessLogi
 D:\Special Work\Manara\ManaretAmman_web\BLL\obj\Debug\net6.0\BusinessLogicLayer.pdb
 D:\Special Work\Manara\ManaretAmman_web\BLL\obj\Debug\net6.0\BusinessLogicLayer.genruntimeconfig.cache
 D:\Special Work\Manara\ManaretAmman_web\BLL\obj\Debug\net6.0\ref\BusinessLogicLayer.dll
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.deps.json
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.runtimeconfig.json
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.dll
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.pdb
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\DataAccessLayer.dll
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\DataAccessLayer.pdb
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.csproj.AssemblyReference.cache
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfoInputs.cache
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfo.cs
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.csproj.CoreCompileInputs.cache
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.csproj.CopyComplete
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.dll
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\refint\BusinessLogicLayer.dll
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.pdb
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.genruntimeconfig.cache
-E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\ref\BusinessLogicLayer.dll
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.deps.json
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.runtimeconfig.json
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.dll
@@ -100,3 +83,20 @@ F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\Mana
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.pdb
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.genruntimeconfig.cache
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\ref\BusinessLogicLayer.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.deps.json
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.runtimeconfig.json
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\BusinessLogicLayer.pdb
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\DataAccessLayer.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\bin\Debug\net6.0\DataAccessLayer.pdb
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.csproj.AssemblyReference.cache
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfoInputs.cache
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfo.cs
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.csproj.CopyComplete
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\refint\BusinessLogicLayer.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.pdb
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\BusinessLogicLayer.genruntimeconfig.cache
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Debug\net6.0\ref\BusinessLogicLayer.dll
