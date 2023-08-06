@@ -106,11 +106,7 @@ namespace DataAccessLayer.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-14LB7F5\\MSSQLSERVER01;Initial Catalog=PayrolLogOnly;Integrated Security=True");
-            }
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -481,6 +477,8 @@ namespace DataAccessLayer.Models
             {
                 entity.HasKey(e => new { e.EmployeeLeaveID, e.EmployeeID, e.ProjectID });
 
+                entity.Property(e => e.EmployeeLeaveID).ValueGeneratedOnAdd();
+
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.EmployeeLeaves)
                     .HasForeignKey(d => d.EmployeeID)
@@ -640,6 +638,8 @@ namespace DataAccessLayer.Models
             modelBuilder.Entity<EmployeeVacation>(entity =>
             {
                 entity.HasKey(e => new { e.EmployeeVacationID, e.EmployeeID, e.ProjectID });
+
+                entity.Property(e => e.EmployeeVacationID).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.EmployeeVacations)
@@ -917,6 +917,7 @@ namespace DataAccessLayer.Models
             });
 
             OnModelCreatingGeneratedProcedures(modelBuilder);
+            OnModelCreatingGeneratedFunctions(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 

@@ -40,3 +40,59 @@ D:\Code\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\refint\Da
 D:\Code\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
 D:\Code\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
 D:\Code\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
+D:\Special Work\Manara\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+D:\Special Work\Manara\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+D:\Special Work\Manara\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+D:\Special Work\Manara\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+D:\Special Work\Manara\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+D:\Special Work\Manara\ManaretAmman_web\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll

@@ -1,10 +1,7 @@
 ﻿using ManaretAmman.ExceptionTypes;
 using ManaretAmman.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ManaretAmman.MiddleWare
 {

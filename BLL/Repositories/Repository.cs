@@ -1,23 +1,23 @@
-﻿using DataAccessLayer.Models;
+﻿using BusinessLogicLayer.Common;
+using BusinessLogicLayer.Services.ProjectProvider;
+using DataAccessLayer.Contracts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
+        private IProjectProvider _projectProvider;
         private DbContext _context;
         private DbSet<TEntity> dbSet;
 
-        public Repository(DbContext context)
+        public Repository(DbContext context, IProjectProvider projectProvider)
         {
-            this._context = context;
-            this.dbSet = context.Set<TEntity>();
+            _projectProvider = projectProvider;
+            this._context    = context;
+            this.dbSet       = context.Set<TEntity>();
         }
 
         public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, params Expression<Func<TEntity, object>>[] includes)
@@ -103,6 +103,15 @@ namespace BusinessLogicLayer.Repositories
             dbSet.Update(entity);
             //_context.Entry(entity).State = EntityState.Modified;
         }
+        
+        public virtual async Task UpdateAsync(TEntity entity)
+        {
+            if (entity is IBaseEntity entityBaseEntity)
+            {
+                entityBaseEntity.ModificationDate = DateTime.Now;
+            }
+            dbSet.Update(entity);
+        }
         public virtual void Update(ICollection<TEntity> entities)
         {
             dbSet.UpdateRange(entities);
@@ -140,6 +149,77 @@ namespace BusinessLogicLayer.Repositories
             //_context.RemoveRange(entity);
             dbSet.RemoveRange(entity);
         }
+
+        public virtual async Task InsertAsync(TEntity entity)
+        {
+            await dbSet.AddAsync(entity);
+        }
+
+        #region AccordingProject
+        public virtual IQueryable<TEntity> PQuery(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, params Expression<Func<TEntity, object>>[] includes)
+        {
+            if (!typeof(IMustHaveProject).IsAssignableFrom(typeof(TEntity)))
+            {
+                throw new InvalidOperationException("TEntity must implement IMustHaveProject.");
+            }
+
+            var projectId = _projectProvider.GetProjectId();
+            Expression<Func<TEntity, bool>> projectFilter = e => ((IMustHaveProject)e).ProjectID == projectId;
+
+            IQueryable<TEntity> query = _context.Set<TEntity>().Where(projectFilter);
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            if (includes is not null)
+            {
+                foreach (Expression<Func<TEntity, object>> include in includes)
+                    query = query.Include(include);
+            }
+
+            return query;
+        }
+
+        public virtual async Task PInsertAsync(TEntity entity)
+        {
+            if (!(entity is IMustHaveProject projectEntity))
+            {
+                throw new InvalidOperationException("TEntity must implement IMustHaveProject.");
+            }
+            if(entity is IBaseEntity entityBaseEntity)
+            {
+                entityBaseEntity.CreationDate =  DateTime.Now;
+            }
+            var projectId = _projectProvider.GetProjectId();
+
+            projectEntity.ProjectID = projectId;
+
+            await InsertAsync(entity);
+        }
+        //public virtual async Task PUpdateAsync(TEntity entity)
+        //{
+        //    if (!(entity is IMustHaveProject projectEntity))
+        //    {
+        //        throw new InvalidOperationException("TEntity must implement IMustHaveProject.");
+        //    }
+        //    if(entity is IBaseEntity entityBaseEntity)
+        //    {
+        //        entityBaseEntity.ModificationDate =  DateTime.Now;
+        //    }
+        //    var projectId = _projectProvider.GetProjectId();
+
+        //    projectEntity.ProjectID = projectId;
+
+        //    await UpdateAsync(entity);
+        //}
+        #endregion
     }
 
 }

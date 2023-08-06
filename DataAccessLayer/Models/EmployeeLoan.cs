@@ -12,6 +12,7 @@ namespace DataAccessLayer.Models
     public partial class EmployeeLoan
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmployeeLoanID { get; set; }
         [Key]
         public int EmployeeID { get; set; }
