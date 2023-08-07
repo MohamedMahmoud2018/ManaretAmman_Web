@@ -20,8 +20,5 @@ public class EmployeeVacationInput
 
     public DateTime? ModificationDate { get; set; }
     public int ProjectID { get; set; }
-    public int? StatusID { get; set; }
 
-    //public int? ApprovalStatusID { get; set; }
-    //public int? approvalstatusid { get; set; }
 }
