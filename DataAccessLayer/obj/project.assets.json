@@ -2108,6 +2108,7 @@
       "path": "microsoft.netcore.targets/1.1.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -2391,6 +2392,7 @@
       "path": "system.globalization/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2479,6 +2481,7 @@
       "path": "system.io/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2647,6 +2650,7 @@
       "path": "system.reflection/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2727,6 +2731,7 @@
       "path": "system.reflection.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2783,6 +2788,7 @@
       "path": "system.resources.resourcemanager/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2839,6 +2845,7 @@
       "path": "system.runtime/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3253,6 +3260,7 @@
       "path": "system.text.encoding/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3463,6 +3471,7 @@
       "path": "system.threading.tasks/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3595,19 +3604,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\moham_l6iqj7x\\.nuget\\packages\\": {}
+    "C:\\Users\\compu_tech\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj",
+      "projectUniqueName": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj",
       "projectName": "DataAccessLayer",
-      "projectPath": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj",
-      "packagesPath": "C:\\Users\\moham_l6iqj7x\\.nuget\\packages\\",
-      "outputPath": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\obj\\",
+      "projectPath": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj",
+      "packagesPath": "C:\\Users\\compu_tech\\.nuget\\packages\\",
+      "outputPath": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\moham_l6iqj7x\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\compu_tech\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3678,7 +3687,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
