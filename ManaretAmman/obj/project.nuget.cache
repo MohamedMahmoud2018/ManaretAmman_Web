@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "T1jGrzqUK5p9m9boDi1Gu1xUsvMsa9RvLHdiIyl3XgM5klev6fQWF6B21AHp5wpXdvFcGgQjKE757yb5wFbfGw==",
+  "dgSpecHash": "qZjqSUoutKS5Hh50xEN+hK9xyNa8hAKvPTY43QIcQudzd/M+mdhMAwJqwOq0WJAqTjbHj9y+M6+RGG7B6Y7z9g==",
   "success": true,
   "projectFilePath": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\ManaretAmman\\ManaretAmman.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\compu_tech\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\compu_tech\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\compu_tech\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\compu_tech\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\compu_tech\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\compu_tech\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\compu_tech\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\compu_tech\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",
