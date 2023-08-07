@@ -6,9 +6,9 @@ public static class TimingExtensions
     {
         if (date == null)
             return null;
-       var _date= date.Value;
-        string month= _date.Month.ToString().Length==1?"0"+ _date.Month.ToString(): _date.Month.ToString();
-        string day= _date.Day.ToString().Length == 1 ? "0" + _date.Day.ToString() : _date.Day.ToString();
+       var _date  = date.Value;
+        string month  = _date.Month.ToString().Length==1?"0"+ _date.Month.ToString(): _date.Month.ToString();
+        string day  = _date.Day.ToString().Length == 1 ? "0" + _date.Day.ToString() : _date.Day.ToString();
          int  result;
         if(int.TryParse(_date.Year.ToString() + month + day, out result))
         return result ;

@@ -63,12 +63,13 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
                 EmployeeID      = item.EmployeeID,
                 EmployeeName    = item.Employee.EmployeeName,
                 LeaveTypeID     = item.LeaveTypeID,
+                ProjectID       = item.ProjectID,
                 LeaveType       = lookups.FirstOrDefault(e => item.LeaveTypeID is not null
                                  && e.ID == item.LeaveTypeID)?.ColumnDescription,
                 LeaveDate       = item.LeaveDate.ConvertFromUnixTimestampToDateTime() ,
                 FromTime        = item.FromTime.ConvertFromMinutesToTimeString(),
-                ToTime          = item.ToTime.ConvertFromMinutesToTimeString()   ,
-                ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.approvalstatusid.ToString()).ColumnDescription
+                ToTime          = item.ToTime.ConvertFromMinutesToTimeString(),
+                ApprovalStatus  = approvals.FirstOrDefault(e => e.ID == item.approvalstatusid)?.ColumnDescription
             });
 
             return result.ToList();

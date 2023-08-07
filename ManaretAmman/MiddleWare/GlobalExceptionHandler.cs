@@ -25,7 +25,7 @@ namespace ManaretAmman.MiddleWare
             catch (Exception ex)
             {
                 await HandleExceptionAsync(httpContext, ex);
-                Console.WriteLine("rrr");
+                Console.WriteLine($"Error Message::::{ex.Message}");
             }
         }
 
