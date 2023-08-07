@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.Services.EmployeeLeaves;
 using DataAccessLayer.DTO;
+using DataAccessLayer.DTO.EmployeeLeaves;
 using ManaretAmman.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,7 +40,7 @@ namespace ManaretAmman.Controllers.Employees
         }
 
         [HttpPut]
-        public async Task<IApiResponse> Update(EmployeeLeavesInput employee)
+        public async Task<IApiResponse> Update(EmployeeLeavesUpdate employee)
         {
             await _employeeService.Update(employee);
 

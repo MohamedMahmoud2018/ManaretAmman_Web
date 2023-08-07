@@ -1,11 +1,12 @@
 ﻿using DataAccessLayer.DTO;
+using DataAccessLayer.DTO.EmployeeLoans;
 
 namespace BusinessLogicLayer.Services.EmployeeLoans
 {
     public interface IEmployeeLoansService
     {
         Task Create(EmployeeLoansInput employee);
-        Task Update(EmployeeLoansInput employee);
+        Task Update(EmployeeLoansUpdate employee);
         Task Delete(int employeeLoanId);
         Task<EmployeeLoansOutput> Get(int id);
         Task<List<EmployeeLoansOutput>> GetAll();

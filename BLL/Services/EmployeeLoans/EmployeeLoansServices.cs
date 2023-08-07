@@ -5,6 +5,7 @@ using BusinessLogicLayer.Extensions;
 using BusinessLogicLayer.Services.Lookups;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
+using DataAccessLayer.DTO.EmployeeLoans;
 using DataAccessLayer.Models;
 
 namespace BusinessLogicLayer.Services.EmployeeLoans
@@ -88,7 +89,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
              await _unitOfWork.SaveAsync();
         }
 
-        public async Task Update(EmployeeLoansInput employeeLoan)
+        public async Task Update(EmployeeLoansUpdate employeeLoan)
         {
             var Loan = _unitOfWork.EmployeeLoanRepository.Get(emp => emp.EmployeeLoanID == employeeLoan.ID)
                 .FirstOrDefault();
@@ -100,7 +101,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
 
             employeeLoan.LoanDate = null;
 
-            var updatedLoan = _mapper.Map<EmployeeLoansInput, EmployeeLoan>(employeeLoan);
+            var updatedLoan = _mapper.Map<EmployeeLoansUpdate, EmployeeLoan>(employeeLoan);
 
             updatedLoan.LoanDate = timing;
 

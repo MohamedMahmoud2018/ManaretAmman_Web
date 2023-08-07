@@ -5,6 +5,7 @@ using BusinessLogicLayer.Extensions;
 using BusinessLogicLayer.Services.Lookups;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
+using DataAccessLayer.DTO.EmployeeLeaves;
 using DataAccessLayer.Models;
 
 namespace BusinessLogicLayer.Services.EmployeeLeaves
@@ -86,17 +87,16 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
             var employeeLeave = _mapper.Map<EmployeeLeaf>(model);
 
-            employeeLeave.LeaveDate    = timing.LeaveDate;
+            employeeLeave.LeaveDate    = model.LeaveDate.DateToIntValue();
             employeeLeave.FromTime     = timing.FromTime;
             employeeLeave.ToTime       = timing.ToTime;
-            //employeeLeave.CreationDate = DateTime.Now;
 
             await _unitOfWork.EmployeeLeaveRepository.PInsertAsync(employeeLeave);
 
              await _unitOfWork.SaveAsync();
         }
 
-        public async Task Update(EmployeeLeavesInput employeeLeave)
+        public async Task Update(EmployeeLeavesUpdate employeeLeave)
         {
             var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeLeaveID == employeeLeave.ID)
                 .FirstOrDefault();
@@ -106,18 +106,24 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
             var timing = GetLeaveTimingInputs(employeeLeave);
 
-            employeeLeave.LeaveDate = null;
-            employeeLeave.FromTime  = null;
-            employeeLeave.ToTime    = null;
 
-            var updatedLeave = _mapper.Map<EmployeeLeavesInput, EmployeeLeaf>(employeeLeave);
+            //employeeLeave.LeaveDate = null;
+            //employeeLeave.FromTime = null;
+            //employeeLeave.ToTime = null;
 
-            updatedLeave.LeaveDate = timing.LeaveDate;
-            updatedLeave.FromTime  = timing.FromTime;
-            updatedLeave.ToTime    = timing.ToTime;
-           // employeeLeave.ModificationDate = DateTime.Now;
+            leave.LeaveDate =employeeLeave.LeaveDate.DateToIntValue();// timing.LeaveDate;//
+            leave.FromTime = timing.FromTime;
+            leave.ToTime = timing.ToTime;
+            leave.ModificationDate = DateTime.Now;
+            leave.LeaveDate = employeeLeave.LeaveTypeID;
+            leave.LeaveTypeID= employeeLeave.LeaveTypeID;
 
-            await _unitOfWork.EmployeeLeaveRepository.UpdateAsync(updatedLeave);
+
+            //var updatedLeave = _mapper.Map<EmployeeLeavesUpdate, EmployeeLeaf>(employeeLeave);
+
+
+
+            await _unitOfWork.EmployeeLeaveRepository.UpdateAsync(leave);
 
             await _unitOfWork.SaveAsync();
 
@@ -145,6 +151,15 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
                    ToTime: model.ToTime.ConvertFromTimeStringToMinutes(),
                    LeaveDate: model.LeaveDate.ConvertFromDateTimeToUnixTimestamp()
                 ) ;
+        }
+
+        private (int? FromTime, int? ToTime, int? LeaveDate) GetLeaveTimingInputs(EmployeeLeavesUpdate model)
+        {
+            return (
+                   FromTime: model.FromTime.ConvertFromTimeStringToMinutes(),
+                   ToTime: model.ToTime.ConvertFromTimeStringToMinutes(),
+                   LeaveDate: model.LeaveDate.ConvertFromDateTimeToUnixTimestamp()
+                );
         }
 
     }
