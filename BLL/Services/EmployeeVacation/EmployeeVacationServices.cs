@@ -5,7 +5,9 @@ using BusinessLogicLayer.Extensions;
 using BusinessLogicLayer.Services.Lookups;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
+using DataAccessLayer.DTO.EmployeeVacations;
 using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogicLayer.Services.EmployeeVacations
 {
@@ -45,9 +47,20 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             return result;
         }
 
-        public async Task<List<EmployeeVacationOutput>> GetAll()
+        public async Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter filter)
         {
-            var Vacation = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee).ToList();
+            var query = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee);   
+
+            var totalRecords = await query.CountAsync();
+
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+            {
+                query = query.Where(e => e.Employee.EmployeeName.Contains(filter.Search)
+                   || e.Employee.EmployeeNameEn.Contains(filter.Search));
+            }
+
+            var Vacation = await query.Skip((filter.PageIndex - 1) * filter.Offset)
+                    .Take(filter.Offset).ToListAsync();
 
             var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
            
@@ -65,10 +78,10 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 ToDate          = item.ToDate.ConvertFromUnixTimestampToDateTime() ,
                 DayCount        = item.DayCount,
                 Notes           = item.Notes,
-                ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString()).ColumnDescription
-            });
+                ApprovalStatus  = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescription
+            }).ToList();
 
-            return result.ToList();
+            return result.CreatePagedReponse(filter, totalRecords);
         }
         public async Task Create(EmployeeVacationInput model)
         {
@@ -88,8 +101,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             var employeeVacation = _mapper.Map<EmployeeVacationInput, EmployeeVacation>(model);
 
-            employeeVacation.FromDate     = timing.FromDate;
-            employeeVacation.ToDate       = timing.ToDate;
+            employeeVacation.FromDate     = model.FromDate.DateToIntValue();// timing.FromDate;
+            employeeVacation.ToDate       = model.ToDate.DateToIntValue();//timing.ToDate;
             //employeeVacation.CreationDate = DateTime.Now;
 
             await _unitOfWork.EmployeeVacationRepository.PInsertAsync(employeeVacation);
@@ -97,7 +110,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
              await _unitOfWork.SaveAsync();
         }
 
-        public async Task Update(EmployeeVacationInput employeeVacation)
+        public async Task Update(EmployeeVacationsUpdate employeeVacation)
         {
             var vacation = _unitOfWork.EmployeeVacationRepository.Get(emp => emp.EmployeeVacationID == employeeVacation.ID)
                 .FirstOrDefault();
@@ -108,21 +121,16 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             DateTime startDate        = (DateTime)employeeVacation.FromDate;
             DateTime endDate          = (DateTime)employeeVacation.ToDate;
             TimeSpan dayCount         = endDate.Subtract(startDate);
-            int daysDifference        = dayCount.Days;
-            employeeVacation.DayCount = daysDifference;
+            vacation.DayCount = dayCount.Days;
 
             var timing = GetVacationTimingInputs(employeeVacation);
 
-            employeeVacation.FromDate = null;
-            employeeVacation.ToDate   = null;
+            vacation.FromDate         = employeeVacation.FromDate.DateToIntValue();
+            vacation.ToDate           = employeeVacation.FromDate.DateToIntValue();
+            vacation.VacationTypeID = employeeVacation.VacationTypeID;
+            vacation.Notes = employeeVacation.Notes;
 
-            var updatedVacation = _mapper.Map<EmployeeVacationInput, EmployeeVacation>(employeeVacation);
-
-            updatedVacation.FromDate         = timing.FromDate;
-            updatedVacation.ToDate           = timing.ToDate;
-            //updatedVacation.ModificationDate = DateTime.Now;
-
-            await _unitOfWork.EmployeeVacationRepository.UpdateAsync(updatedVacation);
+            await _unitOfWork.EmployeeVacationRepository.UpdateAsync(vacation);
 
             await _unitOfWork.SaveAsync();
 
@@ -144,6 +152,14 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
         }
 
         private (int? FromDate, int? ToDate) GetVacationTimingInputs(EmployeeVacationInput model)
+        {
+            return (
+                   FromDate: model.FromDate.ConvertFromDateTimeToUnixTimestamp(),
+                   ToDate: model.FromDate.ConvertFromDateTimeToUnixTimestamp()
+                   );
+        }
+
+        private (int? FromDate, int? ToDate) GetVacationTimingInputs(EmployeeVacationsUpdate model)
         {
             return (
                    FromDate: model.FromDate.ConvertFromDateTimeToUnixTimestamp(),
