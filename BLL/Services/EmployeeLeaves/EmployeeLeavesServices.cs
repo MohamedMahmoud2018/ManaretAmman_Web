@@ -40,7 +40,7 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
                 LeaveTypeID     = leave.LeaveTypeID,
                 LeaveType       = lookups.FirstOrDefault(e => leave.LeaveTypeID is not null
                                  && e.ID == leave.LeaveTypeID)?.ColumnDescription,
-                LeaveDate       = leave.LeaveDate.ConvertFromUnixTimestampToDateTime(),
+                LeaveDate       = leave.LeaveDate.IntToDateValue(),
                 FromTime        = leave.FromTime.ConvertFromMinutesToTimeString(),
                 ToTime          = leave.ToTime.ConvertFromMinutesToTimeString()
                 
@@ -60,15 +60,16 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
             var result = leaves.Select(item => new EmployeeLeavesOutput 
             {
                 ID              = item.EmployeeLeaveID,
+                ProjectID       = item.ProjectID,
                 EmployeeID      = item.EmployeeID,
                 EmployeeName    = item.Employee.EmployeeName,
                 LeaveTypeID     = item.LeaveTypeID,
                 LeaveType       = lookups.FirstOrDefault(e => item.LeaveTypeID is not null
                                  && e.ID == item.LeaveTypeID)?.ColumnDescription,
-                LeaveDate       = item.LeaveDate.ConvertFromUnixTimestampToDateTime() ,
+                LeaveDate       = item.LeaveDate.IntToDateValue() ,
                 FromTime        = item.FromTime.ConvertFromMinutesToTimeString(),
                 ToTime          = item.ToTime.ConvertFromMinutesToTimeString()   ,
-                ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.approvalstatusid.ToString()).ColumnDescription
+                ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.approvalstatusid.ToString())?.ColumnDescription
             });
 
             return result.ToList();
@@ -106,22 +107,11 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
             var timing = GetLeaveTimingInputs(employeeLeave);
 
-
-            //employeeLeave.LeaveDate = null;
-            //employeeLeave.FromTime = null;
-            //employeeLeave.ToTime = null;
-
             leave.LeaveDate =employeeLeave.LeaveDate.DateToIntValue();// timing.LeaveDate;//
             leave.FromTime = timing.FromTime;
             leave.ToTime = timing.ToTime;
             leave.ModificationDate = DateTime.Now;
-            leave.LeaveDate = employeeLeave.LeaveTypeID;
             leave.LeaveTypeID= employeeLeave.LeaveTypeID;
-
-
-            //var updatedLeave = _mapper.Map<EmployeeLeavesUpdate, EmployeeLeaf>(employeeLeave);
-
-
 
             await _unitOfWork.EmployeeLeaveRepository.UpdateAsync(leave);
 

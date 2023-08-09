@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.Extensions;
 using BusinessLogicLayer.UnitOfWork;
+using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,9 @@ namespace BusinessLogicLayer.Services.Notification
             _mapper = mapper;
             _payrolLogOnlyContext = payrolLogOnlyContext;
         }
-        public async Task<List<GetRemindersResult>> GetRemindersAsync(int projectId, int userId,DateTime? fromdate,DateTime? toDate)
+        public async Task<List<GetRemindersResult>> GetRemindersAsync(GetEmployeeNotificationInput model)
         {
-            var result = await _payrolLogOnlyContext.GetProcedures().GetRemindersAsync(projectId, null, 1, 0, fromdate.DateToIntValue(), toDate.DateToIntValue(), null, userId, null);
+            var result = await _payrolLogOnlyContext.GetProcedures().GetRemindersAsync(model.projectId, null, 1, 0, model.fromdate.DateToIntValue(), model.toDate.DateToIntValue(), null, model.userId, null);
             return result;
         }
     }

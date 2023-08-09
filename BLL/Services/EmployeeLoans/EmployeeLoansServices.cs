@@ -30,17 +30,13 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
             if (Loan is null)
                 throw new NotFoundException("data not found");
 
-            // var lookups = await _lookupsService.GetLookups(Constants.EmployeeLoans, Constants.LoanTypeID);
 
             var result = new EmployeeLoansOutput
             {
                 ID = Loan.EmployeeLoanID,
                 EmployeeID = Loan.EmployeeID,
                 EmployeeName = Loan.Employee.EmployeeName,
-                //loantypeid = Loan.loantypeid,
-                //loantypeEn = Constants.GetEmployeeLoanDictionary[Loan.loantypeid.Value].NameEn,
-                //loantypeAr = Constants.GetEmployeeLoanDictionary[Loan.loantypeid.Value].NameAr,
-                LoanDate = Loan.LoanDate.ConvertFromUnixTimestampToDateTime(),
+                LoanDate = Loan.LoanDate.IntToDateValue(),
                 LoanAmount = Loan.LoanAmount
             };
 
@@ -59,10 +55,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
                 ID             = item.EmployeeLoanID,
                 EmployeeID     = item.EmployeeID,
                 EmployeeName   = item.Employee.EmployeeName,
-                //loantypeid     = item.loantypeid,
-                //loantypeEn = Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameEn,
-                //loantypeAr = Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameAr,
-                LoanDate       = item.LoanDate.ConvertFromUnixTimestampToDateTime(),
+                LoanDate       = item.LoanDate.IntToDateValue(),
                 LoanAmount     = item.LoanAmount  ,
                 ApprovalStatus = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString())?.ColumnDescription
             });
@@ -75,14 +68,13 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
 
-            var LoanDate = GetLoanTimingInputs(model.LoanDate);
+            var LoanDate = model.LoanDate.DateToIntValue();
 
             model.LoanDate = null;
 
             var employeeLoan = _mapper.Map<EmployeeLoan>(model);
 
             employeeLoan.LoanDate    = LoanDate;
-            //employeeLoan.CreationDate = DateTime.Now;
 
             await _unitOfWork.EmployeeLoanRepository.PInsertAsync(employeeLoan);
 
@@ -97,8 +89,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
             if (Loan is null)
                 throw new NotFoundException("Data Not Found");
 
-            var timing = GetLoanTimingInputs(employeeLoan.LoanDate);
-
+            var timing = employeeLoan.LoanDate.DateToIntValue();
             employeeLoan.LoanDate = null;
 
             var updatedLoan = _mapper.Map<EmployeeLoansUpdate, EmployeeLoan>(employeeLoan);

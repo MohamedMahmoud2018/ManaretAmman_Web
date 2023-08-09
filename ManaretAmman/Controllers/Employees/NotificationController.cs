@@ -2,6 +2,7 @@
 using BusinessLogicLayer.Services.EmployeeLeaves;
 using BusinessLogicLayer.Services.Notification;
 using DataAccessLayer.DTO;
+using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 using ManaretAmman.Models;
 using Microsoft.AspNetCore.Http;
@@ -18,10 +19,10 @@ namespace ManaretAmman.Controllers.Employees
         public NotificationController(INotificationsService notificationService)
         => _notificationService = notificationService;
 
-        [HttpGet("GetNotification")]
-        public async Task<IApiResponse> GetNotification(int projectId, int userId, DateTime? fromdate, DateTime? toDate)
+        [HttpPost("GetNotification")]
+        public async Task<IApiResponse> GetNotification(GetEmployeeNotificationInput model)
         {
-            var result = await _notificationService.GetRemindersAsync(projectId,userId,fromdate,toDate);
+            var result = await _notificationService.GetRemindersAsync(model);
             if (result == null || result.Count == 0)
             {
                 List<GetRemindersResult> res = new List<GetRemindersResult>();

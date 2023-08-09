@@ -14,6 +14,22 @@ public static class TimingExtensions
         return result ;
         return null;
     }
+
+    public static DateTime? IntToDateValue(this int? intDate)
+    {
+        if (intDate == null || intDate.ToString().Length!=8)
+            return null;
+        var _date = intDate.Value.ToString();
+        string year = _date.Substring(0, 4);
+        string month = _date.Substring(4, 2);
+        string day = _date.Substring(6, 2);
+        if (int.TryParse(day, out int dayint) && int.TryParse(month, out int monthint) && int.TryParse(year, out int yearint))
+        { 
+            Console.WriteLine(new DateTime(yearint, monthint, dayint).ToString());
+            return new DateTime(yearint, monthint, dayint);
+        }
+        return null;
+    }
     public static int? ConvertFromDateTimeToUnixTimestamp(this DateTime? date)
     {
         if (date == null)
