@@ -35,7 +35,7 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
             var result = new EmployeeLeavesOutput
             {
-                ID = leave.EmployeeLeaveID,
+                ID              = leave.EmployeeLeaveID,
                 EmployeeID      = leave.EmployeeID,
                 EmployeeName    = leave.Employee.EmployeeName,
                 LeaveTypeID     = leave.LeaveTypeID,
@@ -85,7 +85,7 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
                 ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.approvalstatusid.ToString())?.ColumnDescription
             });
 
-        return result.CreatePagedReponse(filter, totalRecords);
+        return result.ToList().CreatePagedReponse(filter, totalRecords);
     }
 
     public async Task Create(EmployeeLeavesInput model)

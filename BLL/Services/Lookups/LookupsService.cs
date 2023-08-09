@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using BusinessLogicLayer.Common;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
+using System.Collections.Generic;
 
 namespace BusinessLogicLayer.Services.Lookups
 {
@@ -37,6 +39,24 @@ namespace BusinessLogicLayer.Services.Lookups
 
         public async Task<IList<LookupDto>> GetLookups(string tableName, string columnName)
         {
+            if (tableName == "Loans")
+            {
+                var loanLookup=new List<LookupDto>();
+                foreach (var key in Constants.GetEmployeeLoanDictionary.Keys)
+                {
+                    loanLookup.Add(new LookupDto
+                    {
+                        TableName = tableName,
+                        ColumnValue = key.ToString(),
+                        ColumnDescription = Constants.GetEmployeeLoanDictionary[key].NameEn,
+                        ColumnDescriptionAr = Constants.GetEmployeeLoanDictionary[key].NameAr,
+                        ID = key,
+                        ColumnName = columnName
+                    }) ;
+                }
+                return loanLookup;    
+
+            }
             if (columnName == null)
                 columnName = string.Empty;
 
@@ -46,5 +66,6 @@ namespace BusinessLogicLayer.Services.Lookups
 
             return _mapper.Map<IList<LookupDto>>(lookups);
         }
+
     }
 }

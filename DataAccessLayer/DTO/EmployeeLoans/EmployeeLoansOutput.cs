@@ -28,9 +28,6 @@ namespace DataAccessLayer.DTO
         public string? loantypeEn { get; set; }
         public string? loantypeAr { get; set; }
         public string ApprovalStatus { get; set; }
-
-        //public int? StatusID { get; set; }
-        //public int? ApprovalStatusID { get; set; }
         public int? LoanSerial { get; set; }
     }
 }
