@@ -7,6 +7,7 @@ using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
 using DataAccessLayer.DTO.EmployeeVacations;
 using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogicLayer.Services.EmployeeVacations
 {
@@ -46,9 +47,20 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             return result;
         }
 
-        public async Task<List<EmployeeVacationOutput>> GetAll()
+        public async Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter filter)
         {
-            var Vacation = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee).ToList();
+            var query = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee);   
+
+            var totalRecords = await query.CountAsync();
+
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+            {
+                query = query.Where(e => e.Employee.EmployeeName.Contains(filter.Search)
+                   || e.Employee.EmployeeNameEn.Contains(filter.Search));
+            }
+
+            var Vacation = await query.Skip((filter.PageIndex - 1) * filter.Offset)
+                    .Take(filter.Offset).ToListAsync();
 
             var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
            
@@ -66,10 +78,10 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 ToDate          = item.ToDate.IntToDateValue() ,
                 DayCount        = item.DayCount,
                 Notes           = item.Notes,
-                ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString()).ColumnDescription
-            });
+                ApprovalStatus  = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescription
+            }).ToList();
 
-            return result.ToList();
+            return result.CreatePagedReponse(filter, totalRecords);
         }
         public async Task Create(EmployeeVacationInput model)
         {

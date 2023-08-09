@@ -7,30 +7,31 @@ using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
 using DataAccessLayer.DTO.EmployeeLeaves;
 using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace BusinessLogicLayer.Services.EmployeeLeaves
+namespace BusinessLogicLayer.Services.EmployeeLeaves;
+
+internal class EmployeeLeavesService : IEmployeeLeavesService
 {
-    internal class EmployeeLeavesService : IEmployeeLeavesService
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ILookupsService _lookupsService;
+    private readonly IMapper _mapper;
+    public EmployeeLeavesService(IUnitOfWork unityOfWork, ILookupsService lookupsService, IMapper mapper)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ILookupsService _lookupsService;
-        private readonly IMapper _mapper;
-        public EmployeeLeavesService(IUnitOfWork unityOfWork, ILookupsService lookupsService, IMapper mapper)
-        {
-            _unitOfWork     = unityOfWork;
-            _lookupsService = lookupsService;
-            _mapper         = mapper;
-        }
-        public async Task<EmployeeLeavesOutput> Get(int id)
-        {
-            var leave = _unitOfWork.EmployeeLeaveRepository
-                       .PQuery(e => e.EmployeeLeaveID == id, include: e => e.Employee)
-                       .FirstOrDefault();
+        _unitOfWork     = unityOfWork;
+        _lookupsService = lookupsService;
+        _mapper         = mapper;
+    }
+    public async Task<EmployeeLeavesOutput> Get(int id)
+    {
+        var leave = _unitOfWork.EmployeeLeaveRepository
+                   .PQuery(e => e.EmployeeLeaveID == id, include: e => e.Employee)
+                   .FirstOrDefault();
 
-            if (leave is null)
-                throw new NotFoundException("data not found");
+        if (leave is null)
+            throw new NotFoundException("data not found");
 
-            var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
+        var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
 
             var result = new EmployeeLeavesOutput
             {
@@ -46,16 +47,28 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
                 
             };
 
-            return result;
+        return result;
+    }
+
+    public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter filter)
+    {
+        var query = _unitOfWork.EmployeeLeaveRepository
+                    .PQuery(include: e => e.Employee);
+
+        var totalRecords = await query.CountAsync();
+
+        if (!string.IsNullOrWhiteSpace(filter.Search))
+        {
+            query = query.Where(e => e.Employee.EmployeeName.Contains(filter.Search)
+               || e.Employee.EmployeeNameEn.Contains(filter.Search));
         }
 
-        public async Task<List<EmployeeLeavesOutput>> GetAll()
-        {
-            var leaves = _unitOfWork.EmployeeLeaveRepository.PQuery(include: e => e.Employee).ToList();
+        var leaves = await query.Skip((filter.PageIndex - 1) * filter.Offset)
+                    .Take(filter.Offset).ToListAsync();
 
-            var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
+        var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
 
-            var approvals = await _lookupsService.GetLookups(Constants.Approvals, string.Empty);
+        var approvals = await _lookupsService.GetLookups(Constants.Approvals, string.Empty);
 
             var result = leaves.Select(item => new EmployeeLeavesOutput 
             {
@@ -72,40 +85,40 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
                 ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.approvalstatusid.ToString())?.ColumnDescription
             });
 
-            return result.ToList();
-        }
+        return result.CreatePagedReponse(filter, totalRecords);
+    }
 
-        public async Task Create(EmployeeLeavesInput model)
-        {
-            if (model == null)
-                throw new NotFoundException("recieved data is missed");
+    public async Task Create(EmployeeLeavesInput model)
+    {
+        if (model == null)
+            throw new NotFoundException("recieved data is missed");
 
-            var timing = GetLeaveTimingInputs(model);
+        var timing = GetLeaveTimingInputs(model);
 
-            model.LeaveDate = null;
-            model.FromTime  = null;
-            model.ToTime    = null;
+        model.LeaveDate = null;
+        model.FromTime  = null;
+        model.ToTime    = null;
 
-            var employeeLeave = _mapper.Map<EmployeeLeaf>(model);
+        var employeeLeave = _mapper.Map<EmployeeLeaf>(model);
 
-            employeeLeave.LeaveDate    = model.LeaveDate.DateToIntValue();
-            employeeLeave.FromTime     = timing.FromTime;
-            employeeLeave.ToTime       = timing.ToTime;
+        employeeLeave.LeaveDate    = model.LeaveDate.DateToIntValue();
+        employeeLeave.FromTime     = timing.FromTime;
+        employeeLeave.ToTime       = timing.ToTime;
 
-            await _unitOfWork.EmployeeLeaveRepository.PInsertAsync(employeeLeave);
+        await _unitOfWork.EmployeeLeaveRepository.PInsertAsync(employeeLeave);
 
-             await _unitOfWork.SaveAsync();
-        }
+         await _unitOfWork.SaveAsync();
+    }
 
-        public async Task Update(EmployeeLeavesUpdate employeeLeave)
-        {
-            var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeLeaveID == employeeLeave.ID)
-                .FirstOrDefault();
+    public async Task Update(EmployeeLeavesUpdate employeeLeave)
+    {
+        var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeLeaveID == employeeLeave.ID)
+            .FirstOrDefault();
 
-            if (leave is null)
-                throw new NotFoundException("Data Not Found");
+        if (leave is null)
+            throw new NotFoundException("Data Not Found");
 
-            var timing = GetLeaveTimingInputs(employeeLeave);
+        var timing = GetLeaveTimingInputs(employeeLeave);
 
             leave.LeaveDate =employeeLeave.LeaveDate.DateToIntValue();// timing.LeaveDate;//
             leave.FromTime = timing.FromTime;
@@ -115,42 +128,41 @@ namespace BusinessLogicLayer.Services.EmployeeLeaves
 
             await _unitOfWork.EmployeeLeaveRepository.UpdateAsync(leave);
 
-            await _unitOfWork.SaveAsync();
-
-        }
-
-        public async Task Delete( int employeeLeaveId)
-        {
-            var leave = _unitOfWork.EmployeeLeaveRepository
-                        .Get(e => e.EmployeeLeaveID == employeeLeaveId)
-                        .FirstOrDefault();
-
-            if (leave is null)
-                throw new NotFoundException("Data Not Found");
-
-            _unitOfWork.EmployeeLeaveRepository.Delete(leave);
-
-            await _unitOfWork.SaveAsync();
-
-        }
-
-        private (int? FromTime, int? ToTime, int? LeaveDate) GetLeaveTimingInputs(EmployeeLeavesInput model)
-        {
-            return (
-                   FromTime: model.FromTime.ConvertFromTimeStringToMinutes() ,
-                   ToTime: model.ToTime.ConvertFromTimeStringToMinutes(),
-                   LeaveDate: model.LeaveDate.ConvertFromDateTimeToUnixTimestamp()
-                ) ;
-        }
-
-        private (int? FromTime, int? ToTime, int? LeaveDate) GetLeaveTimingInputs(EmployeeLeavesUpdate model)
-        {
-            return (
-                   FromTime: model.FromTime.ConvertFromTimeStringToMinutes(),
-                   ToTime: model.ToTime.ConvertFromTimeStringToMinutes(),
-                   LeaveDate: model.LeaveDate.ConvertFromDateTimeToUnixTimestamp()
-                );
-        }
+        await _unitOfWork.SaveAsync();
 
     }
+
+    public async Task Delete( int employeeLeaveId)
+    {
+        var leave = _unitOfWork.EmployeeLeaveRepository
+                    .Get(e => e.EmployeeLeaveID == employeeLeaveId)
+                    .FirstOrDefault();
+
+        if (leave is null)
+            throw new NotFoundException("Data Not Found");
+
+        _unitOfWork.EmployeeLeaveRepository.Delete(leave);
+
+        await _unitOfWork.SaveAsync();
+
+    }
+
+    private (int? FromTime, int? ToTime, int? LeaveDate) GetLeaveTimingInputs(EmployeeLeavesInput model)
+    {
+        return (
+               FromTime: model.FromTime.ConvertFromTimeStringToMinutes() ,
+               ToTime: model.ToTime.ConvertFromTimeStringToMinutes(),
+               LeaveDate: model.LeaveDate.ConvertFromDateTimeToUnixTimestamp()
+            ) ;
+    }
+
+    private (int? FromTime, int? ToTime, int? LeaveDate) GetLeaveTimingInputs(EmployeeLeavesUpdate model)
+    {
+        return (
+               FromTime: model.FromTime.ConvertFromTimeStringToMinutes(),
+               ToTime: model.ToTime.ConvertFromTimeStringToMinutes(),
+               LeaveDate: model.LeaveDate.ConvertFromDateTimeToUnixTimestamp()
+            );
+    }
+
 }

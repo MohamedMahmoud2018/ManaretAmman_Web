@@ -1,4 +1,5 @@
-﻿using BusinessLogicLayer.Services.EmployeeLoans;
+﻿using BusinessLogicLayer.Common;
+using BusinessLogicLayer.Services.EmployeeLoans;
 using DataAccessLayer.DTO;
 using DataAccessLayer.DTO.EmployeeLoans;
 using ManaretAmman.Models;
@@ -15,12 +16,12 @@ namespace ManaretAmman.Controllers.Employees
         public LoansController(IEmployeeLoansService employeeService)
         => _employeeService = employeeService;
 
-        [HttpGet("GetAll")]
-        public async Task<IApiResponse> GetAll()
+        [HttpGet("GetPage")]
+        public async Task<IApiResponse> GetPage([FromQuery] PaginationFilter filter)
         {
-            var result = await  _employeeService.GetAll();
+            var result = await  _employeeService.GetPage(filter);
 
-            return ApiResponse<List<EmployeeLoansOutput>>.Success("data has been retrieved succussfully", result);
+            return ApiResponse<BusinessLogicLayer.Common.PagedResponse<EmployeeLoansOutput>>.Success("data has been retrieved succussfully", result);
         }
 
         [HttpGet]

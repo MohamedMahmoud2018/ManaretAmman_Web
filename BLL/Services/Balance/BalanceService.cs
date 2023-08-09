@@ -7,13 +7,11 @@ namespace BusinessLogicLayer.Services.Balance
 {
     public class BalanceService : IBalanceService
     {
-        private readonly IUnitOfWork _unit;
-        private readonly IMapper _mapper;
+        
         private readonly PayrolLogOnlyContext _payrolLogOnlyContext;
-        public BalanceService(IUnitOfWork unit, IMapper mapper, PayrolLogOnlyContext payrolLogOnlyContext)
+        public BalanceService( PayrolLogOnlyContext payrolLogOnlyContext)
         {
-            _unit = unit;
-            _mapper = mapper;
+        
             _payrolLogOnlyContext= payrolLogOnlyContext;
         }
 
