@@ -6,12 +6,12 @@ public class PagedResponse<T>
 
     public int TotalPages { get; set; }
 
-    public List<T> Data { get; set; }
+    public List<T> Result { get; set; }
 
     public PagedResponse(List<T> data, int pageIndex, int offset)
     {
         this.PageIndex = pageIndex;
         this.Offset    = offset;
-        this.Data      = data;
+        this.Result      = data;
     }
 }
