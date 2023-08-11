@@ -22,7 +22,7 @@ namespace ManaretAmman.Controllers.Employees
         [HttpPost("GetNotification")]
         public async Task<IApiResponse> GetNotification(GetEmployeeNotificationInput model)
         {
-            var result = await _notificationService.GetRemindersAsync(model);
+            var result = await _notificationService.GetNotificationsAsync(model);
             if (result == null || result.Count == 0)
             {
                 List<GetRemindersResult> res = new List<GetRemindersResult>();
@@ -30,6 +30,19 @@ namespace ManaretAmman.Controllers.Employees
                 return ApiResponse<List<GetRemindersResult>>.Failure(res, null);
             }
             return ApiResponse<List<GetRemindersResult>>.Success(result);
+        }
+
+        [HttpPost("AcceptOrRejectNotificationsAsync")]
+        public async Task<IApiResponse> AcceptOrRejectNotifications(AcceptOrRejectNotifcationInput model)
+        {
+            var result = await _notificationService.AcceptOrRejectNotificationsAsync(model);
+            if (result == null || result.Count == 0)
+            {
+                List<ChangeEmployeeRequestStatusResult> res = new List<ChangeEmployeeRequestStatusResult>();
+                res.Add(new ChangeEmployeeRequestStatusResult());
+                return ApiResponse<List<ChangeEmployeeRequestStatusResult>>.Failure(res, null);
+            }
+            return ApiResponse<List<ChangeEmployeeRequestStatusResult>>.Success(result);
         }
     }
 }

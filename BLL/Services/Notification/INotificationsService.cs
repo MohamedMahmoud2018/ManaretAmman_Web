@@ -10,7 +10,11 @@ namespace BusinessLogicLayer.Services.Notification
 {
     public interface INotificationsService
     {
-        public Task<List<GetRemindersResult>> GetRemindersAsync(GetEmployeeNotificationInput model);
+        public Task<List<GetRemindersResult>> GetNotificationsAsync(GetEmployeeNotificationInput model);
+       // public Task<List<GetRemindersResult>> IgnorNotificationsAsync(GetEmployeeNotificationInput model);
+        public Task<List<ChangeEmployeeRequestStatusResult>> AcceptOrRejectNotificationsAsync(AcceptOrRejectNotifcationInput model);
+
+
 
 
     }
