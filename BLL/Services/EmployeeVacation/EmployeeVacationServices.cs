@@ -41,8 +41,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 VacationTypeID = Vacation.VacationTypeID,
                 VacationType = lookups.FirstOrDefault(e => Vacation.VacationTypeID is not null
                                  && e.ID == Vacation.VacationTypeID)?.ColumnDescription,
-                FromDate = Vacation.FromDate.ConvertFromUnixTimestampToDateTime(),
-                ToDate = Vacation.ToDate.ConvertFromUnixTimestampToDateTime()
+                FromDate = Vacation.FromDate.IntToDateValue(),
+                ToDate = Vacation.ToDate.IntToDateValue()
             };
             return result;
         }
@@ -74,8 +74,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 VacationTypeID  = item.VacationTypeID,
                 VacationType    = lookups.FirstOrDefault(e => item.VacationTypeID is not null
                                  && e.ID == item.VacationTypeID)?.ColumnDescription,
-                FromDate        = item.FromDate.ConvertFromUnixTimestampToDateTime(),
-                ToDate          = item.ToDate.ConvertFromUnixTimestampToDateTime() ,
+                FromDate        = item.FromDate.IntToDateValue(),
+                ToDate          = item.ToDate.IntToDateValue() ,
                 DayCount        = item.DayCount,
                 Notes           = item.Notes,
                 ApprovalStatus  = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescription
