@@ -47,17 +47,15 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             return result;
         }
 
-        public async Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter filter)
+        public async Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter<EmployeeVacationFilter> filter)
         {
             var query = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee);   
 
             var totalRecords = await query.CountAsync();
 
-            if (!string.IsNullOrWhiteSpace(filter.Search))
-            {
-                query = query.Where(e => e.Employee.EmployeeName.Contains(filter.Search)
-                   || e.Employee.EmployeeNameEn.Contains(filter.Search));
-            }
+            if (filter.FilterCriteria != null)
+                ApplyFilter(query, filter.FilterCriteria);
+
 
             var Vacation = await query.Skip((filter.PageIndex - 1) * filter.Offset)
                     .Take(filter.Offset).ToListAsync();
@@ -81,8 +79,23 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 ApprovalStatus  = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescription
             }).ToList();
 
-            return result.CreatePagedReponse(filter, totalRecords);
+            return result.CreatePagedReponse(filter.PageIndex, filter.Offset, totalRecords);
         }
+
+        private static IQueryable<EmployeeVacation> ApplyFilter(IQueryable<EmployeeVacation> query, EmployeeVacationFilter criteria)
+        {
+            if (criteria.EmployeeID != null)
+                query = query.Where(e => e.EmployeeID == criteria.EmployeeID);
+
+            if (criteria.FromDate != null)
+                query = query.Where(e => e.FromDate == criteria.FromDate.DateToIntValue());
+
+            if (criteria.ToDate != null)
+                query = query.Where(e => e.ToDate == criteria.ToDate.DateToIntValue());
+
+            return query;
+        }
+
         public async Task Create(EmployeeVacationInput model)
         {
             if (model == null)

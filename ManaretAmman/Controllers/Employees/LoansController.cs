@@ -17,7 +17,7 @@ namespace ManaretAmman.Controllers.Employees
         => _employeeService = employeeService;
 
         [HttpGet("GetPage")]
-        public async Task<IApiResponse> GetPage([FromQuery] PaginationFilter filter)
+        public async Task<IApiResponse> GetPage([FromQuery] PaginationFilter<EmployeeLoanFilter> filter)
         {
             var result = await  _employeeService.GetPage(filter);
 

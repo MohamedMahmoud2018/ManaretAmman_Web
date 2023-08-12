@@ -48,17 +48,15 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
             return result;
         }
 
-        public async Task<PagedResponse<EmployeeLoansOutput>> GetPage(PaginationFilter filter)
+        public async Task<PagedResponse<EmployeeLoansOutput>> GetPage(PaginationFilter<EmployeeLoanFilter> filter)
         {
             var query = _unitOfWork.EmployeeLoanRepository.PQuery(include: e => e.Employee);
 
             var totalRecords = await query.CountAsync();
 
-            if (!string.IsNullOrWhiteSpace(filter.Search))
-            {
-                query = query.Where(e => e.Employee.EmployeeName.Contains(filter.Search)
-                   || e.Employee.EmployeeNameEn.Contains(filter.Search));
-            }
+            if (filter.FilterCriteria != null)
+                ApplyFilter(query, filter.FilterCriteria);
+
 
             var Loans = await query.Skip((filter.PageIndex - 1) * filter.Offset)
                         .Take(filter.Offset).ToListAsync();
@@ -79,7 +77,21 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
                 ApprovalStatus = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescription
             }).ToList();
 
-            return result.CreatePagedReponse(filter, totalRecords);
+            return result.CreatePagedReponse(filter.PageIndex, filter.Offset, totalRecords);
+        }
+
+        private static IQueryable<EmployeeLoan> ApplyFilter(IQueryable<EmployeeLoan>  query, EmployeeLoanFilter criteria)
+        {
+            if (criteria.EmployeeID != null)
+                query = query.Where(e => e.EmployeeID == criteria.EmployeeID);
+
+            if (criteria.LoanDate != null)
+                query = query.Where(e => e.LoanDate == criteria.LoanDate.ConvertFromDateTimeToUnixTimestamp());
+
+            if (criteria.LoanTypeId != null)
+                query = query.Where(e => e.loantypeid == criteria.LoanTypeId);
+
+            return query; 
         }
 
         public async Task Create(EmployeeLoansInput model)

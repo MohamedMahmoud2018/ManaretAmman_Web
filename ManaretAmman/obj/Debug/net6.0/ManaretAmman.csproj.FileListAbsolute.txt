@@ -641,3 +641,4 @@ F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\Mana
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.pdb
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.genruntimeconfig.cache
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ref\ManaretAmman.dll
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.MvcApplicationPartsAssemblyInfo.cs
