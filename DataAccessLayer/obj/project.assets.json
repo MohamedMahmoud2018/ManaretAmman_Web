@@ -3604,19 +3604,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\compu_tech\\.nuget\\packages\\": {}
+    "C:\\Users\\moham_l6iqj7x\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj",
+      "projectUniqueName": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj",
       "projectName": "DataAccessLayer",
-      "projectPath": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj",
-      "packagesPath": "C:\\Users\\compu_tech\\.nuget\\packages\\",
-      "outputPath": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\obj\\",
+      "projectPath": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj",
+      "packagesPath": "C:\\Users\\moham_l6iqj7x\\.nuget\\packages\\",
+      "outputPath": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\compu_tech\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\moham_l6iqj7x\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3687,7 +3687,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }

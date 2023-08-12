@@ -33,19 +33,19 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
         var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);
 
-        var result = new EmployeeLeavesOutput
-        {
-            ID = leave.EmployeeLeaveID,
-            EmployeeID = leave.EmployeeID,
-            EmployeeName = leave.Employee.EmployeeName,
-            LeaveTypeID = leave.LeaveTypeID,
-            LeaveType = lookups.FirstOrDefault(e => leave.LeaveTypeID is not null
-                             && e.ID == leave.LeaveTypeID)?.ColumnDescription,
-            LeaveDate = leave.LeaveDate.ConvertFromUnixTimestampToDateTime(),
-            FromTime = leave.FromTime.ConvertFromMinutesToTimeString(),
-            ToTime = leave.ToTime.ConvertFromMinutesToTimeString()
-
-        };
+            var result = new EmployeeLeavesOutput
+            {
+                ID              = leave.EmployeeLeaveID,
+                EmployeeID      = leave.EmployeeID,
+                EmployeeName    = leave.Employee.EmployeeName,
+                LeaveTypeID     = leave.LeaveTypeID,
+                LeaveType       = lookups.FirstOrDefault(e => leave.LeaveTypeID is not null
+                                 && e.ID == leave.LeaveTypeID)?.ColumnDescription,
+                LeaveDate       = leave.LeaveDate.IntToDateValue(),
+                FromTime        = leave.FromTime.ConvertFromMinutesToTimeString(),
+                ToTime          = leave.ToTime.ConvertFromMinutesToTimeString()
+                
+            };
 
         return result;
     }
@@ -138,6 +138,11 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
         var timing = GetLeaveTimingInputs(employeeLeave);
 
+            leave.LeaveDate =employeeLeave.LeaveDate.DateToIntValue();// timing.LeaveDate;//
+            leave.FromTime = timing.FromTime;
+            leave.ToTime = timing.ToTime;
+            leave.ModificationDate = DateTime.Now;
+            leave.LeaveTypeID= employeeLeave.LeaveTypeID;
 
         //employeeLeave.LeaveDate = null;
         //employeeLeave.FromTime = null;
