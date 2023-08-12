@@ -8,7 +8,7 @@ public class EmployeeLeaveFilter
 
     public DateTime? LeaveDate { get; set; }
 
-    public string FromTime { get; set; }
+    public string FromTime { get; set; } = string.Empty;
 
-    public string ToTime { get; set; }
+    public string ToTime { get; set; } = string.Empty;
 }
