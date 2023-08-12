@@ -10,6 +10,7 @@ public class EmployeeVacationInput
     public int? VacationTypeID { get; set; }
     public DateTime? FromDate { get; set; }
     public DateTime? ToDate { get; set; }
+
     [StringLength(1000)]
     public string Notes { get; set; }
     public int? DayCount { get; set; }
