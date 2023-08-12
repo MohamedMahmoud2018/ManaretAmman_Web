@@ -9,7 +9,7 @@ namespace BusinessLogicLayer.Services.Notification
 {
     public interface INotificationsService
     {
-        public Task<List<GetRemindersResult>> GetRemindersAsync(int projectId,int userId);
+        public Task<List<GetRemindersResult>> GetRemindersAsync(int projectId, int userId, DateTime? fromdate, DateTime? toDate);
 
 
     }
