@@ -10,6 +10,6 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
         Task Update(EmployeeVacationsUpdate employeeVacation);
         Task Delete(int employeeVacationId);
         Task<EmployeeVacationOutput> Get(int id);
-        Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter filter);
+        Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter<EmployeeVacationFilter> filter);
     }
 }

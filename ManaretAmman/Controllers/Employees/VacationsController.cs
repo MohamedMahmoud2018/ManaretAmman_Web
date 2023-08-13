@@ -17,7 +17,7 @@ public class VacationsController : ControllerBase
     => _employeeService = employeeService;
 
     [HttpGet("GetPage")]
-    public async Task<IApiResponse> GetPage([FromQuery] PaginationFilter filter)
+    public async Task<IApiResponse> GetPage([FromQuery] PaginationFilter<EmployeeVacationFilter> filter)
     {
         var result = await  _employeeService.GetPage(filter);
 

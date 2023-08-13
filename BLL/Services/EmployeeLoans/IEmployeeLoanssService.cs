@@ -10,6 +10,6 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
         Task Update(EmployeeLoansUpdate employee);
         Task Delete(int employeeLoanId);
         Task<EmployeeLoansOutput> Get(int id);
-        Task<PagedResponse<EmployeeLoansOutput>> GetPage(PaginationFilter filter);
+        Task<PagedResponse<EmployeeLoansOutput>> GetPage(PaginationFilter<EmployeeLoanFilter> filter);
     }
 }

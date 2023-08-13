@@ -549,12 +549,6 @@ E:\FreeWork\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\refint\M
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.pdb
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.genruntimeconfig.cache
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ref\ManaretAmman.dll
-F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.AssemblyReference.cache
-F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.GeneratedMSBuildEditorConfig.editorconfig
-F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.AssemblyInfoInputs.cache
-F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.AssemblyInfo.cs
-F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.CoreCompileInputs.cache
-F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.MvcApplicationPartsAssemblyInfo.cache
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\appsettings.Development.json
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\appsettings.json
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\ManaretAmman.exe
@@ -627,6 +621,13 @@ F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\Mana
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\DataAccessLayer.dll
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\BusinessLogicLayer.pdb
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\DataAccessLayer.pdb
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.AssemblyReference.cache
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.GeneratedMSBuildEditorConfig.editorconfig
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.AssemblyInfoInputs.cache
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.AssemblyInfo.cs
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.csproj.CoreCompileInputs.cache
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.MvcApplicationPartsAssemblyInfo.cs
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.MvcApplicationPartsAssemblyInfo.cache
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.ManaretAmman.Microsoft.AspNetCore.StaticWebAssets.props
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.build.ManaretAmman.props
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ManaretAmman.props

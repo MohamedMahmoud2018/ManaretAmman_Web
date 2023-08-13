@@ -1,9 +1,11 @@
 ﻿namespace BusinessLogicLayer.Common;
 
-public class PaginationFilter
+public class PaginationFilter<T>
 {
     private int _pageIndex = 1;
     private int _offset    = 10;
+
+    public T FilterCriteria { get; set; }
 
     public int PageIndex
     {
@@ -15,12 +17,6 @@ public class PaginationFilter
     {
         get => _offset;
         set => _offset = value > 10 ? 10 : value;
-    }
-
-    public string Search { get; set; }
-
-    public PaginationFilter()
-    {
     }
 }
 

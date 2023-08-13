@@ -41,23 +41,21 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 VacationTypeID = Vacation.VacationTypeID,
                 VacationType = lookups.FirstOrDefault(e => Vacation.VacationTypeID is not null
                                  && e.ID == Vacation.VacationTypeID)?.ColumnDescription,
-                FromDate = Vacation.FromDate.ConvertFromUnixTimestampToDateTime(),
-                ToDate = Vacation.ToDate.ConvertFromUnixTimestampToDateTime()
+                FromDate = Vacation.FromDate.IntToDateValue(),
+                ToDate = Vacation.ToDate.IntToDateValue()
             };
             return result;
         }
 
-        public async Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter filter)
+        public async Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter<EmployeeVacationFilter> filter)
         {
             var query = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee);   
 
             var totalRecords = await query.CountAsync();
 
-            if (!string.IsNullOrWhiteSpace(filter.Search))
-            {
-                query = query.Where(e => e.Employee.EmployeeName.Contains(filter.Search)
-                   || e.Employee.EmployeeNameEn.Contains(filter.Search));
-            }
+            if (filter.FilterCriteria != null)
+                ApplyFilter(query, filter.FilterCriteria);
+
 
             var Vacation = await query.Skip((filter.PageIndex - 1) * filter.Offset)
                     .Take(filter.Offset).ToListAsync();
@@ -74,15 +72,30 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 VacationTypeID  = item.VacationTypeID,
                 VacationType    = lookups.FirstOrDefault(e => item.VacationTypeID is not null
                                  && e.ID == item.VacationTypeID)?.ColumnDescription,
-                FromDate        = item.FromDate.ConvertFromUnixTimestampToDateTime(),
-                ToDate          = item.ToDate.ConvertFromUnixTimestampToDateTime() ,
+                FromDate        = item.FromDate.IntToDateValue(),
+                ToDate          = item.ToDate.IntToDateValue() ,
                 DayCount        = item.DayCount,
                 Notes           = item.Notes,
                 ApprovalStatus  = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescription
             }).ToList();
 
-            return result.CreatePagedReponse(filter, totalRecords);
+            return result.CreatePagedReponse(filter.PageIndex, filter.Offset, totalRecords);
         }
+
+        private static IQueryable<EmployeeVacation> ApplyFilter(IQueryable<EmployeeVacation> query, EmployeeVacationFilter criteria)
+        {
+            if (criteria.EmployeeID != null)
+                query = query.Where(e => e.EmployeeID == criteria.EmployeeID);
+
+            if (criteria.FromDate != null)
+                query = query.Where(e => e.FromDate == criteria.FromDate.DateToIntValue());
+
+            if (criteria.ToDate != null)
+                query = query.Where(e => e.ToDate == criteria.ToDate.DateToIntValue());
+
+            return query;
+        }
+
         public async Task Create(EmployeeVacationInput model)
         {
             if (model == null)
