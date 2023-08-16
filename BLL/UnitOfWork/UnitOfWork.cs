@@ -62,6 +62,12 @@ namespace BusinessLogicLayer.UnitOfWork
             get { return _employeeBalanceRepository ?? (_employeeBalanceRepository = new Repository<GetEmployeeBalanceReportResult>(_context, _projectProvider)); }
         }
 
+        IRepository<User> _userRepository;
+        public IRepository<User> UserRepository
+        {
+            get { return _userRepository ?? (_userRepository = new Repository<User>(_context, _projectProvider)); }
+        }
+
         public void Save()
         {
             _context.SaveChanges();

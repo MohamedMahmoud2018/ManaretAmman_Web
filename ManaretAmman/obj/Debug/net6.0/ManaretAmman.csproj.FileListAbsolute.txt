@@ -641,3 +641,4 @@ E:\FreeWork\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\refint\M
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.pdb
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ManaretAmman.genruntimeconfig.cache
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\ManaretAmman\obj\Debug\net6.0\ref\ManaretAmman.dll
+E:\FreeWork\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
