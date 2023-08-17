@@ -4,6 +4,7 @@ using DataAccessLayer.DTO.EmployeeLeaves;
 using DataAccessLayer.DTO.EmployeeLoans;
 using DataAccessLayer.DTO.Employees;
 using DataAccessLayer.DTO.EmployeeVacations;
+using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 
 namespace BusinessLogicLayer.Mapper
@@ -76,6 +77,10 @@ namespace BusinessLogicLayer.Mapper
                 .ForMember(destination => destination.ID,
                 options => options.MapFrom(source => source.EmployeeLoanID));
 
+            #endregion
+
+            #region Reminders
+            CreateMap<GetRemindersResult, RemiderOutput>();
             #endregion
 
         }

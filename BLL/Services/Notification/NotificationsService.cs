@@ -3,11 +3,6 @@ using BusinessLogicLayer.Extensions;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services.Notification
 {
@@ -30,10 +25,10 @@ namespace BusinessLogicLayer.Services.Notification
             return result;
         }
 
-        public async Task<List<GetRemindersResult>> GetNotificationsAsync(GetEmployeeNotificationInput model)
+        public async Task<List<RemiderOutput>> GetNotificationsAsync(GetEmployeeNotificationInput model)
         {
             var result = await _payrolLogOnlyContext.GetProcedures().GetRemindersAsync(model.ProjectID, null, 1, 0, model.Fromdate.DateToIntValue(), model.ToDate.DateToIntValue(), null, model.UserId, null);
-            return result;
+            return _mapper.Map<List<RemiderOutput>>(result);
         }
     }
 }

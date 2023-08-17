@@ -1,38 +1,38 @@
-﻿using BusinessLogicLayer.Services.Balance;
-using BusinessLogicLayer.Services.EmployeeLeaves;
-using BusinessLogicLayer.Services.Notification;
-using DataAccessLayer.DTO;
+﻿using BusinessLogicLayer.Services.Notification;
 using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 using ManaretAmman.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManaretAmman.Controllers.Employees
 {
     [Route("api/Employees/[controller]")]
     [ApiController]
-    public class NotificationController : ControllerBase
+    public class NotificationsController : ControllerBase
     {
         private readonly INotificationsService _notificationService;
 
-        public NotificationController(INotificationsService notificationService)
+        public NotificationsController(INotificationsService notificationService)
         => _notificationService = notificationService;
 
-        [HttpPost("GetNotification")]
-        public async Task<IApiResponse> GetNotification(GetEmployeeNotificationInput model)
+        [HttpPost("GetNotifications")]
+        public async Task<IApiResponse> GetNotifications(GetEmployeeNotificationInput model)
         {
             var result = await _notificationService.GetNotificationsAsync(model);
+
             if (result == null || result.Count == 0)
             {
-                List<GetRemindersResult> res = new List<GetRemindersResult>();
-                res.Add(new GetRemindersResult());
-                return ApiResponse<List<GetRemindersResult>>.Failure(res, null);
+                List<RemiderOutput> res = new List<RemiderOutput>();
+
+                res.Add(new RemiderOutput());
+
+                return ApiResponse<List<RemiderOutput>>.Failure(res, null);
             }
-            return ApiResponse<List<GetRemindersResult>>.Success(result);
+
+            return ApiResponse<List<RemiderOutput>>.Success(result);
         }
 
-        [HttpPost("AcceptOrRejectNotificationsAsync")]
+        [HttpPost("AcceptOrRejectNotifications")]
         public async Task<IApiResponse> AcceptOrRejectNotifications(AcceptOrRejectNotifcationInput model)
         {
             var result = await _notificationService.AcceptOrRejectNotificationsAsync(model);
