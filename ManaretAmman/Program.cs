@@ -5,6 +5,9 @@ using System.Reflection;
 using AutoMapper;
 using BusinessLogicLayer.Mapper;
 using BusinessLogicLayer.Services.ProjectProvider;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,6 +69,23 @@ for (int i = 0; i < TypesToRegister.Count; i++)
 //    .AddEntityFrameworkStores<BapetcoContext>()
 //    .AddDefaultTokenProviders();
 //#endregion
+ConfigurationManager configuration = builder.Configuration;
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = configuration["Jwt:ValidAudience"],
+        ValidAudience = configuration["JWT:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]))
+    };
+});
 
 
 builder.Services.AddControllers();
