@@ -18,7 +18,7 @@ namespace ManaretAmman.Controllers.Auth
         }
 
         [HttpPost("Login")]
-        public IActionResult Login(LoginModel model)
+        public IActionResult Login([FromBody]LoginModel model)
         {
             var result = _authService.Login(model);
             if(result == null)
