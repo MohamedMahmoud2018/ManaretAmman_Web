@@ -18,9 +18,9 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
     private readonly IMapper _mapper;
     public EmployeeLeavesService(IUnitOfWork unityOfWork, ILookupsService lookupsService, IMapper mapper)
     {
-        _unitOfWork = unityOfWork;
+        _unitOfWork     = unityOfWork;
         _lookupsService = lookupsService;
-        _mapper = mapper;
+        _mapper         = mapper;
     }
     public async Task<EmployeeLeavesOutput> Get(int id)
     {
