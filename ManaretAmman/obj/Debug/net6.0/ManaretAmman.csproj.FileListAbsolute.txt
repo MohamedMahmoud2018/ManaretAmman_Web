@@ -560,6 +560,7 @@ F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\Mana
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\Azure.Core.dll
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\Azure.Identity.dll
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\Humanizer.dll
+F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\ManaretAmman\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
