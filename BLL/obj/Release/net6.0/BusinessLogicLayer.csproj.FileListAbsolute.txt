@@ -15,3 +15,20 @@ E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\refint\Business
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.pdb
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.genruntimeconfig.cache
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\ref\BusinessLogicLayer.dll
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\bin\Release\net6.0\BusinessLogicLayer.deps.json
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\bin\Release\net6.0\BusinessLogicLayer.runtimeconfig.json
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\bin\Release\net6.0\BusinessLogicLayer.dll
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\bin\Release\net6.0\BusinessLogicLayer.pdb
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\bin\Release\net6.0\DataAccessLayer.dll
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\bin\Release\net6.0\DataAccessLayer.pdb
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.csproj.AssemblyReference.cache
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.AssemblyInfoInputs.cache
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.AssemblyInfo.cs
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.csproj.CopyComplete
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.dll
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\refint\BusinessLogicLayer.dll
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.pdb
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\BusinessLogicLayer.genruntimeconfig.cache
+D:\Special Work\ManaretAmman\ManaretAmman_Web\BLL\obj\Release\net6.0\ref\BusinessLogicLayer.dll

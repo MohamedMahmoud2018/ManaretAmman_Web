@@ -18,6 +18,20 @@ internal class EmployeeService : IEmployeeService
 
     public async Task<List<EmployeeLookup>> GetList()
     {
+        //var query = from E in _unitOfWork.EmployeeRepository.Get()
+        //            join LT in _unitOfWork.LookupsRepository.Get() on E.DepartmentID equals LT.ID into tempLT
+        //            from LT in tempLT.DefaultIfEmpty()
+        //            where E.ProjectID == 97 && (E.EmployeeID == 1815 || LT.EmployeeID == 1815)
+        //            select new
+        //            {
+        //                E.EmployeeID,
+        //                E.EmployeeName,
+        //                E.EmployeeNumber,
+        //                DepartmentID = E.DepartmentID
+        //            };
+
+        //var result1 = query.ToList();
+
         var employees = _unitOfWork.EmployeeRepository.PQuery().ToList();
 
         if (employees is null)
