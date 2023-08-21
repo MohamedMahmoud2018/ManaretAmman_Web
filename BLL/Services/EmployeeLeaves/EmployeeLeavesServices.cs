@@ -73,8 +73,33 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
     public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<EmployeeLeaveFilter> filter)
     {
-        var query = _unitOfWork.EmployeeLeaveRepository
-                    .PQuery(include: e => e.Employee);
+
+
+        //var query = _unitOfWork.EmployeeLeaveRepository
+        //            .PQuery(include: e => e.Employee);
+        
+
+        var query = from e in _unitOfWork.EmployeeRepository.PQuery()
+                    join lt in _unitOfWork.LookupsRepository.PQuery() on e.DepartmentID equals lt.ID into ltGroup
+                    from lt in ltGroup.DefaultIfEmpty()
+                    join el in _unitOfWork.EmployeeLeaveRepository.PQuery() on e.EmployeeID equals el.EmployeeID
+                    where e.ProjectID == 97 && (e.EmployeeID == 1815 || lt.EmployeeID == 1815)
+                    select new EmployeeLeaf
+                    {
+                        Employee=e,
+                        EmployeeID=e.EmployeeID,
+                        approvalstatusid=el.approvalstatusid,
+                        EmployeeLeaveID = el.EmployeeLeaveID,
+                        LeaveTypeID = el.LeaveTypeID,
+                        ProjectID = el.ProjectID,
+                        LeaveDate = el.LeaveDate,
+                        FromTime = el.FromTime,
+                        ToTime = el.ToTime
+                    };
+
+        var xres=query.Where(e=>e.approvalstatusid !=null).ToList();
+
+        //return new PagedResponse<EmployeeLeavesOutput>(null, 0, 0);
 
         if (filter.FilterCriteria != null)
             ApplyFilters(query, filter.FilterCriteria);
@@ -97,7 +122,7 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
             ProjectID = item.ProjectID,
             LeaveType = lookups.FirstOrDefault(e => item.LeaveTypeID is not null
                              && e.ID == item.LeaveTypeID)?.ColumnDescription,
-            LeaveDate = item.LeaveDate.ConvertFromUnixTimestampToDateTime(),
+            LeaveDate = item.LeaveDate.IntToDateValue(),
             FromTime = item.FromTime.ConvertFromMinutesToTimeString(),
             ToTime = item.ToTime.ConvertFromMinutesToTimeString(),
             ApprovalStatus = approvals.FirstOrDefault(e => e.ID == item.approvalstatusid)?.ColumnDescription
@@ -112,14 +137,14 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
             throw new NotFoundException("recieved data is missed");
 
         var timing = GetLeaveTimingInputs(model);
-
+        var LeaveDate = model.LeaveDate;
         model.LeaveDate = null;
         model.FromTime = null;
         model.ToTime = null;
 
         var employeeLeave = _mapper.Map<EmployeeLeaf>(model);
 
-        employeeLeave.LeaveDate = model.LeaveDate.DateToIntValue();
+        employeeLeave.LeaveDate = LeaveDate.DateToIntValue();
         employeeLeave.FromTime = timing.FromTime;
         employeeLeave.ToTime = timing.ToTime;
 
