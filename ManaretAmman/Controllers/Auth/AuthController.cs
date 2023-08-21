@@ -1,12 +1,10 @@
 ﻿using BusinessLogicLayer.Services.Auth;
-using BusinessLogicLayer.Services.Balance;
 using DataAccessLayer.Auth;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManaretAmman.Controllers.Auth
 {
-    [Route("api/auth/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
