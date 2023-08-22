@@ -26,4 +26,12 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\DTO\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\DTO\.editorconfig" />
+  </ItemGroup>
+
 </Project>
