@@ -123,6 +123,7 @@ namespace BusinessLogicLayer.Repositories
             IOrderedQueryable<TEntity>> orderBy = null,
             params Expression<Func<TEntity,object>>[] include);
         Task PInsertAsync(TEntity entity);
+        Task PUpdateAsync(TEntity entity);
         #endregion
     }
 

@@ -82,6 +82,20 @@ E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\refin
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
 E:\FreeWork\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+D:\Special Work\ManaretAmman\ManaretAmman_Web\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
 F:\My_Apps\My Applications\hanaa_mohammed_gad_396_at_gmail_com\ManaretAmman\ManaretAmman_Web\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll

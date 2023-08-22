@@ -1,12 +1,12 @@
 ﻿using BusinessLogicLayer.Services.Auth;
-using BusinessLogicLayer.Services.Balance;
 using DataAccessLayer.Auth;
-using Microsoft.AspNetCore.Http;
+using DataAccessLayer.DTO;
+using ManaretAmman.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManaretAmman.Controllers.Auth
 {
-    [Route("api/auth/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -18,14 +18,16 @@ namespace ManaretAmman.Controllers.Auth
         }
 
         [HttpPost("Login")]
-        public IActionResult Login(LoginModel model)
+        public IApiResponse Login([FromBody]LoginModel model)
         {
             var result = _authService.Login(model);
-            if(result == null)
+
+            if (result == null)
             {
-                return NotFound();
+                return ApiResponse<AuthResponse>.Failure(result, new[] { "This User is not found" });
             }
-            return Ok(result);
+
+            return ApiResponse<AuthResponse>.Success("data has been retrieved succussfully", result);
         }
     }
 }
