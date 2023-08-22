@@ -16,4 +16,10 @@ public class ProjectProvider : IProjectProvider
 
         return int.Parse(projectId);
     }
+    public int UserId()
+    {
+        string userId = _httpContextAccessor.HttpContext.Request.Headers["UserId"].ToString();
+        if (string.IsNullOrEmpty(userId)) return -1;
+        return int.Parse(userId);
+    }
 }

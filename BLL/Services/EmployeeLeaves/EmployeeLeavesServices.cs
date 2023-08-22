@@ -2,12 +2,16 @@
 using BusinessLogicLayer.Common;
 using BusinessLogicLayer.Exceptions;
 using BusinessLogicLayer.Extensions;
+using BusinessLogicLayer.Services.Auth;
 using BusinessLogicLayer.Services.Lookups;
+using BusinessLogicLayer.Services.ProjectProvider;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
 using DataAccessLayer.DTO.EmployeeLeaves;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using UnauthorizedAccessException = BusinessLogicLayer.Exceptions.UnauthorizedAccessException;
+
 
 namespace BusinessLogicLayer.Services.EmployeeLeaves;
 
@@ -16,11 +20,19 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILookupsService _lookupsService;
     private readonly IMapper _mapper;
-    public EmployeeLeavesService(IUnitOfWork unityOfWork, ILookupsService lookupsService, IMapper mapper)
+    IProjectProvider _projectProvider;
+    IAuthService _authService;
+    readonly int userId;
+    readonly int projecId;
+    public EmployeeLeavesService(IUnitOfWork unityOfWork, ILookupsService lookupsService, IMapper mapper, IProjectProvider projectProvider, IAuthService authService)
     {
         _unitOfWork     = unityOfWork;
         _lookupsService = lookupsService;
         _mapper         = mapper;
+        _projectProvider = projectProvider;
+        _authService = authService;
+        userId= _projectProvider.UserId();
+        projecId = _projectProvider.GetProjectId();
     }
     public async Task<EmployeeLeavesOutput> Get(int id)
     {
@@ -66,6 +78,8 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
         if (criteria.ToTime != null)
             query = query.Where(e => e.ToTime == criteria.ToTime.ConvertFromTimeStringToMinutes());
+        if(criteria.LeaveDateTo != null && criteria.LeaveDateFrom!=null)
+            query=query.Where(e=>e.LeaveDate>=criteria.LeaveDateFrom.DateToIntValue()&&e.LeaveDate<=criteria.LeaveDateTo.DateToIntValue());
 
         return query;
 
@@ -73,8 +87,32 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
     public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<EmployeeLeaveFilter> filter)
     {
-        var query = _unitOfWork.EmployeeLeaveRepository
-                    .PQuery(include: e => e.Employee);
+
+        if (userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.CheckIfValidUser(userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        int? employeeId = _authService.IsHr(userId);
+
+        var query = from e in _unitOfWork.EmployeeRepository.PQuery()
+                    join lt in _unitOfWork.LookupsRepository.PQuery() on e.DepartmentID equals lt.ID into ltGroup
+                    from lt in ltGroup.DefaultIfEmpty()
+                    join el in _unitOfWork.EmployeeLeaveRepository.PQuery() on e.EmployeeID equals el.EmployeeID
+                    where e.ProjectID == 97 && (e.EmployeeID == employeeId || lt.EmployeeID == employeeId || employeeId==null)
+                    select new EmployeeLeaf
+                    {
+                        Employee=e,
+                        EmployeeID=e.EmployeeID,
+                        approvalstatusid=el.approvalstatusid,
+                        EmployeeLeaveID = el.EmployeeLeaveID,
+                        LeaveTypeID = el.LeaveTypeID,
+                        ProjectID = el.ProjectID,
+                        LeaveDate = el.LeaveDate,
+                        FromTime = el.FromTime,
+                        ToTime = el.ToTime
+                    };
+
+        var xres=query.Where(e=>e.approvalstatusid !=null).ToList();
+
+        //return new PagedResponse<EmployeeLeavesOutput>(null, 0, 0);
 
         if (filter.FilterCriteria != null)
             ApplyFilters(query, filter.FilterCriteria);
@@ -97,10 +135,10 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
             ProjectID = item.ProjectID,
             LeaveType = lookups.FirstOrDefault(e => item.LeaveTypeID is not null
                              && e.ID == item.LeaveTypeID)?.ColumnDescription,
-            LeaveDate = item.LeaveDate.ConvertFromUnixTimestampToDateTime(),
+            LeaveDate = item.LeaveDate.IntToDateValue(),
             FromTime = item.FromTime.ConvertFromMinutesToTimeString(),
             ToTime = item.ToTime.ConvertFromMinutesToTimeString(),
-            ApprovalStatus = approvals.FirstOrDefault(e => e.ID == item.approvalstatusid)?.ColumnDescription
+            ApprovalStatus = approvals.FirstOrDefault(e => e.ColumnValue == item.approvalstatusid.ToString())?.ColumnDescriptionAr
         }).ToList();
 
         return result.CreatePagedReponse(filter.PageIndex, filter.Offset, totalRecords);
@@ -108,18 +146,20 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
     public async Task Create(EmployeeLeavesInput model)
     {
+        if (userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.CheckIfValidUser(userId)) throw new UnauthorizedAccessException("Incorrect userId");
         if (model == null)
             throw new NotFoundException("recieved data is missed");
 
         var timing = GetLeaveTimingInputs(model);
-
+        var LeaveDate = model.LeaveDate;
         model.LeaveDate = null;
         model.FromTime = null;
         model.ToTime = null;
 
         var employeeLeave = _mapper.Map<EmployeeLeaf>(model);
 
-        employeeLeave.LeaveDate = model.LeaveDate.DateToIntValue();
+        employeeLeave.LeaveDate = LeaveDate.DateToIntValue();
         employeeLeave.FromTime = timing.FromTime;
         employeeLeave.ToTime = timing.ToTime;
 
@@ -130,6 +170,9 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
     public async Task Update(EmployeeLeavesUpdate employeeLeave)
     {
+        if (userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.CheckIfValidUser(userId)) throw new UnauthorizedAccessException("Incorrect userId");
+
         var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeLeaveID == employeeLeave.ID)
             .FirstOrDefault();
 
@@ -144,23 +187,15 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
             leave.ModificationDate = DateTime.Now;
             leave.LeaveTypeID= employeeLeave.LeaveTypeID;
 
-        //employeeLeave.LeaveDate = null;
-        //employeeLeave.FromTime = null;
-        //employeeLeave.ToTime = null;
-
         leave.LeaveDate = employeeLeave.LeaveDate.DateToIntValue();// timing.LeaveDate;//
         leave.FromTime = timing.FromTime;
         leave.ToTime = timing.ToTime;
-        leave.ModificationDate = DateTime.Now;
-        leave.LeaveDate = employeeLeave.LeaveTypeID;
+        leave.LeaveDate = employeeLeave.LeaveDate.DateToIntValue();
         leave.LeaveTypeID = employeeLeave.LeaveTypeID;
 
 
-        //var updatedLeave = _mapper.Map<EmployeeLeavesUpdate, EmployeeLeaf>(employeeLeave);
 
-
-
-        await _unitOfWork.EmployeeLeaveRepository.UpdateAsync(leave);
+        await _unitOfWork.EmployeeLeaveRepository.PUpdateAsync(leave);
 
         await _unitOfWork.SaveAsync();
 
@@ -168,6 +203,9 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
     public async Task Delete(int employeeLeaveId)
     {
+        if (userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.CheckIfValidUser(userId)) throw new UnauthorizedAccessException("Incorrect userId");
+
         var leave = _unitOfWork.EmployeeLeaveRepository
                     .Get(e => e.EmployeeLeaveID == employeeLeaveId)
                     .FirstOrDefault();
