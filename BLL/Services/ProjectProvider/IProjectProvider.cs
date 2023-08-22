@@ -3,4 +3,5 @@
 public interface IProjectProvider
 {
     int GetProjectId();
+    int UserId();
 }

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.Identity;
+using BusinessLogicLayer.Services.ProjectProvider;
 
 namespace BusinessLogicLayer.Services.Auth
 {
@@ -20,16 +21,30 @@ namespace BusinessLogicLayer.Services.Auth
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unit;
         private readonly IMapper _mapper;
-       
-        public AuthService(IConfiguration configuration, IUnitOfWork unit, IMapper mapper) {
+        private IProjectProvider _projectProvider;
+        static int _projectId;
+
+        public AuthService(IConfiguration configuration, IUnitOfWork unit, IMapper mapper, IProjectProvider projectProvider) {
             _configuration = configuration;
             _unit = unit;
             _mapper = mapper;
+            _projectProvider = projectProvider;
+            _projectId=_projectProvider.GetProjectId();
         }
-
+        
+        public bool CheckIfValidUser(int userId)
+        {
+            bool isValid=_unit.UserRepository.GetFirstOrDefault(user=>user.UserID == userId&&user.ProjectID== _projectId) !=null;
+            return isValid;
+        }
+        public int? IsHr(int userId)
+        {
+           var employee = _unit.EmployeeRepository.GetFirstOrDefault(emp=>emp.UserID==userId&&emp.ProjectID == _projectId);
+            return employee is null ? null : employee.EmployeeID;
+        }
         public string Login(LoginModel model)
         {
-            if (IsValidUser(model.Username, model.Password,model.ProjectID))
+            if (IsValidUser(model.Username, model.Password, _projectId))
             {
                 var token = GenerateJwtToken(model.Username);
               return   token ;
@@ -53,7 +68,7 @@ namespace BusinessLogicLayer.Services.Auth
 
             var claims = new[]
             {
-            new Claim(JwtRegisteredClaimNames.Sub, username),
+            new Claim("userName",username),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
