@@ -58,7 +58,9 @@ namespace BusinessLogicLayer.Services.Auth
 
         private bool IsValidUser(string username, string password,int projectId)
         {
-          return  string.Compare(password, _unit.UserRepository.GetFirstOrDefault(user=>user.UserName==username&&user.ProjectID==projectId).UserPassword)==0;
+            var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == username && user.ProjectID == projectId);
+         return user is null?false:
+              string.Compare(password, user.UserPassword)==0;
            // return true;
         }
             private string GenerateJwtToken(string username)
