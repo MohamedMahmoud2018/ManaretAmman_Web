@@ -16,7 +16,7 @@ public class PaginationFilter<T>
     public int Offset
     {
         get => _offset;
-        set => _offset = value > 10 ? 10 : value;
+        set => _offset = value <= 0 ? 10 : value;
     }
 }
 
