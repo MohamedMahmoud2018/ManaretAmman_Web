@@ -19,9 +19,9 @@ namespace BusinessLogicLayer.Services.Auth
 
         public AuthService(IConfiguration configuration, IUnitOfWork unit, IProjectProvider projectProvider)
         {
-            _unit            = unit;
-            _configuration   = configuration;
-            _projectId       = projectProvider.GetProjectId();
+            _unit = unit;
+            _configuration = configuration;
+            _projectId = projectProvider.GetProjectId();
         }
 
         public bool CheckIfValidUser(int userId)
@@ -50,22 +50,14 @@ namespace BusinessLogicLayer.Services.Auth
         {
             var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == username && user.ProjectID == projectId);
 
-            if (user is null) 
+            if (user is null)
             {
                 return false;
             }
 
             return string.Compare(password, user.UserPassword) == 0;
         }
-
-        private bool IsValidUser(string username, string password,int projectId)
-        {
-            var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == username && user.ProjectID == projectId);
-         return user is null?false:
-              string.Compare(password, user.UserPassword)==0;
-           // return true;
-        }
-            private string GenerateJwtToken(string username)
+        private string GenerateJwtToken(string username)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
 
