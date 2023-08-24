@@ -46,18 +46,7 @@ namespace BusinessLogicLayer.Services.Auth
 
         }
 
-        private bool IsValidUser(string username, string password, int projectId)
-        {
-            var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == username && user.ProjectID == projectId);
-
-            if (user is null) 
-            {
-                return false;
-            }
-
-            return string.Compare(password, user.UserPassword) == 0;
-        }
-
+        
         private bool IsValidUser(string username, string password,int projectId)
         {
             var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == username && user.ProjectID == projectId);
@@ -65,7 +54,16 @@ namespace BusinessLogicLayer.Services.Auth
               string.Compare(password, user.UserPassword)==0;
            // return true;
         }
-            private string GenerateJwtToken(string username)
+        public int GetUserType(int userId, int employeeId)
+        {
+            if (IsHr(userId) is null)
+                return 2;
+            else if(IsHr(userId)==employeeId) return 3;
+            else return 1;
+
+
+        }
+        private string GenerateJwtToken(string username)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
 

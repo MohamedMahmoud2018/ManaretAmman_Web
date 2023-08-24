@@ -196,6 +196,7 @@ namespace BusinessLogicLayer.Repositories
             if(entity is IBaseEntity entityBaseEntity)
             {
                 entityBaseEntity.CreationDate =  DateTime.Now;
+                entityBaseEntity.CreatedBy = _projectProvider.UserId();
             }
             var projectId = _projectProvider.GetProjectId();
 
