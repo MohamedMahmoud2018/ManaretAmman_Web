@@ -19,9 +19,9 @@ namespace BusinessLogicLayer.Services.Auth
 
         public AuthService(IConfiguration configuration, IUnitOfWork unit, IProjectProvider projectProvider)
         {
-            _unit            = unit;
-            _configuration   = configuration;
-            _projectId       = projectProvider.GetProjectId();
+            _unit = unit;
+            _configuration = configuration;
+            _projectId = projectProvider.GetProjectId();
         }
 
         public bool CheckIfValidUser(int userId)
