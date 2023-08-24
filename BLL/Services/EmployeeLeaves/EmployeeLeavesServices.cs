@@ -78,8 +78,9 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 
         if (criteria.ToTime != null)
             query = query.Where(e => e.ToTime == criteria.ToTime.ConvertFromTimeStringToMinutes());
-        if(criteria.LeaveDateTo != null && criteria.LeaveDateFrom!=null)
-            query=query.Where(e=>e.LeaveDate>=criteria.LeaveDateFrom.DateToIntValue()&&e.LeaveDate<=criteria.LeaveDateTo.DateToIntValue());
+
+        if (criteria.ToDate != null && criteria.FromDate != null)
+            query = query.Where(e => e.LeaveDate >= criteria.FromDate.DateToIntValue() && e.LeaveDate <= criteria.ToDate.DateToIntValue());
 
         return query;
 
@@ -89,7 +90,9 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
     {
 
         if (userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+
         if (!_authService.CheckIfValidUser(userId)) throw new UnauthorizedAccessException("Incorrect userId");
+
         int? employeeId = _authService.IsHr(userId);
 
         var query = from e in _unitOfWork.EmployeeRepository.PQuery()
