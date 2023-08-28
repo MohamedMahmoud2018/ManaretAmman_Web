@@ -1,0 +1,116 @@
+# ASP.NET Core
+*.swp
+*.suo
+*.user
+*.userprefs
+*.log
+.vscode/
+bin/
+obj/
+.vs/
+.idea/
+_ReSharper*/
+*.dll
+*.pdb
+# User-specific files
+*.sln.iml
+
+# NuGet packages
+*.nuget.props
+*.nuget.targets
+
+# Microsoft-specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Rider
+.idea/
+.ide/
+
+# Visual Studio Code
+.vscode/
+.vscode/*
+
+# macOS
+.DS_Store
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code
+.vscode/
+/BLL/bin/Debug/net6.0/BusinessLogicLayer.dll
+/.vs/ManaretAmman/FileContentIndex/d5534cdc-505b-4ed0-a805-ca547f263538.vsidx
+/BLL/bin/Debug/net6.0/BusinessLogicLayer.pdb
+/BLL/bin/Debug/net6.0/DataAccessLayer.dll
+/BLL/bin/Debug/net6.0/DataAccessLayer.pdb
+/BLL/bin/Release/net6.0/BusinessLogicLayer.dll
+/BLL/bin/Release/net6.0/BusinessLogicLayer.pdb
+/BLL/bin/Release/net6.0/DataAccessLayer.dll
+/BLL/bin/Release/net6.0/DataAccessLayer.pdb
+/BLL/obj/Debug/net6.0/BusinessLogicLayer.csproj.AssemblyReference.cache
+/BLL/obj/Debug/net6.0/BusinessLogicLayer.dll
+/BLL/obj/Debug/net6.0/BusinessLogicLayer.pdb
+/BLL/obj/Release/net6.0/ref/BusinessLogicLayer.dll
+/BLL/obj/Release/net6.0/refint/BusinessLogicLayer.dll
+/BLL/obj/Release/net6.0/BusinessLogicLayer.assets.cache
+/BLL/obj/Release/net6.0/BusinessLogicLayer.csproj.AssemblyReference.cache
+/BLL/obj/Release/net6.0/BusinessLogicLayer.csproj.CoreCompileInputs.cache
+/BLL/obj/Release/net6.0/BusinessLogicLayer.dll
+/BLL/obj/Release/net6.0/BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+/BLL/obj/Release/net6.0/BusinessLogicLayer.genruntimeconfig.cache
+/BLL/obj/Release/net6.0/BusinessLogicLayer.pdb
+/DataAccessLayer/bin/Debug/net6.0/DataAccessLayer.dll
+/DataAccessLayer/bin/Debug/net6.0/DataAccessLayer.pdb
+/DataAccessLayer/bin/Release/net6.0/DataAccessLayer.dll
+/DataAccessLayer/bin/Release/net6.0/DataAccessLayer.pdb
+/DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.dll
+/DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.pdb
+/DataAccessLayer/obj/Release/net6.0/ref/DataAccessLayer.dll
+/DataAccessLayer/obj/Release/net6.0/refint/DataAccessLayer.dll
+/DataAccessLayer/obj/Release/net6.0/DataAccessLayer.assets.cache
+/DataAccessLayer/obj/Release/net6.0/DataAccessLayer.csproj.CoreCompileInputs.cache
+/DataAccessLayer/obj/Release/net6.0/DataAccessLayer.dll
+/DataAccessLayer/obj/Release/net6.0/DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+/DataAccessLayer/obj/Release/net6.0/DataAccessLayer.genruntimeconfig.cache
+/DataAccessLayer/obj/Release/net6.0/DataAccessLayer.pdb
+/ManaretAmman/bin/Debug/net6.0/BusinessLogicLayer.dll
+/ManaretAmman/bin/Debug/net6.0/BusinessLogicLayer.pdb
+/ManaretAmman/bin/Debug/net6.0/DataAccessLayer.dll
+/ManaretAmman/bin/Debug/net6.0/DataAccessLayer.pdb
+/ManaretAmman/bin/Debug/net6.0/ManaretAmman.dll
+/ManaretAmman/bin/Debug/net6.0/ManaretAmman.pdb
+/ManaretAmman/bin/Release/net6.0/BusinessLogicLayer.dll
+/ManaretAmman/bin/Release/net6.0/BusinessLogicLayer.pdb
+/ManaretAmman/bin/Release/net6.0/DataAccessLayer.dll
+/ManaretAmman/bin/Release/net6.0/DataAccessLayer.pdb
+/ManaretAmman/bin/Release/net6.0/ManaretAmman.dll
+/ManaretAmman/bin/Release/net6.0/ManaretAmman.exe
+/ManaretAmman/bin/Release/net6.0/ManaretAmman.pdb
+/ManaretAmman/obj/Debug/net6.0/ManaretAmman.csproj.AssemblyReference.cache
+/ManaretAmman/obj/Debug/net6.0/ManaretAmman.dll
+/ManaretAmman/obj/Debug/net6.0/ManaretAmman.pdb
+/ManaretAmman/obj/Release/net6.0/PubTmp/Out/BusinessLogicLayer.dll
+/ManaretAmman/obj/Release/net6.0/PubTmp/Out/BusinessLogicLayer.pdb
+/ManaretAmman/obj/Release/net6.0/ManaretAmman.pdb
+/ManaretAmman/obj/Release/net6.0/ManaretAmman.genruntimeconfig.cache
+/ManaretAmman/obj/Release/net6.0/ManaretAmman.GeneratedMSBuildEditorConfig.editorconfig
+/ManaretAmman/obj/Release/net6.0/ManaretAmman.dll
+/ManaretAmman/obj/Release/net6.0/PubTmp/Out/DataAccessLayer.dll
+/ManaretAmman/obj/Release/net6.0/PubTmp/Out/DataAccessLayer.pdb
+/ManaretAmman/obj/Release/net6.0/PubTmp/Out/ManaretAmman.dll
+/ManaretAmman/obj/Release/net6.0/PubTmp/Out/ManaretAmman.exe
+/ManaretAmman/obj/Release/net6.0/PubTmp/Out/ManaretAmman.pdb
+/ManaretAmman/obj/Release/net6.0/apphost.exe
+/ManaretAmman/obj/Release/net6.0/ManaretAmman.assets.cache
+/ManaretAmman/obj/Release/net6.0/ManaretAmman.csproj.AssemblyReference.cache
+/ManaretAmman/obj/Release/net6.0/ManaretAmman.csproj.CoreCompileInputs.cache
+/ManaretAmman/obj/Debug/net6.0/ManaretAmman.MvcApplicationPartsAssemblyInfo.cs
