@@ -1,0 +1,48 @@
+# ASP.NET Core
+*.swp
+*.suo
+*.user
+*.userprefs
+*.log
+.vscode/
+bin/
+obj/
+.vs/
+.idea/
+_ReSharper*/
+
+# User-specific files
+*.sln.iml
+
+# NuGet packages
+*.nuget.props
+*.nuget.targets
+
+# Microsoft-specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Rider
+.idea/
+.ide/
+
+# Visual Studio Code
+.vscode/
+.vscode/*
+
+# macOS
+.DS_Store
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code
+.vscode/
