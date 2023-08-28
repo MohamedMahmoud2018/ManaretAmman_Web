@@ -19,22 +19,12 @@ namespace BusinessLogicLayer.Services.Auth
 
         public AuthService(IConfiguration configuration, IUnitOfWork unit, IProjectProvider projectProvider)
         {
-            _unit            = unit;
-            _configuration   = configuration;
-            _projectId       = projectProvider.GetProjectId();
+            _unit = unit;
+            _configuration = configuration;
+            _projectId = projectProvider.GetProjectId();
         }
 
-        public bool CheckIfValidUser(int userId)
-        {
-            bool isValid = _unit.UserRepository.GetFirstOrDefault(user => user.UserID == userId && user.ProjectID == _projectId) != null;
-            return isValid;
-        }
-        public int? IsHr(int userId)
-        {
-            var employee = _unit.EmployeeRepository.GetFirstOrDefault(emp => emp.UserID == userId && emp.ProjectID == _projectId);
-
-            return employee is not null ? employee.EmployeeID : null;
-        }
+        
         public AuthResponse Login(LoginModel model)
         {
             if (!IsValidUser(model.Username, model.Password, _projectId))
@@ -46,18 +36,34 @@ namespace BusinessLogicLayer.Services.Auth
 
         }
 
-        private bool IsValidUser(string username, string password, int projectId)
+        
+        private bool IsValidUser(string username, string password,int projectId)
         {
             var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == username && user.ProjectID == projectId);
-
-            if (user is null) 
-            {
-                return false;
-            }
-
-            return string.Compare(password, user.UserPassword) == 0;
+         return user is null?false:
+              string.Compare(password, user.UserPassword)==0;
+           // return true;
         }
+        public int GetUserType(int userId, int employeeId)
+        {
+            if (IsHr(userId) is null)
+                return 2;
+            else if(IsHr(userId)==employeeId) return 3;
+            else return 1;
 
+
+        }
+        public bool CheckIfValidUser(int userId)
+        {
+            bool isValid = _unit.UserRepository.GetFirstOrDefault(user => user.UserID == userId && user.ProjectID == _projectId) != null;
+            return isValid;
+        }
+        public int? IsHr(int userId)
+        {
+            var employee = _unit.EmployeeRepository.GetFirstOrDefault(emp => emp.UserID == userId && emp.ProjectID == _projectId);
+
+            return employee is not null ? employee.EmployeeID : null;
+        }
         private string GenerateJwtToken(string username)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

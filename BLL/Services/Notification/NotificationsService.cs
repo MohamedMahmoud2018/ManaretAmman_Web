@@ -25,7 +25,7 @@ namespace BusinessLogicLayer.Services.Notification
         {
             var projectId = _projectProvider.GetProjectId();
             var result = await _payrolLogOnlyContext.GetProcedures()
-                .ChangeEmployeeRequestStatusAsync(model.EmoloyeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, projectId, model.Id, model.PrevilageType, 0, null, null);
+                .ChangeEmployeeRequestStatusAsync(model.EmoloyeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, model.ProjectID, model.Id, model.PrevilageType, 0,null,null,null);
             return result;
         }
 

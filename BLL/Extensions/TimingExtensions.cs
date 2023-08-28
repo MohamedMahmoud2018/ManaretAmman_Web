@@ -42,6 +42,7 @@ public static class TimingExtensions
 
     public static int ConvertFromTimeStringToMinutes(this string time)
     {
+        if (string.IsNullOrEmpty(time)) return 0;
         var timeSpan = TimeSpan.Parse(time);
 
         return (int)timeSpan.TotalMinutes;
