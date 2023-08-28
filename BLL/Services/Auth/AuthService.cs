@@ -24,17 +24,7 @@ namespace BusinessLogicLayer.Services.Auth
             _projectId = projectProvider.GetProjectId();
         }
 
-        public bool CheckIfValidUser(int userId)
-        {
-            bool isValid = _unit.UserRepository.GetFirstOrDefault(user => user.UserID == userId && user.ProjectID == _projectId) != null;
-            return isValid;
-        }
-        public int? IsHr(int userId)
-        {
-            var employee = _unit.EmployeeRepository.GetFirstOrDefault(emp => emp.UserID == userId && emp.ProjectID == _projectId);
-
-            return employee is not null ? employee.EmployeeID : null;
-        }
+        
         public AuthResponse Login(LoginModel model)
         {
             if (!IsValidUser(model.Username, model.Password, _projectId))
@@ -62,6 +52,17 @@ namespace BusinessLogicLayer.Services.Auth
             else return 1;
 
 
+        }
+        public bool CheckIfValidUser(int userId)
+        {
+            bool isValid = _unit.UserRepository.GetFirstOrDefault(user => user.UserID == userId && user.ProjectID == _projectId) != null;
+            return isValid;
+        }
+        public int? IsHr(int userId)
+        {
+            var employee = _unit.EmployeeRepository.GetFirstOrDefault(emp => emp.UserID == userId && emp.ProjectID == _projectId);
+
+            return employee is not null ? employee.EmployeeID : null;
         }
         private string GenerateJwtToken(string username)
         {

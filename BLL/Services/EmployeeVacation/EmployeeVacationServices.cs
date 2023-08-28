@@ -2,12 +2,19 @@
 using BusinessLogicLayer.Common;
 using BusinessLogicLayer.Exceptions;
 using BusinessLogicLayer.Extensions;
+using BusinessLogicLayer.Services.Auth;
 using BusinessLogicLayer.Services.Lookups;
+using BusinessLogicLayer.Services.Notification;
+using BusinessLogicLayer.Services.ProjectProvider;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
 using DataAccessLayer.DTO.EmployeeVacations;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection.Metadata;
+using UnauthorizedAccessException = BusinessLogicLayer.Exceptions.UnauthorizedAccessException;
 
 namespace BusinessLogicLayer.Services.EmployeeVacations
 {
@@ -16,11 +23,21 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILookupsService _lookupsService;
         private readonly IMapper _mapper;
-        public EmployeeVacationService(IUnitOfWork unityOfWork, ILookupsService lookupsService, IMapper mapper)
+        readonly IProjectProvider _projectProvider;
+        readonly IAuthService _authService;
+        readonly INotificationsService _iNotificationsService;
+        readonly int _userId;
+        readonly int _projecId;
+        public EmployeeVacationService(IUnitOfWork unityOfWork, ILookupsService lookupsService, IMapper mapper, IProjectProvider projectProvider, IAuthService authService, INotificationsService iNotificationsService)
         {
             _unitOfWork     = unityOfWork;
             _lookupsService = lookupsService;
             _mapper         = mapper;
+            _projectProvider = projectProvider;
+            _authService = authService;
+            _iNotificationsService = iNotificationsService;
+            _userId = _projectProvider.UserId();
+            _projecId = _projectProvider.GetProjectId();
         }
         public async Task<EmployeeVacationOutput> Get(int id)
         {
@@ -49,13 +66,35 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
         public async Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter<EmployeeVacationFilter> filter)
         {
-            var query = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee);   
+            if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            int? employeeId = _authService.IsHr(_userId);
 
-            var totalRecords = await query.CountAsync();
+            var query = from e in _unitOfWork.EmployeeRepository.PQuery()
+                        join lt in _unitOfWork.LookupsRepository.PQuery() on e.DepartmentID equals lt.ID into ltGroup
+                        from lt in ltGroup.DefaultIfEmpty()
+                        join ev in _unitOfWork.EmployeeVacationRepository.PQuery() on e.EmployeeID equals ev.EmployeeID
+                        where (lt.TableName == "Department" && lt.ColumnName == "DepartmentID") && e.ProjectID == _projecId && lt.ProjectID == _projecId && ev.ProjectID == _projecId && (e.EmployeeID == employeeId || lt.EmployeeID == employeeId || employeeId == null)
+                        select new EmployeeVacation
+                        {
+                            Employee = e,
+                            EmployeeID = e.EmployeeID,
+                            ApprovalStatusID = ev.ApprovalStatusID,
+                            EmployeeVacationID = ev.EmployeeVacationID,
+                            VacationTypeID = ev.VacationTypeID,
+                            ProjectID = ev.ProjectID,
+                            FromDate = ev.FromDate,
+                            ToDate = ev.ToDate,
+                            DayCount=ev.DayCount,
+                            Notes=ev.Notes
+                        };
+            //var query = _unitOfWork.EmployeeVacationRepository.PQuery(include: e => e.Employee);   
+
 
             if (filter.FilterCriteria != null)
-                ApplyFilter(query, filter.FilterCriteria);
+                query= ApplyFilter(query, filter.FilterCriteria);
 
+            var totalRecords = await query.CountAsync();
 
             var Vacation = await query.Skip((filter.PageIndex - 1) * filter.Offset)
                     .Take(filter.Offset).ToListAsync();
@@ -84,14 +123,58 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
         private static IQueryable<EmployeeVacation> ApplyFilter(IQueryable<EmployeeVacation> query, EmployeeVacationFilter criteria)
         {
-            if (criteria.EmployeeID != null)
-                query = query.Where(e => e.EmployeeID == criteria.EmployeeID);
+            if (criteria == null)
+                return query;
 
-            if (criteria.FromDate != null)
-                query = query.Where(e => e.FromDate == criteria.FromDate.DateToIntValue());
+            var parameter = Expression.Parameter(typeof(EmployeeVacation), "e");
+            Expression combinedExpression = null;
+            if (criteria.EmployeeID != null)
+            {
+                var employeeIdExpression = Expression.Equal(
+                    Expression.Property(parameter, "EmployeeID"),
+                    Expression.Constant(criteria.EmployeeID)
+                );
+                combinedExpression = employeeIdExpression;
+            }
+
+            if (criteria.VacationTypeId != null)
+            {
+                var VacationTypeIdExpression = Expression.Equal(
+                    Expression.Property(parameter, "VacationTypeId"),
+                    Expression.Constant(criteria.VacationTypeId, typeof(int?))
+                );
+                combinedExpression = combinedExpression == null
+                    ? VacationTypeIdExpression
+                    : Expression.AndAlso(combinedExpression, VacationTypeIdExpression);
+            }
+
+            if (criteria.FromDate != null )
+            {
+                var fromDateExpression = Expression.GreaterThanOrEqual(
+                    Expression.Property(parameter, "FromDate"),
+                    Expression.Constant(criteria.FromDate.DateToIntValue(), typeof(int?))
+                );
+                combinedExpression = combinedExpression == null
+                    ? fromDateExpression
+                    : Expression.AndAlso(combinedExpression, fromDateExpression);
+            }
 
             if (criteria.ToDate != null)
-                query = query.Where(e => e.ToDate == criteria.ToDate.DateToIntValue());
+            {
+                var toDateExpression = Expression.LessThanOrEqual(
+                    Expression.Property(parameter, "ToDate"),
+                    Expression.Constant(criteria.ToDate.DateToIntValue(), typeof(int?))
+                );
+                combinedExpression = combinedExpression == null
+                    ? toDateExpression
+                    : Expression.AndAlso(combinedExpression, toDateExpression);
+            }
+
+            if (combinedExpression != null)
+            {
+                var lambda = Expression.Lambda<Func<EmployeeVacation, bool>>(combinedExpression, parameter);
+                query = query.Where(lambda);
+            }
 
             return query;
         }

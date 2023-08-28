@@ -12,6 +12,9 @@ using DataAccessLayer.DTO.EmployeeLeaves;
 using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnauthorizedAccessException = BusinessLogicLayer.Exceptions.UnauthorizedAccessException;
 
 
@@ -66,35 +69,83 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
         return result;
     }
 
-    private static IQueryable<EmployeeLeaf> ApplyFilters(IQueryable<EmployeeLeaf> query, EmployeeLeaveFilter criteria)
+    private static  IQueryable<EmployeeLeaf> ApplyFilters(IQueryable<EmployeeLeaf> query, EmployeeLeaveFilter criteria)
     {
-        if (criteria.EmployeeID != null)
-            query = query.Where(e => e.EmployeeID == criteria.EmployeeID);
+            if (criteria == null)
+                return query;
 
-        if (criteria.LeaveTypeID != null)
-            query = query.Where(e => e.LeaveTypeID == criteria.LeaveTypeID);
+            var parameter = Expression.Parameter(typeof(EmployeeLeaf), "e");
+            Expression combinedExpression = null;
 
-        if (criteria.LeaveDate != null)
-            query = query.Where(e => e.LeaveDate == criteria.LeaveDate.DateToIntValue());
+            if (criteria.EmployeeID != null)
+            {
+                var employeeIdExpression = Expression.Equal(
+                    Expression.Property(parameter, "EmployeeID"),
+                    Expression.Constant(criteria.EmployeeID)
+                );
+                combinedExpression = employeeIdExpression;
+            }
 
-        if (criteria.FromTime != null)
-            query = query.Where(e => e.FromTime == criteria.FromTime.ConvertFromTimeStringToMinutes());
-
-        if (criteria.ToTime != null)
-            query = query.Where(e => e.ToTime == criteria.ToTime.ConvertFromTimeStringToMinutes());
-        if (criteria.ToDate != null && criteria.FromDate != null)
+            if (criteria.LeaveTypeID != null)
+            {
+                var leaveTypeIdExpression = Expression.Equal(
+                    Expression.Property(parameter, "LeaveTypeID"),
+                    Expression.Constant(criteria.LeaveTypeID, typeof(int?))
+                );
+                combinedExpression = combinedExpression == null
+                    ? leaveTypeIdExpression
+                    : Expression.AndAlso(combinedExpression, leaveTypeIdExpression);
+            }
+        if (!string.IsNullOrEmpty(criteria.FromTime ))
         {
-            
-            query = query.Where(e => e.LeaveDate >= criteria.FromDate.DateToIntValue() && e.LeaveDate <= criteria.ToDate.DateToIntValue());
+            var FromTimeExpression = Expression.Equal(
+                Expression.Property(parameter, "FromTime"),
+                Expression.Constant(criteria.FromTime.ConvertFromTimeStringToMinutes(), typeof(int?))
+            );
+            combinedExpression = combinedExpression == null
+                ? FromTimeExpression
+                : Expression.AndAlso(combinedExpression, FromTimeExpression);
+        }
+        if (!string.IsNullOrEmpty( criteria.ToTime))
+        {
+            var ToExpression = Expression.Equal(
+                Expression.Property(parameter, "ToTime"),
+                Expression.Constant(criteria.ToTime.ConvertFromTimeStringToMinutes(), typeof(int?))
+            );
+            combinedExpression = combinedExpression == null
+                ? ToExpression
+                : Expression.AndAlso(combinedExpression, ToExpression);
+        }
 
+        if (criteria.FromDate != null && criteria.ToDate != null)
+        {
+            var fromDateExpression = Expression.GreaterThanOrEqual(
+                Expression.Property(parameter, "LeaveDate"),
+                Expression.Constant(criteria.FromDate.DateToIntValue(), typeof(int?))
+            );
+            var toDateExpression = Expression.LessThanOrEqual(
+                Expression.Property(parameter, "LeaveDate"),
+                Expression.Constant(criteria.ToDate.DateToIntValue(), typeof(int?))
+            );
+            var dateRangeExpression = Expression.AndAlso(fromDateExpression, toDateExpression);
+            combinedExpression = combinedExpression == null
+                ? dateRangeExpression
+                : Expression.AndAlso(combinedExpression, dateRangeExpression);
         }
 
 
-        return query;
+        if (combinedExpression != null)
+            {
+                var lambda = Expression.Lambda<Func<EmployeeLeaf, bool>>(combinedExpression, parameter);
+                query = query.Where(lambda);
+            }
 
-    }
+            return query;
+    
 
-    public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<EmployeeLeaveFilter> filter)
+}
+
+public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<EmployeeLeaveFilter> filter)
     {
 
         if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
@@ -105,7 +156,7 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
                     join lt in _unitOfWork.LookupsRepository.PQuery() on e.DepartmentID equals lt.ID into ltGroup
                     from lt in ltGroup.DefaultIfEmpty()
                     join el in _unitOfWork.EmployeeLeaveRepository.PQuery() on e.EmployeeID equals el.EmployeeID
-                    where e.ProjectID == _projecId && lt.ProjectID==_projecId && el.ProjectID == _projecId && (e.EmployeeID == employeeId || lt.EmployeeID == employeeId || employeeId==null)
+                    where (lt.TableName== "Department" && lt.ColumnName== "DepartmentID") &&e.ProjectID == _projecId && lt.ProjectID==_projecId && el.ProjectID == _projecId && (e.EmployeeID == employeeId || lt.EmployeeID == employeeId || employeeId==null)
                     select new EmployeeLeaf
                     {
                         Employee=e,
@@ -119,19 +170,12 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
                         ToTime = el.ToTime
                     };
 
+       var rquery = filter.FilterCriteria!=null?   ApplyFilters(query, filter.FilterCriteria): query;
        
-        if (filter.FilterCriteria != null)
-            ApplyFilters(query, filter.FilterCriteria);
-
-        var totalRecords = await query.CountAsync();
-        var x = query.ToList();
-        await Console.Out.WriteLineAsync(filter.FilterCriteria.ToDate.DateToIntValue().ToString());
-        foreach (var item in query.ToList())
-        {
-            Console.WriteLine(item.LeaveDate);
-            Console.WriteLine(item.LeaveDate >= filter.FilterCriteria.FromDate.DateToIntValue()&&item.LeaveDate <= filter.FilterCriteria.ToDate.DateToIntValue());
-        }
-        var leaves = await query.Skip((filter.PageIndex - 1) * filter.Offset)
+        var totalRecords = await rquery.CountAsync();
+        
+        
+        var leaves = await rquery.Skip((filter.PageIndex - 1) * filter.Offset)
                     .Take(filter.Offset).ToListAsync();
 
         var lookups = await _lookupsService.GetLookups(Constants.EmployeeLeaves, Constants.LeaveTypeID);

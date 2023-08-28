@@ -444,7 +444,7 @@ namespace DataAccessLayer.Models
             };
             var _ = await _context.SqlQueryAsync<ChangeEmployeeRequestStatusResult>("EXEC @returnValue = [dbo].[ChangeEmployeeRequestStatus] @pEmployeeID, @pCreatedBy, @pApprovalStatusID, @pApprovalPageID, @pProjectID, @pID, @pPrevilageType, @pError OUTPUT, @pSendToLog, @pPK", sqlParameters, cancellationToken);
 
-            pError.SetValue(parameterpError.Value);
+            pError?.SetValue(parameterpError.Value);
             returnValue?.SetValue(parameterreturnValue.Value);
 
             return _;
