@@ -181,6 +181,12 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
         public async Task Create(EmployeeVacationInput model)
         {
+
+            if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (model == null)
+                throw new NotFoundException("recieved data is missed");
+
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
 
