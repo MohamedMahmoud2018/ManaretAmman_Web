@@ -1,4 +1,6 @@
-﻿namespace ManaretAmman.MiddleWare
+﻿using Microsoft.AspNetCore.Http;
+
+namespace ManaretAmman.MiddleWare
 {
     public class ProjectMiddleware
     {
@@ -11,6 +13,7 @@
 
         public async Task InvokeAsync(HttpContext context)
         {
+           
             if (context.Request.Headers.TryGetValue("projectid", out var ProjectIdValue))
             {
                 context.Items["ProjectId"] = ProjectIdValue.ToString();

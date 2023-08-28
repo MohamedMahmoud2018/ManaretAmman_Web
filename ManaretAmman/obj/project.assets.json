@@ -4723,19 +4723,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\compu_tech\\.nuget\\packages\\": {}
+    "C:\\Users\\moham_l6iqj7x\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\ManaretAmman\\ManaretAmman.csproj",
+      "projectUniqueName": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\ManaretAmman\\ManaretAmman.csproj",
       "projectName": "ManaretAmman",
-      "projectPath": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\ManaretAmman\\ManaretAmman.csproj",
-      "packagesPath": "C:\\Users\\compu_tech\\.nuget\\packages\\",
-      "outputPath": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\ManaretAmman\\obj\\",
+      "projectPath": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\ManaretAmman\\ManaretAmman.csproj",
+      "packagesPath": "C:\\Users\\moham_l6iqj7x\\.nuget\\packages\\",
+      "outputPath": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\ManaretAmman\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\compu_tech\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\moham_l6iqj7x\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4743,17 +4743,18 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\BLL\\BusinessLogicLayer.csproj": {
-              "projectPath": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\BLL\\BusinessLogicLayer.csproj"
+            "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\BLL\\BusinessLogicLayer.csproj": {
+              "projectPath": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\BLL\\BusinessLogicLayer.csproj"
             },
-            "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "F:\\My_Apps\\My Applications\\hanaa_mohammed_gad_396_at_gmail_com\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj"
+            "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "E:\\FreeWork\\ManaretAmman\\ManaretAmman_Web\\DataAccessLayer\\DataAccessLayer.csproj"
             }
           }
         }
@@ -4828,7 +4829,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }
