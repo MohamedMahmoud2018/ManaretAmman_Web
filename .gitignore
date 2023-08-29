@@ -97,3 +97,5 @@ $RECYCLE.BIN/
 /ManaretAmman/obj/ManaretAmman.csproj.nuget.g.props
 /ManaretAmman/obj/project.assets.json
 /ManaretAmman/obj/project.nuget.cache
+/.vs/ManaretAmman/DesignTimeBuild/.dtbcache.v2
+/.vs/ManaretAmman/v17/.futdcache.v2
