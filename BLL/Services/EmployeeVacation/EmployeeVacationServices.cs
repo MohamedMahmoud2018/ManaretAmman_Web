@@ -9,6 +9,7 @@ using BusinessLogicLayer.Services.ProjectProvider;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
 using DataAccessLayer.DTO.EmployeeVacations;
+using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -190,9 +191,9 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
 
-            DateTime startDate = (DateTime)model.FromDate;
-            DateTime endDate   = (DateTime)model.ToDate;
-            TimeSpan dayCount  = endDate.Subtract(startDate);
+            DateTime? startDate = (DateTime)model.FromDate;
+            DateTime? endDate   = (DateTime)model.ToDate;
+            TimeSpan dayCount  = endDate.Value.Subtract(startDate.Value);
             int daysDifference = dayCount.Days;
             model.DayCount     = daysDifference;
 
@@ -203,15 +204,31 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             var employeeVacation = _mapper.Map<EmployeeVacationInput, EmployeeVacation>(model);
 
-            employeeVacation.FromDate     = model.FromDate.DateToIntValue();// timing.FromDate;
-            employeeVacation.ToDate       = model.ToDate.DateToIntValue();//timing.ToDate;
-            //employeeVacation.CreationDate = DateTime.Now;
+            employeeVacation.FromDate     = startDate.DateToIntValue();// timing.FromDate;
+            employeeVacation.ToDate       = endDate.DateToIntValue();//timing.ToDate;
 
             await _unitOfWork.EmployeeVacationRepository.PInsertAsync(employeeVacation);
 
              await _unitOfWork.SaveAsync();
+            var insertedPKValue = employeeVacation.EmployeeVacationID;
+            await sendToNotification(employeeVacation.EmployeeID, insertedPKValue);
         }
-
+        async Task sendToNotification(int employeeId, int PKID)
+        {
+            int privigeType = _authService.GetUserType(_userId, employeeId);
+            AcceptOrRejectNotifcationInput model = new AcceptOrRejectNotifcationInput()
+            {
+                ProjectID = _projecId,
+                CreatedBy = _userId,
+                EmoloyeeId = employeeId,
+                ApprovalStatusId = 0,
+                SendToLog = 0,
+                Id = PKID,
+                ApprovalPageID = 1,
+                PrevilageType = privigeType
+            };
+            await _iNotificationsService.AcceptOrRejectNotificationsAsync(model);
+        }
         public async Task Update(EmployeeVacationsUpdate employeeVacation)
         {
             var vacation = _unitOfWork.EmployeeVacationRepository.Get(emp => emp.EmployeeVacationID == employeeVacation.ID)
