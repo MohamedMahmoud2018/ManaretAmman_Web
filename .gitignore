@@ -114,3 +114,5 @@ $RECYCLE.BIN/
 /ManaretAmman/obj/Release/net6.0/ManaretAmman.csproj.AssemblyReference.cache
 /ManaretAmman/obj/Release/net6.0/ManaretAmman.csproj.CoreCompileInputs.cache
 /ManaretAmman/obj/Debug/net6.0/ManaretAmman.MvcApplicationPartsAssemblyInfo.cs
+/BLL/obj/Debug/net6.0/refint/BusinessLogicLayer.dll
+/BLL/obj/Debug/net6.0/ref/BusinessLogicLayer.dll
