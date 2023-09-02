@@ -2,12 +2,19 @@
 using BusinessLogicLayer.Common;
 using BusinessLogicLayer.Exceptions;
 using BusinessLogicLayer.Extensions;
+using BusinessLogicLayer.Services.Auth;
 using BusinessLogicLayer.Services.Lookups;
+using BusinessLogicLayer.Services.Notification;
+using BusinessLogicLayer.Services.ProjectProvider;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
 using DataAccessLayer.DTO.EmployeeLoans;
+using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Expressions;
+using UnauthorizedAccessException = BusinessLogicLayer.Exceptions.UnauthorizedAccessException;
 
 namespace BusinessLogicLayer.Services.EmployeeLoans
 {
@@ -16,11 +23,21 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILookupsService _lookupsService;
         private readonly IMapper _mapper;
-        public EmployeeLoansService(IUnitOfWork unityOfWork, ILookupsService lookupsService, IMapper mapper)
+        readonly IProjectProvider _projectProvider;
+        readonly IAuthService _authService;
+        readonly INotificationsService _iNotificationsService;
+        readonly int _userId;
+        readonly int _projecId;
+        public EmployeeLoansService(IUnitOfWork unityOfWork, ILookupsService lookupsService, IMapper mapper, IProjectProvider projectProvider, IAuthService authService, INotificationsService iNotificationsService)
         {
             _unitOfWork     = unityOfWork;
             _lookupsService = lookupsService;
             _mapper         = mapper;
+            _projectProvider = projectProvider;
+            _authService = authService;
+            _iNotificationsService = iNotificationsService;
+            _userId = _projectProvider.UserId();
+            _projecId = _projectProvider.GetProjectId();
         }
         public async Task<EmployeeLoansOutput> Get(int id)
         {
@@ -50,13 +67,33 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
 
         public async Task<PagedResponse<EmployeeLoansOutput>> GetPage(PaginationFilter<EmployeeLoanFilter> filter)
         {
-            var query = _unitOfWork.EmployeeLoanRepository.PQuery(include: e => e.Employee);
+            if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            int? employeeId = _authService.IsHr(_userId);
 
-            var totalRecords = await query.CountAsync();
+            var query = from e in _unitOfWork.EmployeeRepository.PQuery()
+                        join lt in _unitOfWork.LookupsRepository.PQuery() on e.DepartmentID equals lt.ID into ltGroup
+                        from lt in ltGroup.DefaultIfEmpty()
+                        join el in _unitOfWork.EmployeeLoanRepository.PQuery() on e.EmployeeID equals el.EmployeeID
+                        where (lt.TableName == "Department" && lt.ColumnName == "DepartmentID") && e.ProjectID == _projecId && lt.ProjectID == _projecId && el.ProjectID == _projecId && (e.EmployeeID == employeeId || lt.EmployeeID == employeeId || employeeId == null)
+                        select new EmployeeLoan
+                        {
+                            Employee = e,
+                            EmployeeID = e.EmployeeID,
+                            ApprovalStatusID = el.ApprovalStatusID,
+                            EmployeeLoanID = el.EmployeeLoanID,
+                            loantypeid = el.loantypeid,
+                            ProjectID = el.ProjectID,
+                            LoanDate = el.LoanDate,
+                            LoanAmount=el.LoanAmount,
+                            Notes= el.Notes,
 
+                        };
+
+         
             if (filter.FilterCriteria != null)
-                ApplyFilter(query, filter.FilterCriteria);
-
+                query= ApplyFilter(query, filter.FilterCriteria);
+            var totalRecords = await query.CountAsync();
 
             var Loans = await query.Skip((filter.PageIndex - 1) * filter.Offset)
                         .Take(filter.Offset).ToListAsync();
@@ -75,7 +112,8 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
                 LoantypeId = item.loantypeid,
                 loantypeAr = item.loantypeid is not null? Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameAr:null,
                 loantypeEn = item.loantypeid is not null ? Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameEn : null,
-                ApprovalStatus = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString())?.ColumnDescription
+                ApprovalStatus = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString())?.ColumnDescription,
+                Notes=item.Notes
             }).ToList();
 
             return result.CreatePagedReponse(filter.PageIndex, filter.Offset, totalRecords);
@@ -83,20 +121,65 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
 
         private static IQueryable<EmployeeLoan> ApplyFilter(IQueryable<EmployeeLoan>  query, EmployeeLoanFilter criteria)
         {
+
+            if (criteria == null)
+                return query;
+
+            var parameter = Expression.Parameter(typeof(EmployeeLoan), "e");
+            Expression combinedExpression = null;
             if (criteria.EmployeeID != null)
-                query = query.Where(e => e.EmployeeID == criteria.EmployeeID);
-
-            if (criteria.LoanDate != null)
-                query = query.Where(e => e.LoanDate == criteria.LoanDate.ConvertFromDateTimeToUnixTimestamp());
-
+            {
+                var employeeIdExpression = Expression.Equal(
+                    Expression.Property(parameter, "EmployeeID"),
+                    Expression.Constant(criteria.EmployeeID)
+                );
+                combinedExpression = employeeIdExpression;
+            }
             if (criteria.LoanTypeId != null)
-                query = query.Where(e => e.loantypeid == criteria.LoanTypeId);
+            {
+                var LoanTypeIdExpression = Expression.Equal(
+                    Expression.Property(parameter, "loantypeid"),
+                    Expression.Constant(criteria.LoanTypeId, typeof(int?))
+                );
+                combinedExpression = combinedExpression == null
+                   ? LoanTypeIdExpression
+                   : Expression.AndAlso(combinedExpression, LoanTypeIdExpression);
+            }
+            if (criteria.FromDate != null)
+            {
+                var LoanDateFromExpression = Expression.GreaterThanOrEqual(
+                    Expression.Property(parameter, "LoanDate"),
+                    Expression.Constant(criteria.FromDate.DateToIntValue(), typeof(int?))
+                );
+                combinedExpression = combinedExpression == null
+                                   ? LoanDateFromExpression
+                                   : Expression.AndAlso(combinedExpression, LoanDateFromExpression);
+            }
+            if (criteria.ToDate != null)
+            {
+                var LoanDateToExpression = Expression.LessThanOrEqual(
+                    Expression.Property(parameter, "LoanDate"),
+                    Expression.Constant(criteria.ToDate.DateToIntValue(), typeof(int?))
+                );
+                combinedExpression = combinedExpression == null
+                                   ? LoanDateToExpression
+                                   : Expression.AndAlso(combinedExpression, LoanDateToExpression);
+            }
 
+            if (combinedExpression != null)
+            {
+                var lambda = Expression.Lambda<Func<EmployeeLoan, bool>>(combinedExpression, parameter);
+                query = query.Where(lambda);
+            }
             return query; 
         }
 
         public async Task Create(EmployeeLoansInput model)
         {
+
+            if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
 
@@ -111,10 +194,31 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
             await _unitOfWork.EmployeeLoanRepository.PInsertAsync(employeeLoan);
 
              await _unitOfWork.SaveAsync();
+            var insertedPKValue = employeeLoan.EmployeeLoanID;
+            await sendToNotification(employeeLoan.EmployeeID, insertedPKValue);
         }
+
+        async Task sendToNotification(int employeeId, int PKID)
+        {
+            AcceptOrRejectNotifcationInput model = new AcceptOrRejectNotifcationInput()
+            {
+                ProjectID = _projecId,
+                CreatedBy = _userId,
+                EmoloyeeId = employeeId,
+                ApprovalStatusId = 0,
+                SendToLog = 0,
+                Id = PKID,
+                ApprovalPageID = 3
+            };
+            await _iNotificationsService.AcceptOrRejectNotificationsAsync(model);
+        }
+
 
         public async Task Update(EmployeeLoansUpdate employeeLoan)
         {
+            if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+
             var Loan = _unitOfWork.EmployeeLoanRepository.Get(emp => emp.EmployeeLoanID == employeeLoan.ID)
                 .FirstOrDefault();
 
@@ -124,6 +228,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
             Loan.LoanDate = employeeLoan.LoanDate.DateToIntValue();
             Loan.LoanAmount = employeeLoan.LoanAmount;
             Loan.Notes = employeeLoan.Notes;
+            Loan.loantypeid = employeeLoan.LoantypeId;
 
             await _unitOfWork.EmployeeLoanRepository.UpdateAsync(Loan);
 
@@ -133,6 +238,9 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
 
         public async Task Delete( int employeeLoanId)
         {
+            if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+
             var Loan = _unitOfWork.EmployeeLoanRepository
                         .Get(e => e.EmployeeLoanID == employeeLoanId)
                         .FirstOrDefault();

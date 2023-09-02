@@ -10,7 +10,7 @@ namespace DataAccessLayer.DTO.Notification
         public int ApprovalPageID { get; set; }
         public int ProjectID { get; set; }
         public int Id { get; set; }
-        public int PrevilageType { get; set; }
+       // public int PrevilageType { get; set; }
         public int SendToLog { get; set; } = 0;
     }
 }
