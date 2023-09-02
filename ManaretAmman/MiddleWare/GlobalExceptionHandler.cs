@@ -25,7 +25,7 @@ namespace ManaretAmman.MiddleWare
             catch (Exception ex)
             {
                 await HandleExceptionAsync(httpContext, ex);
-                Console.WriteLine($"Error Message::::{ex.Message}");
+                Console.WriteLine($"Error Message::::{ex.Message}:::::{ex.InnerException}");
             }
         }
 
@@ -38,7 +38,7 @@ namespace ManaretAmman.MiddleWare
             if (exception is ApiException apiException)
             {
                 statusCode = apiException.StatusCode;
-                message = apiException.Message;
+                message = $"{apiException.Message}::::::{apiException.InnerException}";
                 //stackTrace = apiException.StackTrace;
             }
 

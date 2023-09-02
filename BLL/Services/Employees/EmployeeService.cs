@@ -36,12 +36,12 @@ internal class EmployeeService : IEmployeeService
 
 
         IQueryable<Employee> employees ;
-       
-        employees = 
+
+        employees =
             from e in _unitOfWork.EmployeeRepository.PQuery()
             join lt in _unitOfWork.LookupsRepository.PQuery() on e.DepartmentID equals lt.ID into ltGroup
             from lt in ltGroup.DefaultIfEmpty()
-            where e.ProjectID == projecId && (e.EmployeeID == employeeId || lt.EmployeeID == employeeId || employeeId ==null)
+            where e.ProjectID == projecId && (e.EmployeeID == employeeId || lt.EmployeeID == employeeId || employeeId == null) && lt.TableName == "Department" && lt.ColumnName == "DepartmentID"
             select  e;
 
         if (employees is null)

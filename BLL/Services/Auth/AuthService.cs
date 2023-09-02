@@ -42,7 +42,7 @@ namespace BusinessLogicLayer.Services.Auth
             var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == username && user.ProjectID == projectId);
          return user is null?false:
               string.Compare(password, user.UserPassword)==0;
-           // return true;
+           
         }
         public int GetUserType(int userId, int employeeId)
         {
