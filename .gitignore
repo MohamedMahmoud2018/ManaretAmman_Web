@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.vsidx
+/BLL/obj/Debug/net6.0/BusinessLogicLayer.assets.cache
+/BLL/obj/Debug/net6.0/BusinessLogicLayer.csproj.AssemblyReference.cache
+/.vs/ManaretAmman/v17/.suo
+/BLL/obj/Debug/net6.0/BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+/DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.assets.cache
+/DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.csproj.AssemblyReference.cache
+/DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+/ManaretAmman/obj/Debug/net6.0/ManaretAmman.assets.cache
+/ManaretAmman/obj/Debug/net6.0/ManaretAmman.csproj.AssemblyReference.cache
+/ManaretAmman/obj/Debug/net6.0/ManaretAmman.GeneratedMSBuildEditorConfig.editorconfig
