@@ -39,7 +39,7 @@ namespace BusinessLogicLayer.Common
 
 
         #region Enums
-
+        //TODO:Create enum for user types
         #endregion
     }
     public class DictionarData

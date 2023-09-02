@@ -122,5 +122,7 @@ $RECYCLE.BIN/
 /ManaretAmman/obj/ManaretAmman.csproj.nuget.g.props
 /ManaretAmman/obj/project.assets.json
 /ManaretAmman/obj/project.nuget.cache
-
+/BLL/obj/Debug/net6.0/BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+/DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+/ManaretAmman/obj/Debug/net6.0/ManaretAmman.GeneratedMSBuildEditorConfig.editorconfig
 /.vs/ManaretAmman/v17/.suo
