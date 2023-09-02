@@ -215,7 +215,6 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
         }
         async Task sendToNotification(int employeeId, int PKID)
         {
-            int privigeType = _authService.GetUserType(_userId, employeeId);
             AcceptOrRejectNotifcationInput model = new AcceptOrRejectNotifcationInput()
             {
                 ProjectID = _projecId,
@@ -224,13 +223,14 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 ApprovalStatusId = 0,
                 SendToLog = 0,
                 Id = PKID,
-                ApprovalPageID = 1,
-                PrevilageType = privigeType
+                ApprovalPageID = 1
             };
             await _iNotificationsService.AcceptOrRejectNotificationsAsync(model);
         }
         public async Task Update(EmployeeVacationsUpdate employeeVacation)
         {
+            if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             var vacation = _unitOfWork.EmployeeVacationRepository.Get(emp => emp.EmployeeVacationID == employeeVacation.ID)
                 .FirstOrDefault();
 
@@ -257,6 +257,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
         public async Task Delete( int employeeVacationId)
         {
+            if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             var Vacation = _unitOfWork.EmployeeVacationRepository
                         .Get(e => e.EmployeeVacationID == employeeVacationId)
                         .FirstOrDefault();

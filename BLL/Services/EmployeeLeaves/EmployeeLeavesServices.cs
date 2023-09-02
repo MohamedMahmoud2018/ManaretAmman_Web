@@ -227,7 +227,6 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
     }
    async Task sendToNotification(int employeeId,int PKID)
     {
-        int privigeType = _authService.GetUserType(_userId, employeeId);
         AcceptOrRejectNotifcationInput model = new AcceptOrRejectNotifcationInput() { 
         ProjectID=_projecId,
         CreatedBy=_userId,
@@ -235,8 +234,7 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
         ApprovalStatusId=0,
         SendToLog=0,
         Id=PKID,
-        ApprovalPageID=2,
-        PrevilageType= privigeType
+        ApprovalPageID=2
         };
        await _iNotificationsService.AcceptOrRejectNotificationsAsync(model);
     }

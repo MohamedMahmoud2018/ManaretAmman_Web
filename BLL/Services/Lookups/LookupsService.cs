@@ -2,6 +2,7 @@
 using BusinessLogicLayer.Common;
 using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace BusinessLogicLayer.Services.Lookups
@@ -42,27 +43,30 @@ namespace BusinessLogicLayer.Services.Lookups
             if (tableName == "Loans")
             {
                 var loanLookup=new List<LookupDto>();
-                foreach (var key in Constants.GetEmployeeLoanDictionary.Keys)
-                {
-                    loanLookup.Add(new LookupDto
-                    {
-                        TableName = tableName,
-                        ColumnValue = key.ToString(),
-                        ColumnDescription = Constants.GetEmployeeLoanDictionary[key].NameEn,
-                        ColumnDescriptionAr = Constants.GetEmployeeLoanDictionary[key].NameAr,
-                        ID = key,
-                        ColumnName = columnName
-                    }) ;
-                }
+               
+               await Task.Run(() => {
+                   foreach (var key in Constants.GetEmployeeLoanDictionary.Keys)
+                   {
+                       loanLookup.Add(new LookupDto
+                       {
+                           TableName = tableName,
+                           ColumnValue = key.ToString(),
+                           ColumnDescription = Constants.GetEmployeeLoanDictionary[key].NameEn,
+                           ColumnDescriptionAr = Constants.GetEmployeeLoanDictionary[key].NameAr,
+                           ID = key,
+                           ColumnName = columnName
+                       });
+                   }
+               });
                 return loanLookup;    
 
             }
             if (columnName == null)
                 columnName = string.Empty;
 
-            var lookups =  _unit.LookupsRepository
+            var lookups =await  _unit.LookupsRepository
                     .PQuery(e => e.TableName == tableName && e.ColumnName == columnName)
-                    .ToList();
+                    .ToListAsync();
 
             return _mapper.Map<IList<LookupDto>>(lookups);
         }
