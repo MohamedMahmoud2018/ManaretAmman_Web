@@ -1,10 +1,7 @@
 ﻿using ManaretAmman.ExceptionTypes;
 using ManaretAmman.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ManaretAmman.MiddleWare
 {
@@ -28,7 +25,7 @@ namespace ManaretAmman.MiddleWare
             catch (Exception ex)
             {
                 await HandleExceptionAsync(httpContext, ex);
-                Console.WriteLine("rrr");
+                Console.WriteLine($"Error Message::::{ex.Message}:::::{ex.InnerException}");
             }
         }
 
@@ -41,7 +38,7 @@ namespace ManaretAmman.MiddleWare
             if (exception is ApiException apiException)
             {
                 statusCode = apiException.StatusCode;
-                message = apiException.Message;
+                message = $"{apiException.Message}::::::{apiException.InnerException}";
                 //stackTrace = apiException.StackTrace;
             }
 

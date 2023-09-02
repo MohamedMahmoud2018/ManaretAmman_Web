@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Text.Json;
 
 namespace ManaretAmman.ExceptionTypes
 {
@@ -35,5 +34,9 @@ namespace ManaretAmman.ExceptionTypes
     public class UnauthorizedAccessException : ApiException
     {
         public UnauthorizedAccessException(string message) : base(message,HttpStatusCode.Unauthorized) { }
+    }
+    public class internalServerException : ApiException
+    {
+        public internalServerException(string message) : base(message, HttpStatusCode.InternalServerError) { }
     }
 }

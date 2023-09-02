@@ -13,7 +13,9 @@
         }
 
         public static IApiResponse<T> Success(string message, T data) => new ApiResponse<T>(true, message, null, data);
-        public static IApiResponse<T> Success(T data) => new ApiResponse<T>(true, "Completed Successfully", null, data);
+        public static IApiResponse<T> Success(T data) => new ApiResponse<T>(true, "Completed Successfully", null, data); 
+        public static IApiResponse Failure(T data,string[] errors) => new ApiResponse<T>(false,"An Error Occured!", errors,data);
+
 
         public T Data { get; set; }
     }
