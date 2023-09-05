@@ -112,7 +112,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
                 LoantypeId = item.loantypeid,
                 loantypeAr = item.loantypeid is not null? Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameAr:null,
                 loantypeEn = item.loantypeid is not null ? Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameEn : null,
-                ApprovalStatus = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString())?.ColumnDescription,
+                ApprovalStatus = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString())?.ColumnDescriptionAr,
                 Notes=item.Notes
             }).ToList();
 
@@ -208,8 +208,9 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
                 ApprovalStatusId = 0,
                 SendToLog = 0,
                 Id = PKID,
-                ApprovalPageID = 3
-            };
+                ApprovalPageID = 3,
+                PrevilageType = _authService.GetUserType(_userId, employeeId)
+        };
             await _iNotificationsService.AcceptOrRejectNotificationsAsync(model);
         }
 

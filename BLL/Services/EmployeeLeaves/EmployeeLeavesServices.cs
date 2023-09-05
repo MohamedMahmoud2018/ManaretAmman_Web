@@ -234,7 +234,8 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
         ApprovalStatusId=0,
         SendToLog=0,
         Id=PKID,
-        ApprovalPageID=2
+        ApprovalPageID=2,
+        PrevilageType = _authService.GetUserType(_userId, employeeId)
         };
        await _iNotificationsService.AcceptOrRejectNotificationsAsync(model);
     }

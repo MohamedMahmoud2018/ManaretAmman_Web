@@ -31,11 +31,11 @@ namespace BusinessLogicLayer.Services.Notification
 
         public async Task<List<ChangeEmployeeRequestStatusResult>> AcceptOrRejectNotificationsAsync(AcceptOrRejectNotifcationInput model)
         {
-            int privigeType = _authService.GetUserType(_userId, model.EmoloyeeId);
+            //int privigeType = _authService.GetUserType(_userId, model.EmoloyeeId);
 
             var projectId = _projectProvider.GetProjectId();
             var result = await _payrolLogOnlyContext.GetProcedures()
-                .ChangeEmployeeRequestStatusAsync(model.EmoloyeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, _projectId, model.Id, privigeType, 0,null,null,null);
+                .ChangeEmployeeRequestStatusAsync(model.EmoloyeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, _projectId, model.Id, model.PrevilageType, 0,null,null,null);
             return result;
         }
 

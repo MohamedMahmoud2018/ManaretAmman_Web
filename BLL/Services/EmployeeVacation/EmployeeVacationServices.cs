@@ -116,7 +116,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 ToDate          = item.ToDate.IntToDateValue() ,
                 DayCount        = item.DayCount,
                 Notes           = item.Notes,
-                ApprovalStatus  = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescription
+                ApprovalStatus  = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescriptionAr
             }).ToList();
 
             return result.CreatePagedReponse(filter.PageIndex, filter.Offset, totalRecords);
@@ -223,7 +223,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 ApprovalStatusId = 0,
                 SendToLog = 0,
                 Id = PKID,
-                ApprovalPageID = 1
+                ApprovalPageID = 1,
+                PrevilageType = _authService.GetUserType(_userId, employeeId)
             };
             await _iNotificationsService.AcceptOrRejectNotificationsAsync(model);
         }

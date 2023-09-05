@@ -54,7 +54,7 @@ namespace BusinessLogicLayer.Services.Lookups
                            ColumnDescription = Constants.GetEmployeeLoanDictionary[key].NameEn,
                            ColumnDescriptionAr = Constants.GetEmployeeLoanDictionary[key].NameAr,
                            ID = key,
-                           ColumnName = columnName
+                           ColumnName = "LoantypeId"
                        });
                    }
                });
