@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection.Metadata;
+using NotImplementedException = BusinessLogicLayer.Exceptions.NotImplementedException;
 using UnauthorizedAccessException = BusinessLogicLayer.Exceptions.UnauthorizedAccessException;
 
 namespace BusinessLogicLayer.Services.EmployeeVacations
@@ -187,10 +188,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
-
-            if (model == null)
-                throw new NotFoundException("recieved data is missed");
-
+            if (model.FromDate > model.ToDate)
+                throw new NotImplementedException("FromDate greater than ToDate");
             DateTime? startDate = (DateTime)model.FromDate;
             DateTime? endDate   = (DateTime)model.ToDate;
             TimeSpan dayCount  = endDate.Value.Subtract(startDate.Value);

@@ -93,6 +93,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
          
             if (filter.FilterCriteria != null)
                 query= ApplyFilter(query, filter.FilterCriteria);
+
             var totalRecords = await query.CountAsync();
 
             var Loans = await query.Skip((filter.PageIndex - 1) * filter.Offset)
