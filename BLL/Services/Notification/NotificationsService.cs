@@ -29,13 +29,13 @@ namespace BusinessLogicLayer.Services.Notification
             _projectId = _projectProvider.GetProjectId();
         }
 
-        public async Task<List<ChangeEmployeeRequestStatusResult>> AcceptOrRejectNotificationsAsync(AcceptOrRejectNotifcationInput model)
+        public async Task<int?> AcceptOrRejectNotificationsAsync(AcceptOrRejectNotifcationInput model)
         {
             if( model.CreatedBy ==0) model.CreatedBy=_userId;
             int? pError = null;
             var result = await _payrolLogOnlyContext.GetProcedures()
-                .ChangeEmployeeRequestStatusAsync(model.EmoloyeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, _projectId, model.Id, model.PrevilageType, 0, null, null,null);
-            Console.WriteLine(pError);
+                .ChangeEmployeeRequestStatusAsync(model.EmoloyeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, _projectId, model.Id, model.PrevilageType, 0, null,true, null,null);
+            Console.WriteLine(result);
            // OutputParameter<int?> pErrorr = new OutputParameter<int?>(pError);
             return result;
         }
@@ -44,7 +44,7 @@ namespace BusinessLogicLayer.Services.Notification
         {
 
             var result = await _payrolLogOnlyContext.GetProcedures()
-                        .GetRemindersAsync(_projectId, null, 1, 0, filter.FilterCriteria.Fromdate.DateToIntValue(),
+                        .GetRemindersAsync(_projectId, null, 1, filter.FilterCriteria.LanguageId, filter.FilterCriteria.Fromdate.DateToIntValue(),
                         filter.FilterCriteria.ToDate.DateToIntValue(), null, _userId , null);
 
             var totalRecords = result.Count;
@@ -60,7 +60,6 @@ namespace BusinessLogicLayer.Services.Notification
                                   PK = item.PK,
                                   Notes = item.Notes,
                                   ApprovalStatusID = item.ApprovalStatusID,
-                                  ApprovalStatus = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescription,
                                   StatusID = item.StatusID,
                                   PrivillgeType = item.PrivillgeType,
                                   TypeID = item.TypeID,

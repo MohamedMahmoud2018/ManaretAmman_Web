@@ -117,7 +117,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
                 ToDate          = item.ToDate.IntToDateValue() ,
                 DayCount        = item.DayCount,
                 Notes           = item.Notes,
-                ApprovalStatus  = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescriptionAr
+                ApprovalStatus  = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString())?.ColumnDescriptionAr
             }).ToList();
 
             return result.CreatePagedReponse(filter.PageIndex, filter.Offset, totalRecords);
@@ -188,13 +188,16 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
-            if (model.FromDate > model.ToDate)
-                throw new NotImplementedException("FromDate greater than ToDate");
+            if (model.FromDate.DateToIntValue() > model.FromDate.DateToIntValue())
+            throw new BadRequestException("FromDate greater than ToDate");
+            var canAdd = _unitOfWork.EmployeeVacationRepository.Query(v=>v.ProjectID==_projecId && v.EmployeeID==model.EmployeeID  && model.ToDate.DateToIntValue()<= v.ToDate && model.FromDate.DateToIntValue()>= v.FromDate ).CountAsync();
+            if (await canAdd > 0)
+                throw new BadRequestException("there is a vacation in this range");
             DateTime? startDate = (DateTime)model.FromDate;
             DateTime? endDate   = (DateTime)model.ToDate;
             TimeSpan dayCount  = endDate.Value.Subtract(startDate.Value);
             int daysDifference = dayCount.Days;
-            model.DayCount     = daysDifference;
+            model.DayCount     = daysDifference+1;
 
             var timing = GetVacationTimingInputs(model);
 
@@ -236,11 +239,17 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             if (vacation is null)
                 throw new NotFoundException("Data Not Found");
+            if (employeeVacation.FromDate.DateToIntValue() > employeeVacation.FromDate.DateToIntValue())
+                throw new NotFoundException("from date must be less than or equal to date");
+            
+            var canAdd = _unitOfWork.EmployeeVacationRepository.Query(v => v.ProjectID == _projecId && v.EmployeeID == employeeVacation.EmployeeID && employeeVacation.ToDate.DateToIntValue() <= v.ToDate && employeeVacation.FromDate.DateToIntValue() >= v.FromDate && v.EmployeeVacationID != employeeVacation.ID).CountAsync();
+            if (await canAdd > 0)
+                throw new BadRequestException("there is a vacation in this range");
 
             DateTime startDate        = (DateTime)employeeVacation.FromDate;
             DateTime endDate          = (DateTime)employeeVacation.ToDate;
             TimeSpan dayCount         = endDate.Subtract(startDate);
-            vacation.DayCount = dayCount.Days;
+            vacation.DayCount = dayCount.Days+1;
 
             var timing = GetVacationTimingInputs(employeeVacation);
 
