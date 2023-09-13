@@ -32,7 +32,7 @@ namespace BusinessLogicLayer.Services.Notification
         public async Task<int?> AcceptOrRejectNotificationsAsync(AcceptOrRejectNotifcationInput model)
         {
             if( model.CreatedBy ==0) model.CreatedBy=_userId;
-            int? pError = null;
+            //int? pError = null;
             var result = await _payrolLogOnlyContext.GetProcedures()
                 .ChangeEmployeeRequestStatusAsync(model.EmoloyeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, _projectId, model.Id, model.PrevilageType, 0, null,true, null,null);
             Console.WriteLine(result);
