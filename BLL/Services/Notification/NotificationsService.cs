@@ -44,7 +44,7 @@ namespace BusinessLogicLayer.Services.Notification
         {
 
             var result = await _payrolLogOnlyContext.GetProcedures()
-                        .GetRemindersAsync(_projectId, null, 1, filter.FilterCriteria.LanguageId, filter.FilterCriteria.Fromdate.DateToIntValue(),
+                        .GetRemindersAsync(_projectId, filter.FilterCriteria.EmployeeID, 1, filter.FilterCriteria.LanguageId, filter.FilterCriteria.Fromdate.DateToIntValue(),
                         filter.FilterCriteria.ToDate.DateToIntValue(), null, _userId , null);
 
             var totalRecords = result.Count;
