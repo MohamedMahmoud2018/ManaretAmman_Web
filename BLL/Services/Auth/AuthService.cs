@@ -30,7 +30,7 @@ namespace BusinessLogicLayer.Services.Auth
             
             if (!IsValidUser(model.Username, model.Password, _projectId))
                 return null;
-            var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == model.Username && user.ProjectID == _projectId);
+            var user = _unit.UserRepository.GetFirstOrDefault(user =>string.Equals( user.UserName , model.Username) && user.ProjectID == _projectId);
             if (user == null) return null;
 
             var token = GenerateJwtToken(model.Username,user.UserID);
@@ -42,7 +42,7 @@ namespace BusinessLogicLayer.Services.Auth
         
         private bool IsValidUser(string username, string password,int projectId)
         {
-            var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == username && user.ProjectID == projectId);
+            var user = _unit.UserRepository.GetFirstOrDefault(user => string.Equals(user.UserName, username) && user.ProjectID == projectId);
          return user is null?false:
               string.Compare(password, user.UserPassword)==0;
            
