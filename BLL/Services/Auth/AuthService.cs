@@ -27,12 +27,13 @@ namespace BusinessLogicLayer.Services.Auth
         
         public AuthResponse Login(LoginModel model)
         {
-            int userId = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == model.Username && user.ProjectID == _projectId).UserID;
             
             if (!IsValidUser(model.Username, model.Password, _projectId))
                 return null;
+            var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == model.Username && user.ProjectID == _projectId);
+            if (user == null) return null;
 
-            var token = GenerateJwtToken(model.Username,userId);
+            var token = GenerateJwtToken(model.Username,user.UserID);
 
             return new AuthResponse { Token = token };
 
