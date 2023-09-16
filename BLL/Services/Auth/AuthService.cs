@@ -28,6 +28,7 @@ namespace BusinessLogicLayer.Services.Auth
         public AuthResponse Login(LoginModel model)
         {
             int userId = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == model.Username && user.ProjectID == _projectId).UserID;
+            
             if (!IsValidUser(model.Username, model.Password, _projectId))
                 return null;
 
