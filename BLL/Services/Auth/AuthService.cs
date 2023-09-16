@@ -27,10 +27,11 @@ namespace BusinessLogicLayer.Services.Auth
         
         public AuthResponse Login(LoginModel model)
         {
+            int userId = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == model.Username && user.ProjectID == _projectId).UserID;
             if (!IsValidUser(model.Username, model.Password, _projectId))
                 return null;
 
-            var token = GenerateJwtToken(model.Username);
+            var token = GenerateJwtToken(model.Username,userId);
 
             return new AuthResponse { Token = token };
 
@@ -64,7 +65,7 @@ namespace BusinessLogicLayer.Services.Auth
 
             return employee is not null ? employee.EmployeeID : null;
         }
-        private string GenerateJwtToken(string username)
+        private string GenerateJwtToken(string username,int userId)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
 
@@ -73,6 +74,7 @@ namespace BusinessLogicLayer.Services.Auth
             var claims = new[]
             {
                 new Claim("userName",username),
+                new Claim("userId",userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

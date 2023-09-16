@@ -34,7 +34,7 @@ namespace BusinessLogicLayer.Services.Notification
             if( model.CreatedBy ==0) model.CreatedBy=_userId;
             //int? pError = null;
             var result = await _payrolLogOnlyContext.GetProcedures()
-                .ChangeEmployeeRequestStatusAsync(model.EmoloyeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, _projectId, model.Id, model.PrevilageType, 0, null,true, null,null);
+                .ChangeEmployeeRequestStatusAsync(model.EmployeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, _projectId, model.Id, model.PrevilageType, 0, null,true, null,null);
             Console.WriteLine(result);
            // OutputParameter<int?> pErrorr = new OutputParameter<int?>(pError);
             return result;

@@ -4,7 +4,7 @@ namespace DataAccessLayer.DTO.Notification
 {
     public class AcceptOrRejectNotifcationInput:IMustHaveProject
     {
-        public int EmoloyeeId { get; set; }
+        public int EmployeeId { get; set; }
         public int ApprovalStatusId { get; set; }
         public int CreatedBy { get; set; }
         public int ApprovalPageID { get; set; }

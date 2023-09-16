@@ -22,8 +22,11 @@ namespace ManaretAmman.Controllers.Employees
         {
             var result = await _notificationService.GetNotificationsAsync(filter);
 
-            if (result == null || result.Result.Count == 0)
+            if (result == null )
                 return ApiResponse<BusinessLogicLayer.Common.PagedResponse<RemiderOutput>>.Failure(default, null);
+            if(result.Result.Count == 0)
+                return ApiResponse<BusinessLogicLayer.Common.PagedResponse<RemiderOutput>>.Success("No data", result);
+
 
             return ApiResponse<BusinessLogicLayer.Common.PagedResponse<RemiderOutput>>.Success("data has been retrieved succussfully", result);
         }

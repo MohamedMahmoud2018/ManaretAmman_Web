@@ -31,7 +31,7 @@ namespace BusinessLogicLayer.Services.Balance
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
             if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
 
-            var result=await _payrolLogOnlyContext.GetProcedures().GetEmployeeBalanceReportAsync(balanceData.EmployeeID, balanceData.YearID, _projecId, 1, 0,null,null,null);
+            var result=await _payrolLogOnlyContext.GetProcedures().GetEmployeeBalanceReportAsync(balanceData.EmployeeID, balanceData.YearID, balanceData.ProjectID, 1, 0,null,null,null);
             
             return result;
         }

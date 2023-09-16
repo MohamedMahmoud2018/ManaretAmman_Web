@@ -148,7 +148,7 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<EmployeeLeaveFilter> filter)
     {
 
-        if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
+        if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId from header");
         if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
         int? employeeId = _authService.IsHr(_userId);
 
@@ -230,7 +230,7 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
         AcceptOrRejectNotifcationInput model = new AcceptOrRejectNotifcationInput() { 
         ProjectID=_projecId,
         CreatedBy=_userId,
-        EmoloyeeId=employeeId,
+        EmployeeId=employeeId,
         ApprovalStatusId=0,
         SendToLog=0,
         Id=PKID,

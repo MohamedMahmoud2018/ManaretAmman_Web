@@ -221,7 +221,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             {
                 ProjectID = _projecId,
                 CreatedBy = _userId,
-                EmoloyeeId = employeeId,
+                EmployeeId = employeeId,
                 ApprovalStatusId = 0,
                 SendToLog = 0,
                 Id = PKID,
