@@ -8,7 +8,9 @@ public class EmployeeVacationInput
     public int ID { get; set; }
     public int EmployeeID { get; set; }
     public int? VacationTypeID { get; set; }
+    [Required]
     public DateTime? FromDate { get; set; }
+    [Required]
     public DateTime? ToDate { get; set; }
     public string? Notes { get; set; }
     public int? DayCount { get; set; }
