@@ -29,7 +29,7 @@ namespace ManaretAmman.Controllers.Auth
 
             return ApiResponse<AuthResponse>.Success("data has been retrieved succussfully", result);
         }
-        [HttpPut]
+        [HttpPut("ChangePassword")]
         public IApiResponse ChangePassword(ChangePasswordModel model)
         {
             var result=_authService.ChangePassword(model);
