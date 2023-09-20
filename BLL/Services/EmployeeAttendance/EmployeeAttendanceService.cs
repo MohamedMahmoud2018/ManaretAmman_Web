@@ -3,9 +3,7 @@ using BusinessLogicLayer.Extensions;
 using BusinessLogicLayer.Services.Auth;
 using BusinessLogicLayer.Services.Lookups;
 using BusinessLogicLayer.Services.ProjectProvider;
-using DataAccessLayer.DTO;
 using DataAccessLayer.DTO.EmployeeAttendance;
-using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 
 namespace BusinessLogicLayer.Services.EmployeeAttendance

@@ -1,22 +1,18 @@
 ﻿using BusinessLogicLayer.Common;
 using BusinessLogicLayer.Services.EmployeeAttendance;
-using BusinessLogicLayer.Services.Notification;
 using DataAccessLayer.DTO.EmployeeAttendance;
-using DataAccessLayer.DTO.Notification;
-using DataAccessLayer.Models;
 using ManaretAmman.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManaretAmman.Controllers.EmployeeMonitor
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/Employee")]
     [ApiController]
-    public class EmployeeAttendanceController : ControllerBase
+    public class AttendanceController : ControllerBase
     {
         private readonly IEmployeeAttendanceService _employeeAttendanceService;
 
-        public EmployeeAttendanceController(IEmployeeAttendanceService employeeAttendanceService)
+        public AttendanceController(IEmployeeAttendanceService employeeAttendanceService)
         => _employeeAttendanceService = employeeAttendanceService;
 
         [HttpGet("GetPage")]
