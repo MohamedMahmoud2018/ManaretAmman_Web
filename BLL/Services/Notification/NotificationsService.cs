@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using BusinessLogicLayer.Common;
+﻿using BusinessLogicLayer.Common;
 using BusinessLogicLayer.Extensions;
 using BusinessLogicLayer.Services.Auth;
 using BusinessLogicLayer.Services.Lookups;
 using BusinessLogicLayer.Services.ProjectProvider;
-using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 
