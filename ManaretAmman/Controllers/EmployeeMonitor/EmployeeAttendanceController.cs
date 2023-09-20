@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ManaretAmman.Controllers.EmployeeMonitor
 {
-    [Route("api/[controller]/Employee")]
+    [Route("api/Employees/[controller]")]
     [ApiController]
     public class AttendanceController : ControllerBase
     {
