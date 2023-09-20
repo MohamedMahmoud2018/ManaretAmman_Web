@@ -76,6 +76,7 @@ namespace BusinessLogicLayer.Services.Auth
                 var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == model.Username && user.ProjectID == _projectId);
                 user.UserPassword = model.NewPassword;
                 _unit.UserRepository.Update(user);
+                _unit.Save();
                 return true;
             }
             return false;
