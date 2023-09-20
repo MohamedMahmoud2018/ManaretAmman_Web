@@ -69,7 +69,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
         public async Task<PagedResponse<EmployeeVacationOutput>> GetPage(PaginationFilter<EmployeeVacationFilter> filter)
         {
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             int? employeeId = _authService.IsHr(_userId);
 
             var query = from e in _unitOfWork.EmployeeRepository.PQuery()
@@ -185,7 +185,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
         {
 
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
             if (model.FromDate.DateToIntValue() > model.FromDate.DateToIntValue())
@@ -233,7 +233,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
         public async Task Update(EmployeeVacationsUpdate employeeVacation)
         {
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             var vacation = _unitOfWork.EmployeeVacationRepository.Get(emp => emp.EmployeeVacationID == employeeVacation.ID)
                 .FirstOrDefault();
 
@@ -267,7 +267,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
         public async Task Delete( int employeeVacationId)
         {
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             var Vacation = _unitOfWork.EmployeeVacationRepository
                         .Get(e => e.EmployeeVacationID == employeeVacationId)
                         .FirstOrDefault();

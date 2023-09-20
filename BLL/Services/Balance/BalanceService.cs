@@ -29,7 +29,7 @@ namespace BusinessLogicLayer.Services.Balance
         public async Task<List<GetEmployeeBalanceReportResult>> Get(EmployeeBalancesInput balanceData)
         {
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
 
             var result=await _payrolLogOnlyContext.GetProcedures().GetEmployeeBalanceReportAsync(balanceData.EmployeeID, balanceData.YearID, balanceData.ProjectID, 1, 0,null,null,null);
             

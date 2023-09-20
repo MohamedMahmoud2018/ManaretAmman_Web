@@ -149,7 +149,7 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
     {
 
         if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId from header");
-        if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
         int? employeeId = _authService.IsHr(_userId);
 
         var query = from e in _unitOfWork.EmployeeRepository.PQuery()
@@ -203,7 +203,7 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
     public async Task Create(EmployeeLeavesInput model)
     {
         if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-        if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
         if (model == null)
             throw new NotFoundException("recieved data is missed");
 
@@ -242,7 +242,7 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
     public async Task Update(EmployeeLeavesUpdate employeeLeave)
     {
         if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-        if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
 
         var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeLeaveID == employeeLeave.ID)
             .FirstOrDefault();
@@ -275,7 +275,7 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
     public async Task Delete(int employeeLeaveId)
     {
         if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-        if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
 
         var leave = _unitOfWork.EmployeeLeaveRepository
                     .Get(e => e.EmployeeLeaveID == employeeLeaveId)

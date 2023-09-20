@@ -6,7 +6,8 @@ namespace BusinessLogicLayer.Services.Auth
     public interface IAuthService
     {
         public AuthResponse Login(LoginModel model);
-        public bool CheckIfValidUser(int userId);
+        public bool ChangePassword( ChangePasswordModel model);
+        public bool IsValidUser(int userId);
         public int? IsHr(int userId);
        /// <summary>
        /// get user privige type 1=>manager ,2 hr , 3 employee

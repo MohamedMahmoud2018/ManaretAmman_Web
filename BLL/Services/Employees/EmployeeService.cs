@@ -31,7 +31,7 @@ internal class EmployeeService : IEmployeeService
         int userId = _projectProvider.UserId();
         int projecId = _projectProvider.GetProjectId();
         if (userId == -1) throw new UnauthorizedAccessException("Incorrect userId from header");
-        if(!_authService.CheckIfValidUser(userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        if(!_authService.IsValidUser(userId)) throw new UnauthorizedAccessException("Incorrect userId");
         int? employeeId = _authService.IsHr(userId);
 
 
