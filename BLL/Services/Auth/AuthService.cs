@@ -74,7 +74,7 @@ namespace BusinessLogicLayer.Services.Auth
           bool isvalid=  this.IsValidUser(model.Username, model.Password, _projectId);
             if (isvalid) {
                 var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == model.Username && user.ProjectID == _projectId);
-                user.UserPassword = model.Password;
+                user.UserPassword = model.NewPassword;
                 _unit.UserRepository.Update(user);
                 return true;
             }

@@ -192,7 +192,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             throw new BadRequestException("FromDate greater than ToDate");
             var canAdd = _unitOfWork.EmployeeVacationRepository.Query(v=>v.ProjectID==_projecId && v.EmployeeID==model.EmployeeID  && model.ToDate.DateToIntValue()<= v.ToDate && model.FromDate.DateToIntValue()>= v.FromDate ).CountAsync();
             if (await canAdd > 0)
-                throw new BadRequestException("there is a vacation in this range");
+                throw new BadRequestException("يوجد اجازة فى هذه الفترة");
             DateTime? startDate = (DateTime)model.FromDate;
             DateTime? endDate   = (DateTime)model.ToDate;
             TimeSpan dayCount  = endDate.Value.Subtract(startDate.Value);
