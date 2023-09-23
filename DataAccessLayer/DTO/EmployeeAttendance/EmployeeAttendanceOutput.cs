@@ -14,6 +14,7 @@ namespace DataAccessLayer.DTO.EmployeeAttendance
         public DateTime? AttendanceDate { get; set; }
         public string ShiftName { get; set; }
         public string Workhours { get; set; }
+        public string ShiftWithTimes { get; set; }
 
 
     }
