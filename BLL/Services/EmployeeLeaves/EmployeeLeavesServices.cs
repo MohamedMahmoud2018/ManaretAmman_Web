@@ -202,12 +202,15 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
 
     public async Task Create(EmployeeLeavesInput model)
     {
+        
         if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
         if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
         if (model == null)
             throw new NotFoundException("recieved data is missed");
 
         var timing = GetLeaveTimingInputs(model);
+        if (timing.FromTime > timing.ToTime)
+            throw new BadRequestException("وقت بدايةالمغادرة لابد ان يكون اصغر من وقت نهاية المغادرة");
         var LeaveDate = model.LeaveDate;
         model.LeaveDate = null;
         model.FromTime = null;
