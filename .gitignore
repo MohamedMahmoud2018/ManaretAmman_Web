@@ -124,3 +124,8 @@ $RECYCLE.BIN/
 /ManaretAmman/obj/project.nuget.cache
 
 /.vs/ManaretAmman/v17/.suo
+/.vs/ManaretAmman/DesignTimeBuild/.dtbcache.v2
+/.vs/ManaretAmman/v17/.futdcache.v2
+/.vs/ProjectEvaluation/manaretamman.metadata.v7.bin
+/.vs/ProjectEvaluation/manaretamman.projects.v7.bin
+/ManaretAmman/ManaretAmman.csproj.user
