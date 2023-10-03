@@ -46,6 +46,7 @@ namespace BusinessLogicLayer.Services.EmployeeAttendance
                                   ShiftName = item.ShiftName,
                                   StartTime = item.StartTime.ConvertFromMinutesToTimeString(),
                                   Workhours= (TimeSpan.FromMinutes((double)item.EndTime)- TimeSpan.FromMinutes((double)item.StartTime)).ToString(@"hh\:mm"),
+                                  ShiftWithTimes = $"{item.StartTime.ConvertFromMinutesToTimeString()} | {item.EndTime.ConvertFromMinutesToTimeString()} | {item.ShiftName}"
                               }).ToList();
 
             return returnedData.CreatePagedReponse<EmployeeAttendanceOutput>(filter.PageIndex, filter.Offset, totalRecords);

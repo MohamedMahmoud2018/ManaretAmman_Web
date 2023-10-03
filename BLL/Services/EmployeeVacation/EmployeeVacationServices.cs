@@ -188,8 +188,8 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
-            if (model.FromDate.DateToIntValue() > model.FromDate.DateToIntValue())
-            throw new BadRequestException("FromDate greater than ToDate");
+            if (model.FromDate.DateToIntValue() > model.ToDate.DateToIntValue())
+                throw new BadRequestException("تاريخ بداية الاجازة لابد ان يكون اصغر من تاريخ نهايةالاجازة ");
             var canAdd = _unitOfWork.EmployeeVacationRepository.Query(v=>v.ProjectID==_projecId && v.EmployeeID==model.EmployeeID  && model.ToDate.DateToIntValue()<= v.ToDate && model.FromDate.DateToIntValue()>= v.FromDate ).CountAsync();
             if (await canAdd > 0)
                 throw new BadRequestException("يوجد اجازة فى هذه الفترة");
@@ -239,12 +239,12 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
 
             if (vacation is null)
                 throw new NotFoundException("Data Not Found");
-            if (employeeVacation.FromDate.DateToIntValue() > employeeVacation.FromDate.DateToIntValue())
-                throw new NotFoundException("from date must be less than or equal to date");
+            if (employeeVacation.FromDate.DateToIntValue() > employeeVacation.ToDate.DateToIntValue())
+                throw new BadRequestException("تاريخ بداية الاجازة لابد ان يكون اصغر من تاريخ نهايةالاجازة ");
             
             var canAdd = _unitOfWork.EmployeeVacationRepository.Query(v => v.ProjectID == _projecId && v.EmployeeID == employeeVacation.EmployeeID && employeeVacation.ToDate.DateToIntValue() <= v.ToDate && employeeVacation.FromDate.DateToIntValue() >= v.FromDate && v.EmployeeVacationID != employeeVacation.ID).CountAsync();
             if (await canAdd > 0)
-                throw new BadRequestException("there is a vacation in this range");
+                throw new BadRequestException("يوجد اجازة فى هذه الفترة");
 
             DateTime startDate        = (DateTime)employeeVacation.FromDate;
             DateTime endDate          = (DateTime)employeeVacation.ToDate;
@@ -254,7 +254,7 @@ namespace BusinessLogicLayer.Services.EmployeeVacations
             var timing = GetVacationTimingInputs(employeeVacation);
 
             vacation.FromDate         = employeeVacation.FromDate.DateToIntValue();
-            vacation.ToDate           = employeeVacation.FromDate.DateToIntValue();
+            vacation.ToDate           = employeeVacation.ToDate.DateToIntValue();
             vacation.VacationTypeID = employeeVacation.VacationTypeID;
             vacation.Notes = employeeVacation.Notes;
 
