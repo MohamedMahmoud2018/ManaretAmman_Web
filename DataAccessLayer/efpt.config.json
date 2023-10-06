@@ -16,11 +16,11 @@
    "T4TemplatePath": null,
    "Tables": [
       {
-         "Name": "[dbo].[Allowance_deduction]",
+         "Name": "[dbo].[Projects]",
          "ObjectType": 0
       }
    ],
-   "UiHint": "mohamedkamel.PayrolLogOnly.dbo",
+   "UiHint": "vmi1344906\\sqlexpress.Payrollogonly.dbo",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,

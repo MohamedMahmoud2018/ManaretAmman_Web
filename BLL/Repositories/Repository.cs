@@ -19,6 +19,11 @@ namespace BusinessLogicLayer.Repositories
             this._context    = context;
             this.dbSet       = context.Set<TEntity>();
         }
+        public Repository(DbContext context)
+        {
+            this._context = context;
+            this.dbSet = context.Set<TEntity>();
+        }
 
         public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, params Expression<Func<TEntity, object>>[] includes)
         {
