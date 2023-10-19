@@ -8,9 +8,11 @@ namespace DataAccessLayer.DTO
     {
         public int ID { get; set; }
         public int EmployeeID { get; set; }
+        [Required]
         public DateTime? LoanDate { get; set; }
 
         [Column(TypeName = "decimal(18, 5)")]
+        [Required]
         public decimal? LoanAmount { get; set; }
 
         [StringLength(200)]

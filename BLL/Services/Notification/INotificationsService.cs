@@ -8,7 +8,7 @@ namespace BusinessLogicLayer.Services.Notification
     {
         public Task<PagedResponse<RemiderOutput>> GetNotificationsAsync(PaginationFilter<GetEmployeeNotificationInput> filter);
        // public Task<List<GetRemindersResult>> IgnorNotificationsAsync(GetEmployeeNotificationInput model);
-        public Task<List<ChangeEmployeeRequestStatusResult>> AcceptOrRejectNotificationsAsync(AcceptOrRejectNotifcationInput model);
+        public Task<int?> AcceptOrRejectNotificationsAsync(AcceptOrRejectNotifcationInput model);
 
 
 

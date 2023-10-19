@@ -18,9 +18,6 @@ namespace BusinessLogicLayer.UnitOfWork
 
 
 
-
-
-
         private IRepository<Employee> _employeeRepository;
 
         public IRepository<Employee> EmployeeRepository
@@ -66,6 +63,12 @@ namespace BusinessLogicLayer.UnitOfWork
         public IRepository<User> UserRepository
         {
             get { return _userRepository ?? (_userRepository = new Repository<User>(_context, _projectProvider)); }
+        } 
+        
+        IRepository<Project> _projectRepository;
+        public IRepository<Project> ProjectRepository
+        {
+            get { return _projectRepository ?? (_projectRepository = new Repository<Project>(_context)); }
         }
 
         public void Save()

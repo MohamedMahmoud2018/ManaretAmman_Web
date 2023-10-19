@@ -107,6 +107,14 @@ namespace DataAccessLayer.Models
         [StringLength(5000)]
         [Unicode(false)]
         public string AttachementPath { get; set; }
+        [StringLength(1000)]
+        [Unicode(false)]
+        public string CompanyNameEn { get; set; }
+        [StringLength(100)]
+        [Unicode(false)]
+        public string projectcode { get; set; }
+        [MaxLength(1000)]
+        public byte[] apiurl { get; set; }
 
         [InverseProperty("Project")]
         public virtual ICollection<Allowance_deduction> Allowance_deductions { get; set; }

@@ -8,6 +8,7 @@ using BusinessLogicLayer.UnitOfWork;
 using BusinessLogicLayer.Services.ProjectProvider;
 using DataAccessLayer.DTO;
 using BusinessLogicLayer.Exceptions;
+using DataAccessLayer.Models;
 
 namespace BusinessLogicLayer.Services.Auth
 {
@@ -27,10 +28,14 @@ namespace BusinessLogicLayer.Services.Auth
         
         public AuthResponse Login(LoginModel model)
         {
+            
             if (!IsValidUser(model.Username, model.Password, _projectId))
                 return null;
-
-            var token = GenerateJwtToken(model.Username);
+            var user = _unit.UserRepository.GetFirstOrDefault(user =>string.Equals( user.UserName , model.Username) && user.ProjectID == _projectId);
+            if (user == null) return null;
+            var employeeName = _unit.EmployeeRepository.GetFirstOrDefault(emp=>emp.UserID==user.UserID)!=null?
+               _unit.EmployeeRepository.GetFirstOrDefault(emp => emp.UserID == user.UserID).EmployeeName:"HR" ;
+            var token = GenerateJwtToken(model.Username,user.UserID, employeeName);
 
             return new AuthResponse { Token = token };
 
@@ -39,7 +44,7 @@ namespace BusinessLogicLayer.Services.Auth
         
         private bool IsValidUser(string username, string password,int projectId)
         {
-            var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == username && user.ProjectID == projectId);
+            var user = _unit.UserRepository.GetFirstOrDefault(user => string.Equals(user.UserName, username) && user.ProjectID == projectId);
          return user is null?false:
               string.Compare(password, user.UserPassword)==0;
            
@@ -53,7 +58,7 @@ namespace BusinessLogicLayer.Services.Auth
 
 
         }
-        public bool CheckIfValidUser(int userId)
+        public bool IsValidUser(int userId)
         {
             bool isValid = _unit.UserRepository.GetFirstOrDefault(user => user.UserID == userId && user.ProjectID == _projectId) != null;
             return isValid;
@@ -64,7 +69,19 @@ namespace BusinessLogicLayer.Services.Auth
 
             return employee is not null ? employee.EmployeeID : null;
         }
-        private string GenerateJwtToken(string username)
+        public bool ChangePassword(ChangePasswordModel model)
+        {
+          bool isvalid=  this.IsValidUser(model.Username, model.Password, _projectId);
+            if (isvalid) {
+                var user = _unit.UserRepository.GetFirstOrDefault(user => user.UserName == model.Username && user.ProjectID == _projectId);
+                user.UserPassword = model.NewPassword;
+                _unit.UserRepository.Update(user);
+                _unit.Save();
+                return true;
+            }
+            return false;
+        }
+        private string GenerateJwtToken(string username,int userId,string employeeName)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
 
@@ -73,6 +90,8 @@ namespace BusinessLogicLayer.Services.Auth
             var claims = new[]
             {
                 new Claim("userName",username),
+                new Claim("userId",userId.ToString()),
+                new Claim("employeeName",employeeName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

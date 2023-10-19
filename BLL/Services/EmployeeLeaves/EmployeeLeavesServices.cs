@@ -148,8 +148,8 @@ internal class EmployeeLeavesService : IEmployeeLeavesService
 public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<EmployeeLeaveFilter> filter)
     {
 
-        if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-        if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId from header");
+        if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
         int? employeeId = _authService.IsHr(_userId);
 
         var query = from e in _unitOfWork.EmployeeRepository.PQuery()
@@ -202,12 +202,15 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
 
     public async Task Create(EmployeeLeavesInput model)
     {
+        
         if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-        if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
         if (model == null)
             throw new NotFoundException("recieved data is missed");
 
         var timing = GetLeaveTimingInputs(model);
+        if (timing.FromTime > timing.ToTime)
+            throw new BadRequestException("وقت بدايةالمغادرة لابد ان يكون اصغر من وقت نهاية المغادرة");
         var LeaveDate = model.LeaveDate;
         model.LeaveDate = null;
         model.FromTime = null;
@@ -230,18 +233,19 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
         AcceptOrRejectNotifcationInput model = new AcceptOrRejectNotifcationInput() { 
         ProjectID=_projecId,
         CreatedBy=_userId,
-        EmoloyeeId=employeeId,
+        EmployeeId=employeeId,
         ApprovalStatusId=0,
         SendToLog=0,
         Id=PKID,
-        ApprovalPageID=2
+        ApprovalPageID=2,
+        PrevilageType = _authService.GetUserType(_userId, employeeId)
         };
        await _iNotificationsService.AcceptOrRejectNotificationsAsync(model);
     }
     public async Task Update(EmployeeLeavesUpdate employeeLeave)
     {
         if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-        if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
 
         var leave = _unitOfWork.EmployeeLeaveRepository.Get(emp => emp.EmployeeLeaveID == employeeLeave.ID)
             .FirstOrDefault();
@@ -274,7 +278,7 @@ public async Task<PagedResponse<EmployeeLeavesOutput>> GetPage(PaginationFilter<
     public async Task Delete(int employeeLeaveId)
     {
         if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-        if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+        if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
 
         var leave = _unitOfWork.EmployeeLeaveRepository
                     .Get(e => e.EmployeeLeaveID == employeeLeaveId)

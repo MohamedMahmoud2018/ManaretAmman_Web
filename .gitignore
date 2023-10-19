@@ -126,3 +126,7 @@ $RECYCLE.BIN/
 /DataAccessLayer/obj/Debug/net6.0/DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
 /ManaretAmman/obj/Debug/net6.0/ManaretAmman.GeneratedMSBuildEditorConfig.editorconfig
 /.vs/ManaretAmman/v17/.suo
+/.vs/ProjectEvaluation/manaretamman.metadata.v7.bin
+/.vs/ManaretAmman/DesignTimeBuild/.dtbcache.v2
+/.vs/ManaretAmman/v17/.futdcache.v2
+/.vs/ProjectEvaluation/manaretamman.projects.v7.bin

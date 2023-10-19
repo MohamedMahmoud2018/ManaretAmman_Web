@@ -13,6 +13,7 @@ namespace BusinessLogicLayer.UnitOfWork
         IRepository<EmployeeLoan> EmployeeLoanRepository { get; }
         IRepository<GetEmployeeBalanceReportResult> EmployeeBalanceRepository { get; }
         IRepository<User> UserRepository { get; }
+        IRepository<Project> ProjectRepository { get; }
 
         void Save();
         Task SaveAsync();

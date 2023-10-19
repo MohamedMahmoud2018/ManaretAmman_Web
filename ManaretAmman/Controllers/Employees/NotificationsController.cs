@@ -22,8 +22,11 @@ namespace ManaretAmman.Controllers.Employees
         {
             var result = await _notificationService.GetNotificationsAsync(filter);
 
-            if (result == null || result.Result.Count == 0)
+            if (result == null )
                 return ApiResponse<BusinessLogicLayer.Common.PagedResponse<RemiderOutput>>.Failure(default, null);
+            if(result.Result.Count == 0)
+                return ApiResponse<BusinessLogicLayer.Common.PagedResponse<RemiderOutput>>.Success("No data", result);
+
 
             return ApiResponse<BusinessLogicLayer.Common.PagedResponse<RemiderOutput>>.Success("data has been retrieved succussfully", result);
         }
@@ -33,7 +36,7 @@ namespace ManaretAmman.Controllers.Employees
         {
             var result = await _notificationService.AcceptOrRejectNotificationsAsync(model);
 
-            if (result == null || result.Count == 0)
+            if (result == null || result == 0)
             {
                 List<ChangeEmployeeRequestStatusResult> res = new List<ChangeEmployeeRequestStatusResult>();
 
@@ -41,7 +44,7 @@ namespace ManaretAmman.Controllers.Employees
 
                 return ApiResponse<List<ChangeEmployeeRequestStatusResult>>.Failure(res, null);
             }
-            return ApiResponse<List<ChangeEmployeeRequestStatusResult>>.Success(result);
+            return ApiResponse<int?>.Success(result);
         }
     }
 }

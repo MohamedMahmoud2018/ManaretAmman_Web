@@ -7,5 +7,7 @@ namespace DataAccessLayer.Models
 {
     public partial class ChangeEmployeeRequestStatusResult
     {
+        //public int? pError { get; set; }
+        //public int? returnValue { get; set; }
     }
 }

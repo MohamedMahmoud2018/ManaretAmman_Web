@@ -8,7 +8,7 @@ namespace DataAccessLayer.Models
     public partial class GetRemindersResult
     {
         public int ID { get; set; }
-        public string Date { get; set; }
+        public int Date { get; set; }
         public int? TypeID { get; set; }
         public string Notes { get; set; }
         public string ApprovalProcessID { get; set; }

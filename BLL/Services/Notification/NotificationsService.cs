@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using BusinessLogicLayer.Common;
+﻿using BusinessLogicLayer.Common;
 using BusinessLogicLayer.Extensions;
 using BusinessLogicLayer.Services.Auth;
 using BusinessLogicLayer.Services.Lookups;
 using BusinessLogicLayer.Services.ProjectProvider;
-using BusinessLogicLayer.UnitOfWork;
 using DataAccessLayer.DTO.Notification;
 using DataAccessLayer.Models;
 
@@ -29,13 +27,14 @@ namespace BusinessLogicLayer.Services.Notification
             _projectId = _projectProvider.GetProjectId();
         }
 
-        public async Task<List<ChangeEmployeeRequestStatusResult>> AcceptOrRejectNotificationsAsync(AcceptOrRejectNotifcationInput model)
+        public async Task<int?> AcceptOrRejectNotificationsAsync(AcceptOrRejectNotifcationInput model)
         {
-            int privigeType = _authService.GetUserType(_userId, model.EmoloyeeId);
-
-            var projectId = _projectProvider.GetProjectId();
+            if( model.CreatedBy ==0) model.CreatedBy=_userId;
+            //int? pError = null;
             var result = await _payrolLogOnlyContext.GetProcedures()
-                .ChangeEmployeeRequestStatusAsync(model.EmoloyeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, _projectId, model.Id, privigeType, 0,null,null,null);
+                .ChangeEmployeeRequestStatusAsync(model.EmployeeId, model.CreatedBy, model.ApprovalStatusId, model.ApprovalPageID, _projectId, model.Id, model.PrevilageType, 0, null,true, null,null);
+            Console.WriteLine(result);
+           // OutputParameter<int?> pErrorr = new OutputParameter<int?>(pError);
             return result;
         }
 
@@ -43,7 +42,7 @@ namespace BusinessLogicLayer.Services.Notification
         {
 
             var result = await _payrolLogOnlyContext.GetProcedures()
-                        .GetRemindersAsync(_projectId, null, 1, 0, filter.FilterCriteria.Fromdate.DateToIntValue(),
+                        .GetRemindersAsync(_projectId, filter.FilterCriteria.EmployeeID, 1, filter.FilterCriteria.LanguageId, filter.FilterCriteria.Fromdate.DateToIntValue(),
                         filter.FilterCriteria.ToDate.DateToIntValue(), null, _userId , null);
 
             var totalRecords = result.Count;
@@ -59,7 +58,6 @@ namespace BusinessLogicLayer.Services.Notification
                                   PK = item.PK,
                                   Notes = item.Notes,
                                   ApprovalStatusID = item.ApprovalStatusID,
-                                  ApprovalStatus = approvals.FirstOrDefault(e => e.ID == item.ApprovalStatusID)?.ColumnDescription,
                                   StatusID = item.StatusID,
                                   PrivillgeType = item.PrivillgeType,
                                   TypeID = item.TypeID,

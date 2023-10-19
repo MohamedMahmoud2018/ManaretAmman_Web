@@ -13,8 +13,19 @@ namespace ManaretAmman.MiddleWare
 
         public async Task InvokeAsync(HttpContext context)
         {
-           
-            if (context.Request.Headers.TryGetValue("projectid", out var ProjectIdValue))
+            //string userAgent = context.Request.Headers["User-Agent"].ToString();
+            //if (userAgent.Contains("Swagger"))
+            //{
+            //    await Console.Out.WriteLineAsync(userAgent);
+            //}
+            ///api/Auth/Login
+            if (context.Request.Path == "/api/Configration/GetProjectUrl" && context.Request.Method == "GET")
+            {
+                await _next(context);
+                return;
+            }
+            
+                if (context.Request.Headers.TryGetValue("projectid", out var ProjectIdValue))
             {
                 context.Items["ProjectId"] = ProjectIdValue.ToString();
             }

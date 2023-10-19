@@ -68,7 +68,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
         public async Task<PagedResponse<EmployeeLoansOutput>> GetPage(PaginationFilter<EmployeeLoanFilter> filter)
         {
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
             int? employeeId = _authService.IsHr(_userId);
 
             var query = from e in _unitOfWork.EmployeeRepository.PQuery()
@@ -93,6 +93,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
          
             if (filter.FilterCriteria != null)
                 query= ApplyFilter(query, filter.FilterCriteria);
+
             var totalRecords = await query.CountAsync();
 
             var Loans = await query.Skip((filter.PageIndex - 1) * filter.Offset)
@@ -112,7 +113,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
                 LoantypeId = item.loantypeid,
                 loantypeAr = item.loantypeid is not null? Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameAr:null,
                 loantypeEn = item.loantypeid is not null ? Constants.GetEmployeeLoanDictionary[item.loantypeid.Value].NameEn : null,
-                ApprovalStatus = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString())?.ColumnDescription,
+                ApprovalStatus = approvals.FirstOrDefault(e => e.ColumnValue == item.ApprovalStatusID.ToString())?.ColumnDescriptionAr,
                 Notes=item.Notes
             }).ToList();
 
@@ -178,7 +179,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
         {
 
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
 
             if (model == null)
                 throw new NotFoundException("recieved data is missed");
@@ -204,12 +205,13 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
             {
                 ProjectID = _projecId,
                 CreatedBy = _userId,
-                EmoloyeeId = employeeId,
+                EmployeeId = employeeId,
                 ApprovalStatusId = 0,
                 SendToLog = 0,
                 Id = PKID,
-                ApprovalPageID = 3
-            };
+                ApprovalPageID = 3,
+                PrevilageType = _authService.GetUserType(_userId, employeeId)
+        };
             await _iNotificationsService.AcceptOrRejectNotificationsAsync(model);
         }
 
@@ -217,7 +219,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
         public async Task Update(EmployeeLoansUpdate employeeLoan)
         {
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
 
             var Loan = _unitOfWork.EmployeeLoanRepository.Get(emp => emp.EmployeeLoanID == employeeLoan.ID)
                 .FirstOrDefault();
@@ -239,7 +241,7 @@ namespace BusinessLogicLayer.Services.EmployeeLoans
         public async Task Delete( int employeeLoanId)
         {
             if (_userId == -1) throw new UnauthorizedAccessException("Incorrect userId");
-            if (!_authService.CheckIfValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
+            if (!_authService.IsValidUser(_userId)) throw new UnauthorizedAccessException("Incorrect userId");
 
             var Loan = _unitOfWork.EmployeeLoanRepository
                         .Get(e => e.EmployeeLoanID == employeeLoanId)
